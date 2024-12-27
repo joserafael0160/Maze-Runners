@@ -1,0 +1,29 @@
+{
+  "Files": [
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/obj/Debug/net8.0/scopedcss/projectbundle/Anime_Maze.bundle.scp.css",
+      "PackagePath": "staticwebassets/Anime_Maze.bundle.scp.css"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/app.css",
+      "PackagePath": "staticwebassets/app.css"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.Anime_Maze.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.build.Anime_Maze.props",
+      "PackagePath": "build\\Anime_Maze.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.Anime_Maze.props",
+      "PackagePath": "buildMultiTargeting\\Anime_Maze.props"
+    },
+    {
+      "Id": "obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.Anime_Maze.props",
+      "PackagePath": "buildTransitive\\Anime_Maze.props"
+    }
+  ],
+  "ElementsToRemove": []
+}
