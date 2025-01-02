@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets/app.css"
     },
     {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/js/functions.js",
+      "PackagePath": "staticwebassets/js/functions.js"
+    },
+    {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.Anime_Maze.Microsoft.AspNetCore.StaticWebAssets.props",
       "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
     },

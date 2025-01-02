@@ -1,0 +1,68 @@
+@page "/Maze"
+@using Microsoft.JSInterop 
+@inject IJSRuntime JSRuntime
+@inject GameStateService GameStateService
+@inject MovementService MovementService
+@inject ValidationService ValidationService
+
+<PageTitle>Maze</PageTitle>
+
+<div role="container" class="flex flex-col h-screen overflow-hidden">
+    <MazeHeader ResetMaze="ResetMaze" />
+
+    <main class="flex flex-col gap-2 bg-black border-2 border-blue-200 items-center p-2 flex-grow">
+        <MazeGrid game="GameStateService.Game" /> 
+        <MazeNavigation MovePlayer="MovePlayer" />
+    </main>
+</div>
+
+<script>
+    window.addKeyListener = function (dotNetHelper) {
+        document.addEventListener('keydown', function (event) {
+            dotNetHelper.invokeMethodAsync('OnKeyPress', event.key)
+        });
+    };
+</script>
+
+@code {
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JSRuntime.InvokeVoidAsync("addKeyListener", DotNetObjectReference.Create(this));
+        }
+    }
+
+    private void MovePlayer(string direction)
+    {
+        MovementService.MovePlayer(direction);
+        StateHasChanged();
+    }
+
+    [JSInvokable]
+    public async Task OnKeyPress(string key)
+    {
+        switch (key)
+        {
+            case "ArrowUp":
+                MovePlayer("up");
+                break;
+            case "ArrowDown":
+                MovePlayer("down");
+                break;
+            case "ArrowLeft":
+                MovePlayer("left");
+                break;
+            case "ArrowRight":
+                MovePlayer("right");
+                break;
+        }
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private void ResetMaze()
+    {
+        GameStateService.ResetGame();
+        StateHasChanged();
+    }
+}

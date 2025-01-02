@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "ccmAPP+ec6htjeBv4nDnZmPpgX4fQqhiz0Gjpctkb6E=",
+  "Hash": "HuX1ZNeLCy9kBKomKyA3n5lRf+495tExJkYi5TT/iZw=",
   "Source": "Anime_Maze",
   "BasePath": "_content/Anime_Maze",
   "Mode": "Default",
@@ -72,6 +72,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/app.css"
+    },
+    {
+      "Identity": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/js/functions.js",
+      "SourceId": "Anime_Maze",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/",
+      "BasePath": "_content/Anime_Maze",
+      "RelativePath": "js/functions.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/js/functions.js"
     }
   ]
 }

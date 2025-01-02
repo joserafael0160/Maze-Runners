@@ -1,0 +1,39 @@
+@using AnimeMaze;
+
+<section class="border-2 border-red-200 grid grid-cols-10 w-3/4 aspect-square" aria-live="polite">
+    @if (game != null)
+    {
+        @for (int row = 0; row < game.Maze.GetLength(0); row++)
+        {
+            for (int col = 0; col < game.Maze.GetLength(1); col++)
+            {
+                if (row == game.PlayerRow && col == game.PlayerCol)
+                {
+                    <span class="bg-blue-700"></span>
+                }
+                else
+                {
+                    var cell = game.Maze[row, col];
+                    <span class="@GetCellClass(cell)"></span>
+                }
+            }
+        }
+    }
+</section>
+
+@code {
+    [Parameter]
+    public Labyrinth? game { get; set; } 
+
+    private string GetCellClass(Labyrinth.Cell cell)
+    {
+        return cell switch
+        {
+            Labyrinth.Cell.Road => "bg-white",
+            Labyrinth.Cell.Wall => "bg-gray-900",
+            Labyrinth.Cell.Trap => "bg-red-800",
+            Labyrinth.Cell.Exit => "bg-green-800",
+            _ => ""
+        };
+    }
+}

@@ -1,0 +1,13 @@
+<nav class="bg-gray-200 flex flex-col gap-2 items-center p-2" role="navigation">
+    <button class="text-gray-800" @onclick='async () => await MovePlayer.InvokeAsync("up")' aria-label="Move Up">⬆️</button>
+    <div class="flex gap-2 justify-around w-full">
+        <button class="text-gray-800" @onclick='async () => await MovePlayer.InvokeAsync("left")' aria-label="Move Left">⬅️</button>
+        <button class="text-gray-800" @onclick='async () => await MovePlayer.InvokeAsync("down")' aria-label="Move Down">⬇️</button>
+        <button class="text-gray-800" @onclick='async () => await MovePlayer.InvokeAsync("right")' aria-label="Move Right">➡️</button>
+    </div>
+</nav>
+
+@code {
+    [Parameter]
+    public EventCallback<string> MovePlayer { get; set; }
+}

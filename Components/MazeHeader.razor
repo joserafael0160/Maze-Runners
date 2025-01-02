@@ -1,0 +1,10 @@
+<header class="bg-gray-200 flex justify-between items-center p-2" role="banner">
+    <a href="/" class="border-2 border-black p-2">Volver al inicio</a>
+    <h1 class="text-xl">Laberinto</h1>
+    <button class="border-2 border-black p-2" @onclick="ResetMaze">Reiniciar mapa</button>
+</header>
+
+@code {
+    [Parameter]
+    public EventCallback ResetMaze { get; set; }
+}
