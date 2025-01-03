@@ -1,4 +1,4 @@
-namespace AnimeMaze;
+namespace AnimeMaze.Models;
 
 public class Labyrinth
 {

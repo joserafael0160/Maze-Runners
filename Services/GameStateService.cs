@@ -1,3 +1,4 @@
+using AnimeMaze.Models;
 namespace AnimeMaze;
 
 public class GameStateService

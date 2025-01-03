@@ -1,0 +1,1 @@
+namespace AnimeMaze.Models;
