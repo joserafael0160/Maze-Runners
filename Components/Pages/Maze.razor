@@ -3,18 +3,17 @@
 @inject IJSRuntime JSRuntime
 @inject GameStateService GameStateService
 @inject MovementService MovementService
-@inject ValidationService ValidationService
 
 <PageTitle>Maze</PageTitle>
 
 <div role="container" class="flex flex-col h-screen overflow-hidden">
     <MazeHeader ResetMaze="ResetMaze" />
 
-    <main class="flex flex-col gap-2 bg-black border-2 border-blue-200 items-center p-2 flex-grow">
+    <main class="flex flex-col gap-2 bg-black items-center p-2 flex-grow">
         <MazeGrid game="GameStateService.Game" /> 
         <MazeNavigation MovePlayer="MovePlayer" />
     </main>
-</div>
+</div> 
 
 <script>
     window.addKeyListener = function (dotNetHelper) {

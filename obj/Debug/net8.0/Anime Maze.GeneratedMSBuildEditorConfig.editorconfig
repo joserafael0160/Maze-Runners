@@ -22,6 +22,14 @@ build_property._RazorSourceGeneratorDebug =
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
+[/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/Components/CharactersHeader.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9DaGFyYWN0ZXJzSGVhZGVyLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/Components/HeroCard.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9IZXJvQ2FyZC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
 [/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/Components/MazeGrid.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9NYXplR3JpZC5yYXpvcg==
 build_metadata.AdditionalFiles.CssScope = 
@@ -32,6 +40,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/Components/MazeNavigation.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9NYXplTmF2aWdhdGlvbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/Components/Pages/Characters.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9DaGFyYWN0ZXJzLnJhem9y
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/Components/Pages/Error.razor]
@@ -48,6 +60,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/Components/Routes.razor]
 build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Sb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/Components/SelectedHeroNotification.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9TZWxlY3RlZEhlcm9Ob3RpZmljYXRpb24ucmF6b3I=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/Components/_Imports.razor]

@@ -9,8 +9,36 @@
       "PackagePath": "staticwebassets/app.css"
     },
     {
-      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/js/functions.js",
-      "PackagePath": "staticwebassets/js/functions.js"
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/eren.jpeg",
+      "PackagePath": "staticwebassets/images/eren.jpeg"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/goku.jpeg",
+      "PackagePath": "staticwebassets/images/goku.jpeg"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/jinx.jpeg",
+      "PackagePath": "staticwebassets/images/jinx.jpeg"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/kaneki.jpeg",
+      "PackagePath": "staticwebassets/images/kaneki.jpeg"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/luffy.jpeg",
+      "PackagePath": "staticwebassets/images/luffy.jpeg"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/naruto.jpeg",
+      "PackagePath": "staticwebassets/images/naruto.jpeg"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/saitama.jpeg",
+      "PackagePath": "staticwebassets/images/saitama.jpeg"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/shingi.jpg",
+      "PackagePath": "staticwebassets/images/shingi.jpg"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.Anime_Maze.Microsoft.AspNetCore.StaticWebAssets.props",

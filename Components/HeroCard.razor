@@ -1,0 +1,38 @@
+@inject NavigationManager Navigation
+@using AnimeMaze.Models
+
+@code {
+    [Parameter] public Hero? Character { get; set; } = new Hero("", "", "");
+    [Parameter] public int Index { get; set; }
+    [Parameter] public EventCallback<int> OnSelect { get; set; }
+    [Parameter] public EventCallback<int> OnToggleDescription { get; set; }
+    [Parameter] public bool IsExpanded { get; set; }
+    [Parameter] public bool IsSelected { get; set; }
+
+    private async Task HandleSelect()
+    {
+        await OnSelect.InvokeAsync(Index);
+    }
+
+    private async Task HandleToggleDescription()
+    {
+        await OnToggleDescription.InvokeAsync(Index);
+    }
+}
+
+<section @onclick="HandleSelect" 
+         class="border-2 m-2 rounded-t-md relative bg-gray-800 shadow-lg 
+                @(IsSelected ? "border-green-500 shadow-green-500" : "border-gray-700 shadow-lg") 
+                hover:border-green-500 hover:shadow-green-500 transition duration-300 ease-in-out">
+    <img src="@Character.Image" alt="@Character.Name" class="w-full h-64 object-cover rounded-t-md"/>
+    <div class="p-2">
+        <h2 class="text-xl font-semibold">@Character.Name</h2>
+        <p class="text-sm text-gray-300 overflow-hidden @(IsExpanded ? "max-h-none" : "max-h-20")">
+            @Character.Description
+        </p>
+        <button class="text-sm text-blue-500 hover:underline" 
+                @onclick:stopPropagation @onclick="HandleToggleDescription">
+            @(IsExpanded ? "Leer menos" : "Leer más")
+        </button>
+    </div>
+</section>

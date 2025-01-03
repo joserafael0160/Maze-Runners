@@ -1,0 +1,51 @@
+@page "/Characters"
+
+@inject NavigationManager Navigation
+@inject IJSRuntime JS
+@using AnimeMaze.Models
+@using AnimeMaze.Data
+
+<PageTitle>Personajes</PageTitle>
+
+<CharactersHeader />
+
+<main class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 bg-gray-900 text-white">
+    @for (int i = 0; i < characters?.Count; i++)
+    {
+        var index = i;
+        <HeroCard Character="characters[index]"
+                  Index="index"
+                  OnSelect="SelectCharacter"
+                  OnToggleDescription="ToggleDescription"
+                  IsExpanded="@(ShowFullDescription == index)"
+                  IsSelected="@(SelectedHeroIndex == index)" />
+    }
+</main>
+
+<SelectedHeroNotification SelectedHero="SelectedHero" OnPlayGame="PlayGame" />
+
+@code {
+    private List<Hero>? characters = HeroData.HeroCharacters;
+    private int? ShowFullDescription { get; set; } = null;
+    private int? SelectedHeroIndex { get; set; } = null;
+    private Hero? SelectedHero { get; set; }
+
+    private void ToggleDescription(int index)
+    {
+        ShowFullDescription = ShowFullDescription == index ? null : index;
+    }
+
+    private void SelectCharacter(int index)
+    {
+        SelectedHeroIndex = index;
+        SelectedHero = HeroData.HeroCharacters[index];
+    }
+
+    private void PlayGame()
+    {
+        if (SelectedHero != null)
+        {
+            Navigation.NavigateTo($"/Maze?character={SelectedHero.Name}");
+        }
+    }
+}
