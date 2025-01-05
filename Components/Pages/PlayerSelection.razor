@@ -1,4 +1,6 @@
 @page "/PlayerSelection"
+@inject NavigationManager Navigation
+@using AnimeMaze.Data
 @using AnimeMaze.Models
 
 <header class="bg-gray-800 text-white flex justify-between items-center p-4" role="banner">
@@ -23,9 +25,24 @@
 
 @code {
     private int numberOfPlayers = 1;
-
     private void StartGame()
     {
-        //
+        var Cordinates = new (int row, int col)[] 
+        { 
+            (1,1), 
+            (4,1), 
+            (7,1) 
+        };
+
+        PlayerData.NumberOfPlayers = numberOfPlayers;
+        PlayerData.Players.Clear();
+        for (int i = 0; i < numberOfPlayers; i++)
+        {
+            var position = Cordinates[i];
+            PlayerData.Players.Add(new Player(position));
+        }
+        Navigation.NavigateTo($"/Characters");
+
     }
 }
+      

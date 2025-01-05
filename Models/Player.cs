@@ -5,10 +5,11 @@ public class Player
     public (int RowPosition, int ColPosition) Position { get; set; }
     public Hero? HeroSelected { get; set; }
 
-    public Player(int rowPosition, int colPosition)
+    public Player((int row, int col) position)
     {
-        Position = (rowPosition, colPosition);
+        Position = position;
     }
+
 }
 
  
