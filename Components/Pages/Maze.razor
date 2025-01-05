@@ -2,6 +2,7 @@
 @using Microsoft.JSInterop 
 @using AnimeMaze.Data
 @using AnimeMaze.Models
+@using AnimeMaze.Services
 @inject IJSRuntime JSRuntime
 
 <PageTitle>Maze</PageTitle>
@@ -12,6 +13,7 @@
     <main class="flex flex-col gap-2 bg-black items-center p-2 flex-grow">
         <MazeGrid game="LabyrinthData.Game" /> 
         <MazeNavigation MovePlayer="MovePlayer" />
+        <div class="text-white">Turno de: Jugador @TurnManager.CurrentPlayerIndex</div>
     </main>
 </div> 
 
@@ -30,10 +32,7 @@
     {
         if (firstRender)
         {
-            if (PlayerData.Players.Count > 0)
-            {
-                player = PlayerData.Players[0]; // Inicializar el jugador actual
-            }
+            player = TurnManager.CurrentPlayer; 
             await JSRuntime.InvokeVoidAsync("addKeyListener", DotNetObjectReference.Create(this));
         }
     }
@@ -63,11 +62,21 @@
                 break;
         }
         await InvokeAsync(StateHasChanged);
+        NextTurn();
     }
 
     private void ResetMaze()
     {
         LabyrinthData.ResetGame();
+        TurnManager.ResetTurns();
+        player = TurnManager.CurrentPlayer; 
+        StateHasChanged();
+    }
+
+    private void NextTurn()
+    {
+        TurnManager.NextTurn();
+        player = TurnManager.CurrentPlayer; 
         StateHasChanged();
     }
 }

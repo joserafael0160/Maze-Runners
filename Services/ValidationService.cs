@@ -1,7 +1,7 @@
 using AnimeMaze.Models;
 using AnimeMaze.Data;
 
-namespace AnimeMaze;
+namespace AnimeMaze.Services;
 
 public static class ValidationService
 {

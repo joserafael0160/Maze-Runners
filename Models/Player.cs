@@ -1,5 +1,5 @@
+using AnimeMaze.Services;
 namespace AnimeMaze.Models;
-
 public class Player
 {
     public (int RowPosition, int ColPosition) Position { get; set; }
