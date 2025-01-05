@@ -1,5 +1,4 @@
 @page "/Characters"
-
 @inject NavigationManager Navigation
 @inject IJSRuntime JS
 @using AnimeMaze.Models
@@ -9,26 +8,41 @@
 
 <CharactersHeader />
 
-<main class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-4 bg-gray-900 text-white">
-    @for (int i = 0; i < characters?.Count; i++)
-    {
-        var index = i;
-        <HeroCard Character="characters[index]"
-                  Index="index"
-                  OnSelect="SelectCharacter"
-                  OnToggleDescription="ToggleDescription"
-                  IsExpanded="@(ShowFullDescription == index)"
-                  IsSelected="@(SelectedHeroIndex == index)" />
-    }
+<main class="p-4 bg-gray-900 text-white">
+    <h2 class="text-2xl font-bold">Jugador @currentPlayer</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        @for (int i = 0; i < characters?.Count; i++)
+        {
+            var index = i;
+            <HeroCard Character="characters[index]"
+                      Index="index"
+                      OnSelect="SelectCharacter"
+                      OnToggleDescription="ToggleDescription"
+                      IsExpanded="@(ShowFullDescription == index)"
+                      IsSelected="@(SelectedHeroIndex == index)" />
+        }
+    </div> 
 </main>
 
-<SelectedHeroNotification SelectedHero="SelectedHero" OnPlayGame="PlayGame" />
+<SelectedHeroNotification SelectedHero="SelectedHero" OnPlayGame="PlayGame" Player="currentPlayer"/>
 
 @code {
     private List<Hero>? characters = HeroData.HeroCharacters;
     private int? ShowFullDescription { get; set; } = null;
     private int? SelectedHeroIndex { get; set; } = null;
     private Hero? SelectedHero { get; set; }
+    private int numberOfPlayers = PlayerData.NumberOfPlayers; 
+    private int currentPlayer = 1;
+
+    protected override void OnInitialized()
+    {
+        foreach (var player in PlayerData.Players)
+        {
+            player.HeroSelected = null;
+        }
+        SelectedHeroIndex = null;
+        SelectedHero = null;
+    }
 
     private void ToggleDescription(int index)
     {
@@ -43,9 +57,19 @@
 
     private void PlayGame()
     {
-        if (SelectedHero != null)
-        {
-            Navigation.NavigateTo($"/Maze?character={SelectedHero.Name}");
+        if (SelectedHero != null) 
+        { 
+            PlayerData.Players[currentPlayer - 1].HeroSelected = SelectedHero;
+            currentPlayer++; 
+            if (currentPlayer > numberOfPlayers) 
+            { 
+                Navigation.NavigateTo($"/Maze"); 
+            } 
+            else 
+            { 
+                SelectedHero = null; 
+                SelectedHeroIndex = null; 
+            } 
         }
     }
 }

@@ -3,6 +3,7 @@
 @code {
     [Parameter] public Hero? SelectedHero { get; set; }
     [Parameter] public EventCallback OnPlayGame { get; set; }
+    [Parameter] public int Player { get; set; } 
 
     private async Task HandlePlayGame()
     {
@@ -13,7 +14,7 @@
 @if (SelectedHero != null)
 {
     <div class="fixed bottom-4 border-2 border-black right-4 bg-green-600 text-white p-4 rounded shadow-lg">
-        <p>Has seleccionado a @SelectedHero?.Name.</p>
+        <p>Jugador @Player has seleccionado a @SelectedHero?.Name.</p>
         <button class="mt-2 p-2 bg-gray-800 text-white rounded hover:bg-gray-700" 
                 @onclick="HandlePlayGame">
             Jugar
