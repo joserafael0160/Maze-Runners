@@ -6,10 +6,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
-// Register custom services 
-    builder.Services.AddScoped<GameStateService>(); 
-    builder.Services.AddScoped<MovementService>();
-    builder.Services.AddScoped<ValidationService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

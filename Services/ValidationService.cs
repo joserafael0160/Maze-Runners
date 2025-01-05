@@ -1,18 +1,14 @@
 using AnimeMaze.Models;
+using AnimeMaze.Data;
+
 namespace AnimeMaze;
 
-public class ValidationService
+public static class ValidationService
 {
-    private readonly GameStateService _gameStateService;
+    private static Labyrinth game = LabyrinthData.Game;
 
-    public ValidationService(GameStateService gameStateService)
+    public static bool IsValidMove(int playerRow, int playerCol)
     {
-        _gameStateService = gameStateService;
-    }
-
-    public bool IsValidMove(int playerRow, int playerCol)
-    {
-        var game = _gameStateService.Game;
         return (playerRow >= 0) && (playerCol >= 0) &&
                (playerRow < game.Maze.GetLength(0)) &&
                (playerCol < game.Maze.GetLength(1)) &&

@@ -1,8 +1,8 @@
 @page "/Maze"
 @using Microsoft.JSInterop 
+@using AnimeMaze.Data
+@using AnimeMaze.Models
 @inject IJSRuntime JSRuntime
-@inject GameStateService GameStateService
-@inject MovementService MovementService
 
 <PageTitle>Maze</PageTitle>
 
@@ -10,7 +10,7 @@
     <MazeHeader ResetMaze="ResetMaze" />
 
     <main class="flex flex-col gap-2 bg-black items-center p-2 flex-grow">
-        <MazeGrid game="GameStateService.Game" /> 
+        <MazeGrid game="LabyrinthData.Game" /> 
         <MazeNavigation MovePlayer="MovePlayer" />
     </main>
 </div> 
@@ -24,17 +24,23 @@
 </script>
 
 @code {
+    private Player? player;
+
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
+            if (PlayerData.Players.Count > 0)
+            {
+                player = PlayerData.Players[0]; // Inicializar el jugador actual
+            }
             await JSRuntime.InvokeVoidAsync("addKeyListener", DotNetObjectReference.Create(this));
         }
     }
 
     private void MovePlayer(string direction)
     {
-        MovementService.MovePlayer(direction);
+        player?.MovePlayer(direction);
         StateHasChanged();
     }
 
@@ -61,7 +67,7 @@
 
     private void ResetMaze()
     {
-        GameStateService.ResetGame();
+        LabyrinthData.ResetGame();
         StateHasChanged();
     }
 }
