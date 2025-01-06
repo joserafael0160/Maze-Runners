@@ -13,10 +13,10 @@
 
 @if (SelectedHero != null)
 {
-    <div class="fixed bottom-4 border-2 border-black right-4 bg-green-600 text-white p-4 rounded shadow-lg">
-        <p>Jugador @Player has seleccionado a @SelectedHero?.Name.</p>
-        <button class="mt-2 p-2 bg-gray-800 text-white rounded hover:bg-gray-700" 
-                @onclick="HandlePlayGame">
+    <div class="fixed bottom-4 right-4 bg-gray-700 text-white p-4 rounded shadow-lg border-black border-2 transition-transform transform hover:scale-105">
+        <p>Jugador @Player ha seleccionado a <strong class="text-blue-500">@SelectedHero?.Name</strong>.</p>
+        <button class="mt-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-500 focus:outline-none focus:ring-4 focus:ring-blue-300 focus:ring-opacity-50" 
+                @onclick="HandlePlayGame" aria-label="Jugar con @SelectedHero?.Name">
             Jugar
         </button>
     </div>

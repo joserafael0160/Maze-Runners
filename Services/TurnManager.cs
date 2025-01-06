@@ -7,8 +7,17 @@ namespace AnimeMaze.Services;
 public static class TurnManager
 {
     public static int CurrentPlayerIndex = 0;
-
-    public static Player CurrentPlayer => PlayerData.Players[CurrentPlayerIndex];
+    public static Player? CurrentPlayer
+    {
+        get
+        {
+            if (PlayerData.Players.Count > 0)
+            {
+                return PlayerData.Players[CurrentPlayerIndex];
+            }
+            return null;
+        }
+    }
 
     public static void NextTurn()
     {

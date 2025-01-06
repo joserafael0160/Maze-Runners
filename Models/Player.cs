@@ -1,9 +1,12 @@
 using AnimeMaze.Services;
+
 namespace AnimeMaze.Models;
+
 public class Player
 {
     public (int RowPosition, int ColPosition) Position { get; set; }
     public Hero? HeroSelected { get; set; }
+    public bool HasWon { get; private set; } = false; // Nueva propiedad para indicar si el jugador ha ganado
 
     public Player((int row, int col) position)
     {
@@ -29,13 +32,16 @@ public class Player
             case "right":
                 newPositionCol++;
                 break;
-            default:
-                throw new ArgumentException("Dirección no válida");
         }
 
         if (ValidationService.IsValidMove(newPositionRow, newPositionCol))
         {
             Position = (newPositionRow, newPositionCol);
+            if (ValidationService.IsWinningMove(newPositionRow, newPositionCol))
+            {
+                HasWon = true;
+            }
+            TurnManager.NextTurn();
         }
     }
 }

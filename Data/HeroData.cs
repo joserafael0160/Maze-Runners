@@ -10,42 +10,74 @@ public static class HeroData
         new Hero(
             "Kaneki", 
             "Inicialmente un estudiante universitario normal, su vida cambia drásticamente cuando es transformado en mitad ghoul tras un accidente. Kaneki lucha por adaptarse a su nueva identidad y mantener su humanidad.", 
-            "/images/kaneki.jpeg"
+            "/images/kaneki.jpeg",
+            4, 
+            70, 
+            35,
+            new List<string> { "Regeneración", "Fuerza sobrehumana", "Control de kagune" }
         ),
         new Hero(
             "Eren Yeager", 
             "Determinado a destruir a los titanes que amenazan a la humanidad, Eren descubre sus habilidades como titán cambiante y se convierte en una figura clave en la lucha por la supervivencia.", 
-            "/images/eren.jpeg"
+            "/images/eren.jpeg",
+            5, 
+            80, 
+            38,
+            new List<string> { "Transformación en Titán", "Fuerza titánica", "Regeneración" }
         ),
         new Hero(
             "Goku", 
             "Un guerrero Saiyajin que busca constantemente desafíos y entrenamientos para convertirse en el ser más fuerte del universo. Su carácter amable y protector lo lleva a defender la Tierra de diversas amenazas.", 
-            "/images/goku.jpeg"
+            "/images/goku.jpeg",
+            5, 
+            100, 
+            40,
+            new List<string> { "Kamehameha", "Transformación en Super Saiyajin", "Vuelo" }
         ),
         new Hero(
             "Naruto Uzumaki", 
             "Marcado desde pequeño como un paria por tener al zorro de nueve colas sellado dentro de él, Naruto sueña con convertirse en Hokage, el líder y protector de su aldea.",
-            "/images/naruto.jpeg"
+            "/images/naruto.jpeg",
+            4, 
+            80, 
+            32,
+            new List<string> { "Rasengan", "Sombra de clones", "Modo sabio" }
         ),
         new Hero(
             "Monkey D. Luffy", 
             "Es un joven pirata con el sueño de encontrar el One Piece y convertirse en el Rey de los Piratas. Luffy tiene la habilidad de estirarse como goma gracias a la fruta del diablo que comió.",
-            "/images/luffy.jpeg"
+            "/images/luffy.jpeg",
+            4, 
+            70, 
+            34,
+            new List<string> { "Gomu Gomu no Mi", "Haki del Rey", "Gatling" }
         ),
         new Hero(
             "Jinx", 
             "Conocida por su amor al caos y la destrucción, Jinx es una criminal temida en Piltover. Su personalidad impredecible y su arsenal de armas locas la hacen una fuerza a tener en cuenta.",
-            "/images/jinx.jpeg"
+            "/images/jinx.jpeg",
+            3, 
+            50, 
+            30,
+            new List<string> { "Zap", "Flame Chompers", "Super Mega Death Rocket" }
         ),
         new Hero(
             "Saitama", 
             "Conocido como el héroe por diversión, Saitama tiene una fuerza abrumadora que le permite derrotar a cualquier enemigo de un solo golpe.",
-            "/images/saitama.jpeg"
+            "/images/saitama.jpeg",
+            5, 
+            100, 
+            100,
+            new List<string> { "Puñetazo serio", "Velocidad sobrehumana", "Invulnerabilidad" }
         ),
         new Hero(
             "Shinji Ikari", 
             "Un adolescente inseguro y con problemas emocionales, es reclutado para pilotar un Evangelion y luchar contra misteriosas criaturas conocidas como Ángeles.",
-            "/images/shingi.jpg"
+            "/images/shingi.jpg",
+            2, 
+            40, 
+            20,
+            new List<string> { "Sincronización con EVA", "AT Field", "Lanza de Longinus" }
         )
     };
 }

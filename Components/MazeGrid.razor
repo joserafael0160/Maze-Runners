@@ -1,15 +1,20 @@
 @using AnimeMaze.Models;
+@using AnimeMaze.Services;
+@using AnimeMaze.Data;
 
 <section class="grid grid-cols-10 w-3/4 aspect-square" aria-live="polite">
-    @if (game != null)
+    @if (game != null && players != null)
     {
-        @for (int row = 0; row < game.Maze.GetLength(0); row++)
+        for (int row = 0; row < game.Maze.GetLength(0); row++)
         {
             for (int col = 0; col < game.Maze.GetLength(1); col++)
             {
-                if (row == game.PlayerRow && col == game.PlayerCol)
+                var playerAtCell = players.FirstOrDefault(p => p.Position.RowPosition == row && p.Position.ColPosition == col);
+
+                if (playerAtCell != null && playerAtCell.HeroSelected != null)
                 {
-                    <span class="bg-blue-700"></span>
+                    string borderClass = playerAtCell == TurnManager.CurrentPlayer ? "border-4 border-blue-500" : "";
+                    <img src="@playerAtCell.HeroSelected.Image" alt="@playerAtCell.HeroSelected.Name" class="h-full w-full object-cover aspect-square @borderClass">
                 }
                 else
                 {
@@ -23,7 +28,9 @@
 
 @code {
     [Parameter]
-    public Labyrinth? game { get; set; } 
+    public Labyrinth? game { get; set; }
+    [Parameter]
+    public List<Player>? players { get; set; } 
 
     private string GetCellClass(Labyrinth.Cell cell)
     {

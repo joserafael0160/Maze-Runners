@@ -6,7 +6,7 @@ public static class LabyrinthData
     public static Labyrinth Game = new Labyrinth();
     
 
-    public static void ResetGame()
+    public static void ResetLabyrinth()
     {
         Game = new Labyrinth();
     }

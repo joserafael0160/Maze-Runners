@@ -1,9 +1,9 @@
 # ToDo
 
-- Añadir cosas a la clase Hero { life, speed, attack, powers, coldown, sound }
-
-- crear la clase player { (RowPosition, ColPosition), HeroSelected }
-- Hacer una página donde los jugadores eligan si son 2 o 4
+- Añadir cosas a la clase Hero { coldown, sound }
+- crear una clase Power
+- poner los svgs en los atributos y posibles svgs en poderes
+- pagina que cuando toques en algun poder te lleve a una pagina de descripcion del poder
 
 - añadir sonido al juego 
 

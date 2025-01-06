@@ -7,13 +7,13 @@
 
 <PageTitle>Maze</PageTitle>
 
-<div role="container" class="flex flex-col h-screen overflow-hidden">
+<div role="container" class="flex flex-col h-screen ">
     <MazeHeader ResetMaze="ResetMaze" />
 
+    <div class="text-white">Turno de: Jugador @(TurnManager.CurrentPlayerIndex + 1)</div>
     <main class="flex flex-col gap-2 bg-black items-center p-2 flex-grow">
-        <MazeGrid game="LabyrinthData.Game" /> 
+        <MazeGrid game="LabyrinthData.Game" players="players" /> 
         <MazeNavigation MovePlayer="MovePlayer" />
-        <div class="text-white">Turno de: Jugador @TurnManager.CurrentPlayerIndex</div>
     </main>
 </div> 
 
@@ -26,57 +26,52 @@
 </script>
 
 @code {
-    private Player? player;
+    private List<Player> players = PlayerData.Players;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)
         {
-            player = TurnManager.CurrentPlayer; 
             await JSRuntime.InvokeVoidAsync("addKeyListener", DotNetObjectReference.Create(this));
         }
     }
 
     private void MovePlayer(string direction)
     {
-        player?.MovePlayer(direction);
-        StateHasChanged();
+        if (TurnManager.CurrentPlayer != null)
+        {
+            TurnManager.CurrentPlayer.MovePlayer(direction);
+            StateHasChanged(); 
+        }
     }
 
     [JSInvokable]
-    public async Task OnKeyPress(string key)
+    public void OnKeyPress(string key)
     {
         switch (key)
         {
-            case "ArrowUp":
+            case "ArrowUp" or "w":
                 MovePlayer("up");
                 break;
-            case "ArrowDown":
+            case "ArrowDown" or "s":
                 MovePlayer("down");
                 break;
-            case "ArrowLeft":
+            case "ArrowLeft" or "a":
                 MovePlayer("left");
                 break;
-            case "ArrowRight":
+            case "ArrowRight" or "d":
                 MovePlayer("right");
                 break;
         }
-        await InvokeAsync(StateHasChanged);
-        NextTurn();
+        InvokeAsync(StateHasChanged);
     }
+
 
     private void ResetMaze()
     {
-        LabyrinthData.ResetGame();
+        LabyrinthData.ResetLabyrinth();
         TurnManager.ResetTurns();
-        player = TurnManager.CurrentPlayer; 
-        StateHasChanged();
-    }
-
-    private void NextTurn()
-    {
-        TurnManager.NextTurn();
-        player = TurnManager.CurrentPlayer; 
-        StateHasChanged();
+        players = PlayerData.Players; 
+        StateHasChanged(); 
     }
 }
