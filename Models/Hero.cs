@@ -16,7 +16,7 @@ public class Hero
         get => _speed;
         set
         {
-            if (value < 0 || value >= 5)
+            if (value < 0 || value > 5)
                 throw new ArgumentOutOfRangeException(nameof(Speed), "Speed must be between 0 and 5.");
             _speed = value;
         }
@@ -27,7 +27,7 @@ public class Hero
         get => _life;
         set
         {
-            if (value < 0 || value >= 100)
+            if (value < 0 || value > 100)
                 throw new ArgumentOutOfRangeException(nameof(Life), "Life must be between 0 and 100.");
             _life = value;
         }
@@ -38,8 +38,10 @@ public class Hero
         get => _attack;
         set
         {
-            if (value < 0 || value >= 100)
-                throw new ArgumentOutOfRangeException(nameof(Attack), "Attack must be between 0 and 40.");
+            if (Name != "Saitama" && (value < 0 || value > 40))
+                throw new ArgumentOutOfRangeException(nameof(Attack), "Attack must be between 0 and 40 for all heroes except Saitama.");
+            if (Name == "Saitama" && (value < 0 || value > 100))
+                throw new ArgumentOutOfRangeException(nameof(Attack), "Attack must be between 0 and 100 for Saitama.");
             _attack = value;
         }
     }

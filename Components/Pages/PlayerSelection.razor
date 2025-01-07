@@ -10,40 +10,22 @@
 
 <main class="flex flex-col items-center justify-center min-h-screen gap-5">
     <h2 class="text-4xl font-bold">Selección de jugadores</h2>
-    
     <p class="text-lg">Selecciona el número de jugadores</p>
-    
     <select @bind="numberOfPlayers" class="block w-1/4 px-3 py-2 bg-white border text-black border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
         @for (int i = 1; i <= 4; i++)
         {
             <option value="@i" class="text-black">@i</option>
         }
     </select>
-    
-    <button @onclick="StartGame" class=" px-4 py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Empezar juego</button>
+    <button @onclick="StartGame" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">Empezar juego</button>
 </main>
 
 @code {
     private int numberOfPlayers = 1;
+
     private void StartGame()
     {
-        var Cordinates = new (int row, int col)[] 
-        { 
-            (1,1), 
-            (4,1), 
-            (7,1),
-            (6,1),
-        };
-
-        PlayerData.NumberOfPlayers = numberOfPlayers;
-        PlayerData.Players.Clear();
-        for (int i = 0; i < numberOfPlayers; i++)
-        {
-            var position = Cordinates[i];
-            PlayerData.Players.Add(new Player(position));
-        }
-        Navigation.NavigateTo($"/Characters");
-
+        PlayerData.InitializePlayers(numberOfPlayers);
+        Navigation.NavigateTo("/Characters");
     }
 }
-      

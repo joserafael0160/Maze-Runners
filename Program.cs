@@ -1,10 +1,17 @@
 using AnimeMaze;
 using Anime_Maze.Components;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+// Habilitar errores detallados para Blazor Server
+builder.Services.AddServerSideBlazor().AddCircuitOptions(options => 
+{
+    options.DetailedErrors = true;
+});
 
 var app = builder.Build();
 

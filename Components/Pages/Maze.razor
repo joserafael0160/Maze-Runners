@@ -4,29 +4,42 @@
 @using AnimeMaze.Models
 @using AnimeMaze.Services
 @inject IJSRuntime JSRuntime
+@inject NavigationManager Navigation
 
 <PageTitle>Maze</PageTitle>
 
 <div role="container" class="flex flex-col h-screen ">
-    <MazeHeader ResetMaze="ResetMaze" />
-
-    <div class="text-white">Turno de: Jugador @(TurnManager.CurrentPlayerIndex + 1)</div>
-    <main class="flex flex-col gap-2 bg-black items-center p-2 flex-grow">
-        <MazeGrid game="LabyrinthData.Game" players="players" /> 
-        <MazeNavigation MovePlayer="MovePlayer" />
-    </main>
+    <MazeHeader ResetMaze="ResetMazeAsync" />
+    
+    @if (showModal)
+    {
+        <GameWonModal Message="@winningMessage"
+                      OnClose="HideModalAsync" 
+                      OnResetGame="ResetMazeAsync" 
+                      OnSelectNewCharacters="SelectNewCharactersAsync" />
+    }
+    else
+    {
+        <div class="text-white">Turno de: Jugador @(TurnManager.CurrentPlayerIndex + 1)</div>
+        <main class="flex flex-col gap-2 bg-black items-center p-2 flex-grow">
+            <MazeGrid game="LabyrinthData.Game" players="players" /> 
+            <MazeNavigation MovePlayer="MovePlayerAsync" />
+        </main>
+    }
 </div> 
 
 <script>
     window.addKeyListener = function (dotNetHelper) {
         document.addEventListener('keydown', function (event) {
-            dotNetHelper.invokeMethodAsync('OnKeyPress', event.key)
+            dotNetHelper.invokeMethodAsync('OnKeyPress', event.key);
         });
     };
 </script>
 
 @code {
     private List<Player> players = PlayerData.Players;
+    private bool showModal = false;
+    private string winningMessage = string.Empty;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -36,42 +49,62 @@
         }
     }
 
-    private void MovePlayer(string direction)
+    private async Task MovePlayerAsync(string direction)
     {
         if (TurnManager.CurrentPlayer != null)
         {
-            TurnManager.CurrentPlayer.MovePlayer(direction);
-            StateHasChanged(); 
+            bool hasWon = TurnManager.CurrentPlayer.MovePlayer(direction);
+            if (hasWon)
+            {
+                winningMessage = $"¡Jugador {TurnManager.CurrentPlayerIndex + 1} ha ganado!";
+                showModal = true;
+            }
+            await InvokeAsync(StateHasChanged);
         }
     }
 
     [JSInvokable]
-    public void OnKeyPress(string key)
+    public async Task OnKeyPress(string key)
     {
         switch (key)
         {
             case "ArrowUp" or "w":
-                MovePlayer("up");
+                await MovePlayerAsync("up");
                 break;
             case "ArrowDown" or "s":
-                MovePlayer("down");
+                await MovePlayerAsync("down");
                 break;
             case "ArrowLeft" or "a":
-                MovePlayer("left");
+                await MovePlayerAsync("left");
                 break;
             case "ArrowRight" or "d":
-                MovePlayer("right");
+                await MovePlayerAsync("right");
                 break;
         }
-        InvokeAsync(StateHasChanged);
+        await InvokeAsync(StateHasChanged);
     }
 
-
-    private void ResetMaze()
+    private async Task ResetMazeAsync()
     {
         LabyrinthData.ResetLabyrinth();
         TurnManager.ResetTurns();
-        players = PlayerData.Players; 
-        StateHasChanged(); 
+        PlayerData.ResetPlayerPositions();
+        showModal = false;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task SelectNewCharactersAsync()
+    {
+        PlayerData.Players.Clear(); 
+        TurnManager.ResetTurns(); 
+        PlayerData.InitializePlayers(PlayerData.NumberOfPlayers); 
+        Navigation.NavigateTo("/PlayerSelection");
+        await Task.CompletedTask;
+    }
+
+    private async Task HideModalAsync()
+    {
+        showModal = false;
+        await Task.CompletedTask;
     }
 }

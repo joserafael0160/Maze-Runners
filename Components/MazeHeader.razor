@@ -5,6 +5,11 @@
 </header>
 
 @code {
-    [Parameter]
-    public EventCallback ResetMaze { get; set; }
+    [Parameter] public EventCallback ResetMaze { get; set; }
+
+    private async Task OnResetMaze()
+    {
+        await ResetMaze.InvokeAsync();
+    }
 }
+
