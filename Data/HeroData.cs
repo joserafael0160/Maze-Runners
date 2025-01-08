@@ -78,6 +78,42 @@ public static class HeroData
             40, 
             20,
             new List<string> { "Sincronización con EVA", "AT Field", "Lanza de Longinus" }
+        ), 
+        new Hero(
+            "Nana Osaki", 
+            "Una talentosa cantante de punk rock con un espíritu independiente y fuerte.", 
+            "/images/nana_osaki.jpeg",
+            3, 
+            60, 
+            25,
+            new List<string> { "Voz Poderosa", "Resistencia Emocional", "Determinación Inquebrantable" }
+        ),
+        new Hero(
+            "Ichigo Kurosaki", 
+            "Un adolescente con la capacidad de ver fantasmas y un poder espiritual inmenso que le permite convertirse en un Shinigami.", 
+            "/images/ichigo_kurosaki.jpeg",
+            4, 
+            80, 
+            36,
+            new List<string> { "Getsuga Tensho", "Forma Bankai", "Habilidad Hollow" }
+        ),
+        new Hero(
+            "Punpun", 
+            "Un personaje complejo y simbólico de la serie 'Oyasumi Punpun'.", 
+            "/images/punpun.png",
+            1, 
+            10, 
+            1,
+            new List<string> { "Cambio de Forma", "Inocencia Desgarradora", "Resiliencia Emocional" }
+        ),
+        new Hero(
+            "Guts", 
+            "Un guerrero formidable con una vida de luchas constantes de la serie 'Berserk'.", 
+            "/images/guts.jpeg",
+            3, 
+            90, 
+            40,
+            new List<string> { "Fuerza Titánica", "Maestría en Espadas", "Resistencia Sobrehumana" }
         )
     };
 }

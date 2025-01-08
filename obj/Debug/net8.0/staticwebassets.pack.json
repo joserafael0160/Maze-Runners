@@ -17,8 +17,28 @@
       "PackagePath": "staticwebassets/images/goku.jpeg"
     },
     {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/guts.jpeg",
+      "PackagePath": "staticwebassets/images/guts.jpeg"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/ichigo_kurosaki.jpeg",
+      "PackagePath": "staticwebassets/images/ichigo_kurosaki.jpeg"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/jinx-explosive-trap.jpg",
+      "PackagePath": "staticwebassets/images/jinx-explosive-trap.jpg"
+    },
+    {
       "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/jinx.jpeg",
       "PackagePath": "staticwebassets/images/jinx.jpeg"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/kagune-spike.jpg",
+      "PackagePath": "staticwebassets/images/kagune-spike.jpg"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/kamehameha-blast.png",
+      "PackagePath": "staticwebassets/images/kamehameha-blast.png"
     },
     {
       "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/kaneki.jpeg",
@@ -29,16 +49,36 @@
       "PackagePath": "staticwebassets/images/luffy.jpeg"
     },
     {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/nana_osaki.jpeg",
+      "PackagePath": "staticwebassets/images/nana_osaki.jpeg"
+    },
+    {
       "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/naruto.jpeg",
       "PackagePath": "staticwebassets/images/naruto.jpeg"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/punpun.png",
+      "PackagePath": "staticwebassets/images/punpun.png"
     },
     {
       "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/saitama.jpeg",
       "PackagePath": "staticwebassets/images/saitama.jpeg"
     },
     {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/sea-stone-trap.webp",
+      "PackagePath": "staticwebassets/images/sea-stone-trap.webp"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/shadow-clone-ambush.jpeg",
+      "PackagePath": "staticwebassets/images/shadow-clone-ambush.jpeg"
+    },
+    {
       "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/shingi.jpg",
       "PackagePath": "staticwebassets/images/shingi.jpg"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/titan-footfall.jpeg",
+      "PackagePath": "staticwebassets/images/titan-footfall.jpeg"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.Anime_Maze.Microsoft.AspNetCore.StaticWebAssets.props",
