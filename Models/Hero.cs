@@ -3,7 +3,7 @@ namespace AnimeMaze.Models;
 public class Hero
 {
     private int _speed;
-    private int _life;
+    private int _health;
     private int _attack;
 
     public string Name { get; set; } = string.Empty;
@@ -22,14 +22,14 @@ public class Hero
         }
     }
 
-    public int Life
+    public int Health
     {
-        get => _life;
+        get => _health;
         set
         {
             if (value < 0 || value > 100)
-                throw new ArgumentOutOfRangeException(nameof(Life), "Life must be between 0 and 100.");
-            _life = value;
+                throw new ArgumentOutOfRangeException(nameof(Health), "Heatlh must be between 0 and 100.");
+            _health = value;
         }
     }
 
@@ -46,13 +46,13 @@ public class Hero
         }
     }
 
-    public Hero(string name, string description, string image, int speed, int life, int attack, List<string> powers)
+    public Hero(string name, string description, string image, int speed, int health, int attack, List<string> powers)
     {
         Name = name;
         Description = description;
         Image = image;
         Speed = speed;
-        Life = life;
+        Health = health;
         Attack = attack;
         Powers = powers ?? new List<string>();
     }
