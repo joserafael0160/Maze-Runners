@@ -14,7 +14,6 @@
     @if (showModal)
     {
         <GameWonModal Message="@winningMessage"
-                      OnClose="HideModal" 
                       OnResetGame="ResetMaze" 
                       OnSelectNewCharacters="SelectNewCharacters" />
     }
@@ -23,11 +22,11 @@
         <PlayersHealth Players="players"/>
         <div class="text-white">Turno de: Jugador @(TurnManager.CurrentPlayerIndex + 1)</div>
         <main class="flex flex-col gap-2 bg-black items-center p-2 flex-grow">
-            <MazeGrid game="LabyrinthData.Game" players="players" /> 
-            <MazeNavigation MovePlayer="MovePlayerAsync" />
+            <MazeGrid game="LabyrinthData.Game" players="players" OnClickMaze="EventCallback.Factory.Create<(int, int)>(this, OnClickMaze)" /> 
+            <MazeNavigation MovePlayer="MovePlayerAsync" Attack="AttackPlayer" />
         </main>
     }
-</div> 
+</div>
 
 <script>
     window.addKeyListener = function (dotNetHelper) {
@@ -52,7 +51,7 @@
 
     private async Task MovePlayerAsync(string direction)
     {
-        if (TurnManager.CurrentPlayer != null)
+        if (TurnManager.CurrentPlayer != null && !showModal)
         {
             bool hasWon = TurnManager.CurrentPlayer.MovePlayer(direction);
             if (hasWon)
@@ -61,6 +60,40 @@
                 showModal = true;
             }
             await InvokeAsync(StateHasChanged);
+        }
+    }
+
+    private void AttackPlayer()
+    {
+        if (TurnManager.CurrentPlayer != null && !showModal)
+        {
+            TurnManager.CurrentPlayer.Attack();
+            StateHasChanged();
+        }
+    }
+
+    private void OnClickMaze((int row, int col) position)
+    {
+        var player = TurnManager.CurrentPlayer;
+        if (player != null)
+        {
+            if (position.row < player.Position.RowPosition)
+            {
+                player.FacingDirection = Direction.Up;
+            }
+            else if (position.row > player.Position.RowPosition)
+            {
+                player.FacingDirection = Direction.Down;
+            }
+            else if (position.col < player.Position.ColPosition)
+            {
+                player.FacingDirection = Direction.Left;
+            }
+            else if (position.col > player.Position.ColPosition)
+            {
+                player.FacingDirection = Direction.Right;
+            }
+            StateHasChanged();
         }
     }
 
@@ -81,6 +114,9 @@
             case "ArrowRight" or "d":
                 await MovePlayerAsync("right");
                 break;
+            case "e":
+                AttackPlayer();
+                break;
         }
         await InvokeAsync(StateHasChanged);
     }
@@ -96,15 +132,10 @@
 
     private void SelectNewCharacters()
     {
-        PlayerData.Players.Clear(); 
+        PlayerData.Players.Clear();
         TurnManager.ResetTurns(); 
         PlayerData.InitializePlayers(PlayerData.NumberOfPlayers); 
         Navigation.NavigateTo("/Characters");
-        StateHasChanged();
-    }
-
-    private void HideModal()
-    {
         showModal = false;
         StateHasChanged();
     }

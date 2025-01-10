@@ -14,12 +14,12 @@
                 if (playerAtCell != null && playerAtCell.HeroSelected != null)
                 {
                     string borderClass = playerAtCell == TurnManager.CurrentPlayer ? "border-4 border-blue-500" : "";
-                    <img src="@playerAtCell.HeroSelected.Image" alt="@playerAtCell.HeroSelected.Name" class="h-full w-full object-cover aspect-square @borderClass">
+                    <img src="@playerAtCell.HeroSelected.Image" alt="@playerAtCell.HeroSelected.Name" class="h-full w-full object-cover aspect-square @borderClass" @onclick="() => HandleClick(row, col)">
                 }
                 else
                 {
                     var cell = game.Maze[row, col];
-                    <span class="@GetCellClass(cell)"></span>
+                    <span class="@GetCellClass(cell)" @onclick="() => HandleClick(row, col)"></span>
                 }
             }
         }
@@ -30,7 +30,9 @@
     [Parameter]
     public Labyrinth? game { get; set; }
     [Parameter]
-    public List<Player>? players { get; set; } 
+    public List<Player>? players { get; set; }
+    [Parameter]
+    public EventCallback<(int, int)> OnClickMaze { get; set; }
 
     private string GetCellClass(Labyrinth.Cell cell)
     {
@@ -42,5 +44,10 @@
             Labyrinth.Cell.Exit => "bg-green-800",
             _ => ""
         };
+    }
+
+    private void HandleClick(int row, int col)
+    {
+        OnClickMaze.InvokeAsync((row, col));
     }
 }

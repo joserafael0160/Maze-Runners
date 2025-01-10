@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Anime_Maze")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+f5d2a1485f9db33b8b5b9d81c6a9591ee9555778")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+89d998484d5dbbc6ec3e0d7f99db8a2d083f1768")]
 [assembly: System.Reflection.AssemblyProductAttribute("Anime_Maze")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Anime_Maze")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

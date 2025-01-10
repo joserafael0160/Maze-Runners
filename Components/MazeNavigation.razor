@@ -5,9 +5,13 @@
         <button class="text-gray-800" @onclick='async () => await MovePlayer.InvokeAsync("down")' aria-label="Move Down">⬇️</button>
         <button class="text-gray-800" @onclick='async () => await MovePlayer.InvokeAsync("right")' aria-label="Move Right">➡️</button>
     </div>
+    <button class="text-gray-800 mt-2" @onclick='async () => await Attack.InvokeAsync()' aria-label="Attack">⚔️ Attack</button>
 </nav>
 
 @code {
     [Parameter]
     public EventCallback<string> MovePlayer { get; set; }
+    
+    [Parameter]
+    public EventCallback Attack { get; set; }
 }

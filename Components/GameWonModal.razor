@@ -1,5 +1,5 @@
-<div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50" @onclick:stopPropagation @onclick="CloseModal">
-    <div class="flex flex-col gap-4 bg-white text-black rounded-lg shadow-lg p-6 max-w-sm w-full text-center" @onclick:stopPropagation>
+<div class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+    <div class="flex flex-col gap-4 bg-white text-black rounded-lg shadow-lg p-6 max-w-sm w-full text-center">
         <h2 class="text-2xl font-bold mb-4">@Message</h2>
         <button class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 mr-2" @onclick="ResetGame">
             Reiniciar el juego
@@ -12,14 +12,8 @@
 
 @code {
     [Parameter] public string? Message { get; set; }
-    [Parameter] public EventCallback OnClose { get; set; }
     [Parameter] public EventCallback OnResetGame { get; set; }
     [Parameter] public EventCallback OnSelectNewCharacters { get; set; }
-
-    private void CloseModal()
-    {
-        OnClose.InvokeAsync();
-    }
 
     private void ResetGame()
     {
