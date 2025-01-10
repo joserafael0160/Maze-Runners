@@ -22,7 +22,7 @@
         <PlayersHealth Players="players"/>
         <div class="text-white">Turno de: Jugador @(TurnManager.CurrentPlayerIndex + 1)</div>
         <main class="flex flex-col gap-2 bg-black items-center p-2 flex-grow">
-            <MazeGrid game="LabyrinthData.Game" players="players" OnClickMaze="EventCallback.Factory.Create<(int, int)>(this, OnClickMaze)" /> 
+            <MazeGrid game="LabyrinthData.Game" players="players" OnClickMaze="EventCallback.Factory.Create<(int, int)>(this, OnClickMaze)"/> 
             <MazeNavigation MovePlayer="MovePlayerAsync" Attack="AttackPlayer" />
         </main>
     }
@@ -65,7 +65,7 @@
 
     private void AttackPlayer()
     {
-        if (TurnManager.CurrentPlayer != null && !showModal)
+        if (TurnManager.CurrentPlayer != null)
         {
             TurnManager.CurrentPlayer.Attack();
             StateHasChanged();
@@ -77,19 +77,20 @@
         var player = TurnManager.CurrentPlayer;
         if (player != null)
         {
-            if (position.row < player.Position.RowPosition)
+            var currentPosition = player.Position;
+            if (position.row < currentPosition.RowPosition)
             {
                 player.FacingDirection = Direction.Up;
             }
-            else if (position.row > player.Position.RowPosition)
+            else if (position.row > currentPosition.RowPosition)
             {
                 player.FacingDirection = Direction.Down;
             }
-            else if (position.col < player.Position.ColPosition)
+            else if (position.col < currentPosition.ColPosition)
             {
                 player.FacingDirection = Direction.Left;
             }
-            else if (position.col > player.Position.ColPosition)
+            else if (position.col > currentPosition.ColPosition)
             {
                 player.FacingDirection = Direction.Right;
             }

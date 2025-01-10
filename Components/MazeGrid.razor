@@ -5,10 +5,12 @@
 <section class="grid grid-cols-10 w-3/4 aspect-square" aria-live="polite">
     @if (game != null && players != null)
     {
-        for (int row = 0; row < game.Maze.GetLength(0); row++)
+        for (int i = 0; i < game.Maze.GetLength(0); i++)
         {
-            for (int col = 0; col < game.Maze.GetLength(1); col++)
+            for (int j = 0; j < game.Maze.GetLength(1); j++)
             {
+                int row = i;
+                int col = j;
                 var playerAtCell = players.FirstOrDefault(p => p.Position.RowPosition == row && p.Position.ColPosition == col);
 
                 if (playerAtCell != null && playerAtCell.HeroSelected != null)
