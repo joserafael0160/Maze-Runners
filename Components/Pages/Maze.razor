@@ -8,15 +8,15 @@
 
 <PageTitle>Maze</PageTitle>
 
-<div role="container" class="flex flex-col h-screen ">
-    <MazeHeader ResetMaze="ResetMazeAsync" />
+<div role="container" class="flex flex-col h-screen">
+    <MazeHeader ResetMaze="ResetMaze" />
     
     @if (showModal)
     {
         <GameWonModal Message="@winningMessage"
-                      OnClose="HideModalAsync" 
-                      OnResetGame="ResetMazeAsync" 
-                      OnSelectNewCharacters="SelectNewCharactersAsync" />
+                      OnClose="HideModal" 
+                      OnResetGame="ResetMaze" 
+                      OnSelectNewCharacters="SelectNewCharacters" />
     }
     else
     {
@@ -35,8 +35,6 @@
             dotNetHelper.invokeMethodAsync('OnKeyPress', event.key);
         });
     };
-
-    
 </script>
 
 @code {
@@ -87,27 +85,27 @@
         await InvokeAsync(StateHasChanged);
     }
 
-    private async Task ResetMazeAsync()
+    private void ResetMaze()
     {
         LabyrinthData.ResetLabyrinth();
         TurnManager.ResetTurns();
         PlayerData.ResetPlayerPositions();
         showModal = false;
-        await InvokeAsync(StateHasChanged);
+        StateHasChanged();
     }
 
-    private async Task SelectNewCharactersAsync()
+    private void SelectNewCharacters()
     {
         PlayerData.Players.Clear(); 
         TurnManager.ResetTurns(); 
         PlayerData.InitializePlayers(PlayerData.NumberOfPlayers); 
         Navigation.NavigateTo("/Characters");
-        await Task.CompletedTask;
+        StateHasChanged();
     }
 
-    private async Task HideModalAsync()
+    private void HideModal()
     {
         showModal = false;
-        await Task.CompletedTask;
+        StateHasChanged();
     }
 }
