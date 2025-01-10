@@ -7,6 +7,7 @@ public class Player
     public (int RowPosition, int ColPosition) Position { get; set; }
     public Hero? HeroSelected { get; set; }
     public bool HasWon { get; private set; } = false;
+    public int Health { get; set; }
 
     public Player((int row, int col) position)
     {

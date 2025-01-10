@@ -20,6 +20,7 @@
     }
     else
     {
+        <PlayersHealth Players="players"/>
         <div class="text-white">Turno de: Jugador @(TurnManager.CurrentPlayerIndex + 1)</div>
         <main class="flex flex-col gap-2 bg-black items-center p-2 flex-grow">
             <MazeGrid game="LabyrinthData.Game" players="players" /> 
@@ -100,7 +101,7 @@
         PlayerData.Players.Clear(); 
         TurnManager.ResetTurns(); 
         PlayerData.InitializePlayers(PlayerData.NumberOfPlayers); 
-        Navigation.NavigateTo("/PlayerSelection");
+        Navigation.NavigateTo("/Characters");
         await Task.CompletedTask;
     }
 

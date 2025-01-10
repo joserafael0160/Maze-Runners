@@ -60,6 +60,7 @@
         if (SelectedHero != null) 
         { 
             PlayerData.Players[currentPlayer - 1].HeroSelected = SelectedHero;
+            PlayerData.Players[currentPlayer - 1].Health = SelectedHero.Health;
             currentPlayer++; 
             if (currentPlayer > numberOfPlayers) 
             { 
