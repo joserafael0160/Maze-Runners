@@ -20,7 +20,16 @@
     else
     {
         <PlayersHealth Players="players"/>
-        <div class="text-white">Turno de: Jugador @(TurnManager.CurrentPlayerIndex + 1)</div>
+        <div class="text-white bg-gray-800 p-4 rounded-lg shadow-lg flex items-center space-x-4">
+            <div class="text-lg font-bold flex items-center">
+                <span class="text-yellow-500">Turno:</span>
+                <span class="ml-2">Jugador @(TurnManager.CurrentPlayerIndex + 1)</span>
+            </div>
+            <div class="text-lg font-bold flex items-center">
+                <span class=" text-green-500">Movimientos:</span>
+                <span class="ml-2">@TurnManager.MovesLeft</span>
+             </div>
+        </div>
         <main class="flex flex-col gap-2 bg-black items-center p-2 flex-grow">
             <MazeGrid game="LabyrinthData.Game" players="players" OnClickMaze="EventCallback.Factory.Create<(int, int)>(this, OnClickMaze)"/> 
             <MazeNavigation MovePlayer="MovePlayerAsync" Attack="AttackPlayer" Power="UsePowerPlayer"/>

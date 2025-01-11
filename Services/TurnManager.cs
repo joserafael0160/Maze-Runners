@@ -1,8 +1,7 @@
+namespace AnimeMaze.Services;
+
 using AnimeMaze.Models;
 using AnimeMaze.Data;
-using System.Collections.Generic;
-
-namespace AnimeMaze.Services;
 
 public static class TurnManager
 {
@@ -18,22 +17,51 @@ public static class TurnManager
             return null;
         }
     }
+    public static int MovesLeft;
+
+    static TurnManager()
+    {
+        if (CurrentPlayer != null && CurrentPlayer.HeroSelected != null)
+        {
+            MovesLeft = CurrentPlayer.HeroSelected.Speed;
+        }
+        else
+        {
+            MovesLeft = 0;
+        }
+    }
 
     public static void NextTurn()
     {
         if (CurrentPlayer != null)
         {
-            CurrentPlayer.HeroSelected?.Power.ReduceCooldown();
-        }
-        CurrentPlayerIndex++;
-        if (CurrentPlayerIndex >= PlayerData.NumberOfPlayers)
-        {
-            CurrentPlayerIndex = 0;
+            if (MovesLeft == 1)
+            {
+                CurrentPlayer.HeroSelected?.Power.ReduceCooldown();
+                CurrentPlayerIndex++;
+                if (CurrentPlayerIndex >= PlayerData.NumberOfPlayers)
+                {
+                    CurrentPlayerIndex = 0;
+                }
+                MovesLeft = CurrentPlayer.HeroSelected?.Speed ?? 0; 
+            }
+            else
+            {
+                MovesLeft--;
+            }
         }
     }
 
     public static void ResetTurns()
     {
         CurrentPlayerIndex = 0;
+        if (CurrentPlayer != null && CurrentPlayer.HeroSelected != null)
+        {
+            MovesLeft = CurrentPlayer.HeroSelected.Speed;
+        }
+        else
+        {
+            MovesLeft = 0; 
+        }
     }
 }
