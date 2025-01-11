@@ -23,7 +23,7 @@
         <div class="text-white">Turno de: Jugador @(TurnManager.CurrentPlayerIndex + 1)</div>
         <main class="flex flex-col gap-2 bg-black items-center p-2 flex-grow">
             <MazeGrid game="LabyrinthData.Game" players="players" OnClickMaze="EventCallback.Factory.Create<(int, int)>(this, OnClickMaze)"/> 
-            <MazeNavigation MovePlayer="MovePlayerAsync" Attack="AttackPlayer" />
+            <MazeNavigation MovePlayer="MovePlayerAsync" Attack="AttackPlayer" Power="UsePowerPlayer"/>
         </main>
     }
 </div>
@@ -68,6 +68,15 @@
         if (TurnManager.CurrentPlayer != null)
         {
             TurnManager.CurrentPlayer.Attack();
+            StateHasChanged();
+        }
+    }
+    private void UsePowerPlayer()
+    {
+        if (TurnManager.CurrentPlayer != null && TurnManager.CurrentPlayer.HeroSelected.Power.CurrentCooldown == 0)
+        {
+            TurnManager.CurrentPlayer.HeroSelected.Power.Use(TurnManager.CurrentPlayer, players);
+            TurnManager.NextTurn();
             StateHasChanged();
         }
     }
@@ -117,6 +126,9 @@
                 break;
             case "e":
                 AttackPlayer();
+                break;
+            case "f":
+                UsePowerPlayer();
                 break;
         }
         await InvokeAsync(StateHasChanged);

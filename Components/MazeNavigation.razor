@@ -1,17 +1,57 @@
-<nav class="bg-gray-200 flex flex-col gap-2 items-center p-2" role="navigation">
-    <button class="text-gray-800" @onclick='async () => await MovePlayer.InvokeAsync("up")' aria-label="Move Up">⬆️</button>
-    <div class="flex gap-2 justify-around w-full">
-        <button class="text-gray-800" @onclick='async () => await MovePlayer.InvokeAsync("left")' aria-label="Move Left">⬅️</button>
-        <button class="text-gray-800" @onclick='async () => await MovePlayer.InvokeAsync("down")' aria-label="Move Down">⬇️</button>
-        <button class="text-gray-800" @onclick='async () => await MovePlayer.InvokeAsync("right")' aria-label="Move Right">➡️</button>
+@inject IJSRuntime JSRuntime
+
+<nav id="navigation" class="fixed bottom-0 right-0 @(isMenuOpen ? "bg-gray-800" : "") text-white p-4 rounded-md shadow-lg nav-menu" role="navigation">
+    <button class="@(isMenuOpen ? "bg-red-600 hover:bg-red-500" : "bg-yellow-600 hover:bg-yellow-500") text-white font-bold py-2 px-4 rounded-full transition-all duration-300" @onclick="ToggleMenu" aria-label="Toggle Menu">@((isMenuOpen ? "x" : "☰"))</button>
+
+    <div class="mt-4 grid grid-cols-3 gap-4 items-center lg:grid" style="display: @(isMenuOpen ? "grid" : "none");">
+        <button class="col-start-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition-all duration-300" @onclick='async () => await MovePlayer.InvokeAsync("up")' aria-label="Move Up">⬆️</button>
+        <button class="col-start-1 col-span-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition-all duration-300" @onclick='async () => await MovePlayer.InvokeAsync("left")' aria-label="Move Left">⬅️</button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition-all duration-300" @onclick='async () => await MovePlayer.InvokeAsync("down")' aria-label="Move Down">⬇️</button>
+        <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition-all duration-300" @onclick='async () => await MovePlayer.InvokeAsync("right")' aria-label="Move Right">➡️</button>
     </div>
-    <button class="text-gray-800 mt-2" @onclick='async () => await Attack.InvokeAsync()' aria-label="Attack">⚔️ Attack</button>
+    <div style="display: @(isMenuOpen ? "block" : "none");">
+        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full mt-4 transition-all duration-300" @onclick='async () => await Power.InvokeAsync()' aria-label="Power">⚔️ Power</button>
+        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mt-4 transition-all duration-300" @onclick='async () => await Attack.InvokeAsync()' aria-label="Attack">⚔️ Attack</button>
+    </div>
 </nav>
 
-@code {
+<script>
+    window.getWindowWidth = function () {
+        return window.innerWidth;
+    };
+</script>
+
+<style>
+#navigation {
+    touch-action: manipulation;
+}
+</style>
+
+@code { 
+    private bool isMenuOpen = true;
+
     [Parameter]
     public EventCallback<string> MovePlayer { get; set; }
     
     [Parameter]
     public EventCallback Attack { get; set; }
+
+    [Parameter]
+    public EventCallback Power { get; set; }
+
+    private async Task ToggleMenu()
+    {
+        isMenuOpen = !isMenuOpen;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            var width = await JSRuntime.InvokeAsync<int>("getWindowWidth");
+            isMenuOpen = width <= 768;
+            await InvokeAsync(StateHasChanged);
+        }
+    }
 }

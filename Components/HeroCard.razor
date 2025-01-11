@@ -52,12 +52,9 @@
                 </div>
             </div>
             <div class="mt-2 mb-2 p-2 bg-gray-900 rounded-md">
-                <h3 class="text-lg font-semibold text-yellow-400">Poderes</h3>
+                <h3 class="text-lg font-semibold text-yellow-400">Poder</h3>
                 <ul class="list-disc list-inside text-gray-300">
-                    @foreach (var power in Character.Powers)
-                    {
-                        <li>@power</li>
-                    }
+                    <li>@Character.Power.Name</li>
                 </ul>
             </div>
             <p class="text-sm text-gray-300 overflow-hidden @(IsExpanded ? "max-h-none" : "max-h-20") transition-all duration-300 ease-in-out">

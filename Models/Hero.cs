@@ -9,7 +9,7 @@ public class Hero
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string Image { get; set; } = string.Empty;
-    public List<string> Powers { get; set; } = new List<string>();
+    public Power Power { get; set; }
 
     public int Speed
     {
@@ -28,7 +28,7 @@ public class Hero
         set
         {
             if (value < 0 || value > 100)
-                throw new ArgumentOutOfRangeException(nameof(Health), "Heatlh must be between 0 and 100.");
+                throw new ArgumentOutOfRangeException(nameof(Health), "Health must be between 0 and 100.");
             _health = value;
         }
     }
@@ -46,7 +46,7 @@ public class Hero
         }
     }
 
-    public Hero(string name, string description, string image, int speed, int health, int attack, List<string> powers)
+    public Hero(string name, string description, string image, int speed, int health, int attack, Power power)
     {
         Name = name;
         Description = description;
@@ -54,8 +54,8 @@ public class Hero
         Speed = speed;
         Health = health;
         Attack = attack;
-        Powers = powers ?? new List<string>();
+        Power = power;
     }
 
-    public Hero() {}  
+    public Hero() {}
 }

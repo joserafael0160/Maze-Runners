@@ -21,6 +21,10 @@ public static class TurnManager
 
     public static void NextTurn()
     {
+        if (CurrentPlayer != null)
+        {
+            CurrentPlayer.HeroSelected?.Power.ReduceCooldown();
+        }
         CurrentPlayerIndex++;
         if (CurrentPlayerIndex >= PlayerData.NumberOfPlayers)
         {

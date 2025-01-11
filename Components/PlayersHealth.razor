@@ -2,12 +2,12 @@
 @using AnimeMaze.Models
 @using AnimeMaze.Services
 
-<aside class="fixed bottom-0 right-0 w-1/5 flex flex-col gap-2 p-2 ">
+<aside class="fixed bottom-0 left-0 w-28 flex flex-col gap-2 p-2 ">
     @if (Players != null)
     {
         foreach (var player in Players)
         {
-            string borderClass = player == TurnManager.CurrentPlayer ? "border-4 border-blue-500" : "";
+            string borderClass = player == TurnManager.CurrentPlayer ? "border-4 border-blue-800" : "";
 
             <article class="relative border-2 border-gray-600 rounded-lg p-2 flex items-center bg-white shadow-lg @borderClass">
                 <img src="@player.HeroSelected?.Image" alt="@player.HeroSelected?.Name's avatar" class="h-10 w-10 rounded-full aspect-square"/>
@@ -15,6 +15,9 @@
                     <p class="text-red-500">@player.Health</p>
                     <span class="text-black">
                         @FacingDirection(player)
+                    </span>
+                    <span class="text-black">
+                        @player.HeroSelected?.Power.CurrentCooldown
                     </span>
                 </div>
                 <div class="absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-75 opacity-0 hover:opacity-100 transition-opacity duration-300">

@@ -2,7 +2,7 @@
 @using AnimeMaze.Services;
 @using AnimeMaze.Data;
 
-<section class="grid grid-cols-10 w-3/4 aspect-square" aria-live="polite">
+<section class="grid grid-cols-10 w-3/4 aspect-square mb-8" aria-live="polite">
     @if (game != null && players != null)
     {
         for (int i = 0; i < game.Maze.GetLength(0); i++)

@@ -1,5 +1,4 @@
 using AnimeMaze.Models;
-using System.Collections.Generic;
 
 namespace AnimeMaze.Data;
 
@@ -14,7 +13,14 @@ public static class HeroData
             4, 
             70, 
             35,
-            new List<string> { "Regeneración", "Fuerza sobrehumana", "Control de kagune" }
+            new Power("Regeneración", 2, (player, players) => 
+            {
+                player.Health += 20;
+                if (player.Health > player.HeroSelected?.Health)
+                {
+                    player.Health = player.HeroSelected.Health;
+                }
+            })
         ),
         new Hero(
             "Eren Yeager", 
@@ -23,7 +29,14 @@ public static class HeroData
             5, 
             80, 
             38,
-            new List<string> { "Transformación en Titán", "Fuerza titánica", "Regeneración" }
+            new Power("Ataque Titán", 3, (player, players) => 
+            {
+                var target = players.FirstOrDefault(p => p.Position == player.Position && p != player);
+                if (target != null)
+                {
+                    target.Health -= 50;
+                }
+            })
         ),
         new Hero(
             "Goku", 
@@ -32,7 +45,14 @@ public static class HeroData
             5, 
             100, 
             40,
-            new List<string> { "Kamehameha", "Transformación en Super Saiyajin", "Vuelo" }
+            new Power("Kamehameha", 3, (player, players) => 
+            {
+                var targets = players.Where(p => Math.Abs(p.Position.RowPosition - player.Position.RowPosition) <= 1 && Math.Abs(p.Position.ColPosition - player.Position.ColPosition) <= 1).ToList();
+                foreach (var target in targets)
+                {
+                    target.Health -= 40;
+                }
+            })
         ),
         new Hero(
             "Naruto Uzumaki", 
@@ -41,7 +61,14 @@ public static class HeroData
             4, 
             80, 
             32,
-            new List<string> { "Rasengan", "Sombra de clones", "Modo sabio" }
+            new Power("Rasengan", 3, (player, players) => 
+            {
+                var target = players.FirstOrDefault(p => p.Position == player.Position && player != p);
+                if (target != null)
+                {
+                    target.Health -= 40;
+                }
+            })
         ),
         new Hero(
             "Monkey D. Luffy", 
@@ -50,7 +77,10 @@ public static class HeroData
             4, 
             70, 
             34,
-            new List<string> { "Gomu Gomu no Mi", "Haki del Rey", "Gatling" }
+            new Power("Gomu Gomu no Mi", 2, (player, players) => 
+            {
+                player.Attack();
+            })
         ),
         new Hero(
             "Jinx", 
@@ -59,7 +89,13 @@ public static class HeroData
             3, 
             50, 
             30,
-            new List<string> { "Zap", "Flame Chompers", "Super Mega Death Rocket" }
+            new Power("Super Mega Death Rocket", 4, (player, players) => 
+            {
+                foreach (var target in players)
+                {
+                    target.Health -= 50;
+                }
+            })
         ),
         new Hero(
             "Saitama", 
@@ -68,7 +104,14 @@ public static class HeroData
             5, 
             100, 
             100,
-            new List<string> { "Puñetazo serio", "Velocidad sobrehumana", "Invulnerabilidad" }
+            new Power("Puñetazo serio", 2, (player, players) => 
+            {
+                var target = players.FirstOrDefault(p => p.Position == player.Position);
+                if (target != null)
+                {
+                    target.Health -= 100;
+                }
+            })
         ),
         new Hero(
             "Shinji Ikari", 
@@ -77,7 +120,14 @@ public static class HeroData
             2, 
             40, 
             20,
-            new List<string> { "Sincronización con EVA", "AT Field", "Lanza de Longinus" }
+            new Power("Lanza de Longinus", 4, (player, players) => 
+            {
+                var target = players.FirstOrDefault(p => p.Position == player.Position);
+                if (target != null)
+                {
+                    target.Health -= 50;
+                }
+            })
         ), 
         new Hero(
             "Nana Osaki", 
@@ -86,7 +136,13 @@ public static class HeroData
             3, 
             60, 
             25,
-            new List<string> { "Voz Poderosa", "Resistencia Emocional", "Determinación Inquebrantable" }
+            new Power("Voz Poderosa", 2, (player, players) => 
+            {
+                foreach (var target in players)
+                {
+                    target.Health -= 10;
+                }
+            })
         ),
         new Hero(
             "Ichigo Kurosaki", 
@@ -95,7 +151,14 @@ public static class HeroData
             4, 
             80, 
             36,
-            new List<string> { "Getsuga Tensho", "Forma Bankai", "Habilidad Hollow" }
+            new Power("Getsuga Tensho", 2, (player, players) => 
+            {
+                var target = players.FirstOrDefault(p => p.Position == player.Position);
+                if (target != null)
+                {
+                    target.Health -= 40;
+                }
+            })
         ),
         new Hero(
             "Punpun", 
@@ -104,16 +167,13 @@ public static class HeroData
             1, 
             10, 
             1,
-            new List<string> { "Cambio de Forma", "Inocencia Desgarradora", "Resiliencia Emocional" }
-        ),
-        new Hero(
-            "Guts", 
-            "Un guerrero formidable con una vida de luchas constantes de la serie 'Berserk'.", 
-            "/images/guts.jpeg",
-            3, 
-            90, 
-            40,
-            new List<string> { "Fuerza Titánica", "Maestría en Espadas", "Resistencia Sobrehumana" }
+            new Power("Inocencia Desgarradora", 3, (player, players) => 
+            {
+                foreach (var target in players)
+                {
+                    target.Health -= 5;
+                }
+            })
         )
     };
 }
