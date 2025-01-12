@@ -9,12 +9,20 @@
       "PackagePath": "staticwebassets/app.css"
     },
     {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/electricity.jpeg",
+      "PackagePath": "staticwebassets/images/electricity.jpeg"
+    },
+    {
       "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/eren.jpeg",
       "PackagePath": "staticwebassets/images/eren.jpeg"
     },
     {
       "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/goku.jpeg",
       "PackagePath": "staticwebassets/images/goku.jpeg"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/green-smoke.png",
+      "PackagePath": "staticwebassets/images/green-smoke.png"
     },
     {
       "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/guts.jpeg",
@@ -59,6 +67,10 @@
     {
       "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/punpun.png",
       "PackagePath": "staticwebassets/images/punpun.png"
+    },
+    {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/rc-cells.jpeg",
+      "PackagePath": "staticwebassets/images/rc-cells.jpeg"
     },
     {
       "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/saitama.jpeg",

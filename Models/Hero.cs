@@ -9,7 +9,7 @@ public class Hero
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string Image { get; set; } = string.Empty;
-    public Power Power { get; set; }
+    public Power Power { get; set; } = new Power("Default", 0, (_, _) => {});
 
     public int Speed
     {

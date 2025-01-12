@@ -18,9 +18,14 @@
                     string borderClass = playerAtCell == TurnManager.CurrentPlayer ? "border-4 border-blue-500" : "";
                     <img src="@playerAtCell.HeroSelected.Image" alt="@playerAtCell.HeroSelected.Name" class="h-full w-full object-cover aspect-square @borderClass" @onclick="() => HandleClick(row, col)">
                 }
+                else if (game.Maze[row, col].Trap != null)
+                {
+                    var trap = game.Maze[row, col].Trap;
+                    <img src="@trap.Image" alt="@trap.Name" class="h-full w-full object-cover aspect-square" @onclick="() => HandleClick(row, col)">
+                }
                 else
                 {
-                    var cell = game.Maze[row, col];
+                    var cell = game.Maze[row, col].Type;
                     <span class="@GetCellClass(cell)" @onclick="() => HandleClick(row, col)"></span>
                 }
             }
@@ -36,14 +41,14 @@
     [Parameter]
     public EventCallback<(int, int)> OnClickMaze { get; set; }
 
-    private string GetCellClass(Labyrinth.Cell cell)
+    private string GetCellClass(Labyrinth.CellType cellType)
     {
-        return cell switch
+        return cellType switch
         {
-            Labyrinth.Cell.Road => "bg-white",
-            Labyrinth.Cell.Wall => "bg-gray-900",
-            Labyrinth.Cell.Trap => "bg-red-800",
-            Labyrinth.Cell.Exit => "bg-green-800",
+            Labyrinth.CellType.Road => "bg-white",
+            Labyrinth.CellType.Wall => "bg-gray-900",
+            Labyrinth.CellType.Trap => "bg-red-800", // No se usa si se renderizan las imágenes de las trampas
+            Labyrinth.CellType.Exit => "bg-green-800",
             _ => ""
         };
     }

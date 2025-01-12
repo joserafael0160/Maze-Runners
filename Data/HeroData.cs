@@ -79,7 +79,7 @@ public static class HeroData
             34,
             new Power("Gomu Gomu no Mi", 2, (player, players) => 
             {
-                player.Attack();
+                player.AttackPlayer(); // Utilizar AttackPlayer en lugar de Attack
             })
         ),
         new Hero(

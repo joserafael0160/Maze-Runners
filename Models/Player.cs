@@ -3,13 +3,7 @@ using AnimeMaze.Data;
 
 namespace AnimeMaze.Models;
 
-public enum Direction
-{
-    Up,
-    Down,
-    Left,
-    Right
-}
+public enum Direction { Up, Down, Left, Right }
 
 public class Player
 {
@@ -18,13 +12,26 @@ public class Player
     public Hero? HeroSelected { get; set; }
     public bool HasWon { get; private set; } = false;
     public int Health { get; set; }
+    public int Speed { get; set; }
+    public int Attack { get; set; }
     public Direction FacingDirection { get; set; }
+    public List<TemporaryEffect> TemporaryEffects { get; } = new List<TemporaryEffect>();
 
     public Player((int row, int col) position)
     {
         Position = position;
         InitialPosition = position;
         FacingDirection = Direction.Right;
+    }
+
+    public void InitializeStats()
+    {
+        if (HeroSelected != null)
+        {
+            Health = HeroSelected.Health;
+            Speed = HeroSelected.Speed;
+            Attack = HeroSelected.Attack;
+        }
     }
 
     public bool MovePlayer(string direction)
@@ -60,12 +67,14 @@ public class Player
                 HasWon = true;
                 return true;
             }
+        ApplyEffects();
+            
             TurnManager.NextTurn();
         }
         return false;
     }
 
-    public void Attack()
+    public void AttackPlayer()
     {
         (int row, int col) attackPosition = Position;
 
@@ -88,15 +97,34 @@ public class Player
         var targetPlayer = PlayerData.Players.FirstOrDefault(p => p.Position == attackPosition);
         if (targetPlayer != null)
         {
-            targetPlayer.Health -= this.HeroSelected?.Attack ?? 0;
+            targetPlayer.Health -= this.Attack;
             if (targetPlayer.Health <= 0)
             {
                 targetPlayer.Position = targetPlayer.InitialPosition;
-                targetPlayer.Health = targetPlayer.HeroSelected?.Health ?? 0;
+                targetPlayer.InitializeStats(); // Restablecer las estadísticas del jugador
             }
         }
+        ApplyEffects();
         TurnManager.NextTurn();
+    }
 
+    public void ApplyEffects()
+    {
+        foreach (var effect in TemporaryEffects.ToList())
+        {
+            effect.DecrementTurn();
+            if (effect.TurnsRemaining <= 0)
+            {
+                effect.Remove(this);
+                TemporaryEffects.Remove(effect);
+            }
+        }
+    }
+
+    public void AddTemporaryEffect(TemporaryEffect effect)
+    {
+        TemporaryEffects.Add(effect);
+        effect.Apply(this);
     }
 
     public void ResetHasWon()

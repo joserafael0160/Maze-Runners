@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4M/8KmMcwygDhgr2YLR2lKjOctgm7EvqVhfIN3mYFYQ=",
+  "Hash": "4qsI5SsSCC3s+uxBziNbxLOIU/ACOhoTGUEKSgGbQPc=",
   "Source": "Anime_Maze",
   "BasePath": "_content/Anime_Maze",
   "Mode": "Default",
@@ -74,6 +74,25 @@
       "OriginalItemSpec": "wwwroot/app.css"
     },
     {
+      "Identity": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/electricity.jpeg",
+      "SourceId": "Anime_Maze",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/",
+      "BasePath": "_content/Anime_Maze",
+      "RelativePath": "images/electricity.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/electricity.jpeg"
+    },
+    {
       "Identity": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/eren.jpeg",
       "SourceId": "Anime_Maze",
       "SourceType": "Discovered",
@@ -110,6 +129,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/goku.jpeg"
+    },
+    {
+      "Identity": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/green-smoke.png",
+      "SourceId": "Anime_Maze",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/",
+      "BasePath": "_content/Anime_Maze",
+      "RelativePath": "images/green-smoke.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/green-smoke.png"
     },
     {
       "Identity": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/guts.jpeg",
@@ -319,6 +357,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/punpun.png"
+    },
+    {
+      "Identity": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/rc-cells.jpeg",
+      "SourceId": "Anime_Maze",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/",
+      "BasePath": "_content/Anime_Maze",
+      "RelativePath": "images/rc-cells.jpeg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/rc-cells.jpeg"
     },
     {
       "Identity": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/saitama.jpeg",
