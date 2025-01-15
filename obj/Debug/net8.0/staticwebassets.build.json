@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "4qsI5SsSCC3s+uxBziNbxLOIU/ACOhoTGUEKSgGbQPc=",
+  "Hash": "/zE0t44IdaiHm9ZKzWYJwPuwdlPPc7KNbGqg2fjHDO8=",
   "Source": "Anime_Maze",
   "BasePath": "_content/Anime_Maze",
   "Mode": "Default",
@@ -376,6 +376,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/images/rc-cells.jpeg"
+    },
+    {
+      "Identity": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/rock.jpg",
+      "SourceId": "Anime_Maze",
+      "SourceType": "Discovered",
+      "ContentRoot": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/",
+      "BasePath": "_content/Anime_Maze",
+      "RelativePath": "images/rock.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/images/rock.jpg"
     },
     {
       "Identity": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/saitama.jpeg",

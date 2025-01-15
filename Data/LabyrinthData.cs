@@ -9,5 +9,12 @@ public static class LabyrinthData
     public static void ResetLabyrinth()
     {
         Game = new Labyrinth();
+        foreach (var cell in Game.Maze) 
+        { 
+            if (cell.Obstacle != null) 
+            { 
+                cell.Obstacle.Reset();
+            }
+        } 
     }
 }

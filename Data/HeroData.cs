@@ -31,10 +31,9 @@ public static class HeroData
             38,
             new Power("Ataque Titán", 3, (player, players) => 
             {
-                var target = players.FirstOrDefault(p => p.Position == player.Position && p != player);
-                if (target != null)
+                for (int i = 0; i < 3; i++)
                 {
-                    target.Health -= 50;
+                    player.AttackTarget();
                 }
             })
         ),
@@ -47,10 +46,9 @@ public static class HeroData
             40,
             new Power("Kamehameha", 3, (player, players) => 
             {
-                var targets = players.Where(p => Math.Abs(p.Position.RowPosition - player.Position.RowPosition) <= 1 && Math.Abs(p.Position.ColPosition - player.Position.ColPosition) <= 1).ToList();
-                foreach (var target in targets)
+                for (int i = 0; i < 2; i++)
                 {
-                    target.Health -= 40;
+                    player.AttackTarget();
                 }
             })
         ),
@@ -63,10 +61,9 @@ public static class HeroData
             32,
             new Power("Rasengan", 3, (player, players) => 
             {
-                var target = players.FirstOrDefault(p => p.Position == player.Position && player != p);
-                if (target != null)
+                for (int i = 0; i < 2; i++)
                 {
-                    target.Health -= 40;
+                    player.AttackTarget();
                 }
             })
         ),
@@ -79,7 +76,10 @@ public static class HeroData
             34,
             new Power("Gomu Gomu no Mi", 2, (player, players) => 
             {
-                player.AttackPlayer(); // Utilizar AttackPlayer en lugar de Attack
+                for (int i = 0; i < 3; i++)
+                {
+                    player.AttackTarget();
+                }
             })
         ),
         new Hero(
@@ -91,9 +91,9 @@ public static class HeroData
             30,
             new Power("Super Mega Death Rocket", 4, (player, players) => 
             {
-                foreach (var target in players)
+                for (int i = 0; i < 2; i++)
                 {
-                    target.Health -= 50;
+                    player.AttackTarget();
                 }
             })
         ),
@@ -106,11 +106,7 @@ public static class HeroData
             100,
             new Power("Puñetazo serio", 2, (player, players) => 
             {
-                var target = players.FirstOrDefault(p => p.Position == player.Position);
-                if (target != null)
-                {
-                    target.Health -= 100;
-                }
+                player.AttackTarget(); 
             })
         ),
         new Hero(
@@ -122,10 +118,9 @@ public static class HeroData
             20,
             new Power("Lanza de Longinus", 4, (player, players) => 
             {
-                var target = players.FirstOrDefault(p => p.Position == player.Position);
-                if (target != null)
+                for (int i = 0; i < 2; i++) 
                 {
-                    target.Health -= 50;
+                    player.AttackTarget();
                 }
             })
         ), 
@@ -138,9 +133,9 @@ public static class HeroData
             25,
             new Power("Voz Poderosa", 2, (player, players) => 
             {
-                foreach (var target in players)
+                for (int i = 0; i < 2; i++) 
                 {
-                    target.Health -= 10;
+                    player.AttackTarget();
                 }
             })
         ),
@@ -153,10 +148,9 @@ public static class HeroData
             36,
             new Power("Getsuga Tensho", 2, (player, players) => 
             {
-                var target = players.FirstOrDefault(p => p.Position == player.Position);
-                if (target != null)
+                for (int i = 0; i < 2; i++) 
                 {
-                    target.Health -= 40;
+                    player.AttackTarget();
                 }
             })
         ),
@@ -169,9 +163,9 @@ public static class HeroData
             1,
             new Power("Inocencia Desgarradora", 3, (player, players) => 
             {
-                foreach (var target in players)
+                for (int i = 0; i < 2; i++) 
                 {
-                    target.Health -= 5;
+                    player.AttackTarget();
                 }
             })
         )

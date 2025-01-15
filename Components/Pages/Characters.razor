@@ -61,6 +61,8 @@
         { 
             PlayerData.Players[currentPlayer - 1].HeroSelected = SelectedHero;
             PlayerData.Players[currentPlayer - 1].Health = SelectedHero.Health;
+            PlayerData.Players[currentPlayer - 1].Speed = SelectedHero.Speed;
+            PlayerData.Players[currentPlayer - 1].Attack = SelectedHero.Attack;
             currentPlayer++; 
             if (currentPlayer > numberOfPlayers) 
             { 

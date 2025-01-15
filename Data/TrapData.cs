@@ -21,15 +21,15 @@ public static class TrapData
             "/images/electricity.jpeg",
             player =>
             {
-                if (player.HeroSelected != null )
+                if (player != null && player.HeroSelected != null)
                 {
                     player.AddTemporaryEffect(new TemporaryEffect(
                         "Parálisis",
                         p => p.Speed = 0,
-                        p => p.Speed = p.HeroSelected.Speed, // Revertir velocidad a su valor original
-                        1 // Cambiamos a 1 turno para hacer pruebas
+                        p => p.Speed = p.HeroSelected.Speed,
+                        1
                     ));
-                    TurnManager.MovesLeft = 0; // Actualiza MovesLeft
+                    TurnManager.MovesLeft = 0;
                     TurnManager.NextTurn();
                 }
             }
@@ -45,14 +45,14 @@ public static class TrapData
                 {
                     player.AddTemporaryEffect(new TemporaryEffect(
                         "Rc Cells",
-                        p => p.Speed = Math.Max(p.Speed - 1, 0), // Reducir velocidad en 1, sin permitir valores negativos
-                        p => p.Speed = p.HeroSelected.Speed, // Revertir el efecto
+                        p => p.Speed = Math.Max(p.Speed - 1, 0),
+                        p => p.Speed = p.HeroSelected.Speed,
                         3
                     ));
-                    TurnManager.MovesLeft--; // Ajusta MovesLeft
-                    if (TurnManager.MovesLeft <= 0) 
+                    TurnManager.MovesLeft--;
+                    if (TurnManager.MovesLeft <= 0)
                     {
-                        TurnManager.NextTurn(); 
+                        TurnManager.NextTurn();
                     }
                 }
             }

@@ -16,12 +16,31 @@
                 if (playerAtCell != null && playerAtCell.HeroSelected != null)
                 {
                     string borderClass = playerAtCell == TurnManager.CurrentPlayer ? "border-4 border-blue-500" : "";
-                    <img src="@playerAtCell.HeroSelected.Image" alt="@playerAtCell.HeroSelected.Name" class="h-full w-full object-cover aspect-square @borderClass" @onclick="() => HandleClick(row, col)">
+                    <div class="relative">
+                        <img src="@playerAtCell.HeroSelected.Image" alt="@playerAtCell.HeroSelected.Name" class="h-full w-full object-cover aspect-square @borderClass" @onclick="() => HandleClick(row, col)">
+                    </div>
                 }
                 else if (game.Maze[row, col].Trap != null)
                 {
                     var trap = game.Maze[row, col].Trap;
                     <img src="@trap.Image" alt="@trap.Name" class="h-full w-full object-cover aspect-square" @onclick="() => HandleClick(row, col)">
+                }
+                else if (game.Maze[row, col].Obstacle != null)
+                {
+                    var obstacle = game.Maze[row, col].Obstacle;
+                    if (obstacle.Health > 0)
+                    {
+                        <div class="relative">
+                            <div class="absolute inset-x-0 top-0 h-1 bg-red-500">
+                                <div class="h-full bg-green-500" style="width:@(obstacle.Health * 100 / obstacle.MaxHealth)%"></div>
+                            </div>
+                            <img src="@obstacle.Image" alt="@obstacle.Name" class="h-full w-full object-cover aspect-square" @onclick="() => HandleClick(row, col)">
+                        </div>
+                    }
+                    else 
+                    {
+                        <span class="bg-white" @onclick="() => HandleClick(row, col)"></span>
+                    }
                 }
                 else
                 {
@@ -48,6 +67,7 @@
             Labyrinth.CellType.Road => "bg-white",
             Labyrinth.CellType.Wall => "bg-gray-900",
             Labyrinth.CellType.Trap => "bg-red-800", // No se usa si se renderizan las imágenes de las trampas
+            Labyrinth.CellType.Obstacle => "bg-gray-400", // No se usa si se renderizan las imágenes de los obstáculos
             Labyrinth.CellType.Exit => "bg-green-800",
             _ => ""
         };

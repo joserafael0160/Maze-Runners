@@ -28,7 +28,6 @@ public static class TurnManager
 {
     if (CurrentPlayer != null)
     {
-        // Aplicar efectos temporales solo al final del turno completo
         CurrentPlayer.ApplyEffects();
         
         if (MovesLeft <= 1)
@@ -44,7 +43,6 @@ public static class TurnManager
     }
     else
     {
-        // Si el jugador no puede moverse, saltamos al siguiente jugador
         CurrentPlayerIndex = (CurrentPlayerIndex + 1) % PlayerData.NumberOfPlayers;
         MovesLeft = CurrentPlayer?.HeroSelected?.Speed ?? 0;
     }
@@ -60,7 +58,7 @@ public static class TurnManager
             player.TemporaryEffects.Clear();
             player.Position = player.InitialPosition;
             player.Health = player.HeroSelected?.Health ?? 0;
-            player.Speed = player.HeroSelected?.Speed ?? 1; // Restablecer la velocidad
+            player.Speed = player.HeroSelected?.Speed ?? 1; 
             player.Attack = player.HeroSelected?.Attack ?? 0;
         }
 

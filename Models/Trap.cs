@@ -17,7 +17,7 @@ public class Trap
             if (!player.TemporaryEffects.Any(e => e.Name == name))
             {
                 activate(player);
-                player.AddTemporaryEffect(new TemporaryEffect(name, p => { }, p => { }, 1)); // Añadir efecto temporal vacío para evitar doble activación
+                player.AddTemporaryEffect(new TemporaryEffect(name, p => { }, p => { }, 1));
             }
             if (player.Health <= 0)
             {

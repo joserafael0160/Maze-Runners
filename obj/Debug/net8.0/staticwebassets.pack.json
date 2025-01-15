@@ -73,6 +73,10 @@
       "PackagePath": "staticwebassets/images/rc-cells.jpeg"
     },
     {
+      "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/rock.jpg",
+      "PackagePath": "staticwebassets/images/rock.jpg"
+    },
+    {
       "Id": "/home/jose/Estudio/UH MATCOM - Ciencias de la computación/1er año/Programación/Proyecto/Anime Maze/wwwroot/images/saitama.jpeg",
       "PackagePath": "staticwebassets/images/saitama.jpeg"
     },

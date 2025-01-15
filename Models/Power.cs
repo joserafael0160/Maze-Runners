@@ -20,7 +20,7 @@ public class Power
     {
         if (CurrentCooldown == 0)
         {
-            Action(player, players); // Ensure two parameters are passed here
+            Action(player, players);
             CurrentCooldown = Cooldown;
         }
     }

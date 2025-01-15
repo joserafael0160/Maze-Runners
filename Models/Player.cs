@@ -74,39 +74,49 @@ public class Player
         return false;
     }
 
-    public void AttackPlayer()
+    public void AttackTarget()
+{
+    (int row, int col) attackPosition = Position;
+
+    switch (FacingDirection)
     {
-        (int row, int col) attackPosition = Position;
+        case Direction.Up:
+            attackPosition.row--;
+            break;
+        case Direction.Down:
+            attackPosition.row++;
+            break;
+        case Direction.Left:
+            attackPosition.col--;
+            break;
+        case Direction.Right:
+            attackPosition.col++;
+            break;
+    }
 
-        switch (FacingDirection)
+    if (ValidationService.CanAttack(attackPosition.row, attackPosition.col))
+    {
+        var cell = ValidationService.GetCell(attackPosition.row, attackPosition.col);
+        var player = ValidationService.GetPlayerAtPosition(attackPosition.row, attackPosition.col);
+        
+        if (cell.Obstacle != null && cell.Obstacle.Health != 0)
         {
-            case Direction.Up:
-                attackPosition.row--;
-                break;
-            case Direction.Down:
-                attackPosition.row++;
-                break;
-            case Direction.Left:
-                attackPosition.col--;
-                break;
-            case Direction.Right:
-                attackPosition.col++;
-                break;
+            cell.Obstacle.TakeDamage(this.Attack);
         }
-
-        var targetPlayer = PlayerData.Players.FirstOrDefault(p => p.Position == attackPosition);
-        if (targetPlayer != null)
+        else if (player != null)
         {
-            targetPlayer.Health -= this.Attack;
-            if (targetPlayer.Health <= 0)
+            player.Health -= this.Attack;
+            if (player.Health <= 0)
             {
-                targetPlayer.Position = targetPlayer.InitialPosition;
-                targetPlayer.InitializeStats(); // Restablecer las estadísticas del jugador
+                player.Position = player.InitialPosition;
+                player.InitializeStats(); 
             }
         }
+    }
         ApplyEffects();
         TurnManager.NextTurn();
-    }
+}
+
 
     public void ApplyEffects()
     {

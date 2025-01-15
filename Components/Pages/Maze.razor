@@ -81,7 +81,7 @@
     {
         if (TurnManager.CurrentPlayer != null)
         {
-            TurnManager.CurrentPlayer.AttackPlayer();
+            TurnManager.CurrentPlayer.AttackTarget();
             StateHasChanged();
         }
     }
@@ -154,15 +154,18 @@
         LabyrinthData.ResetLabyrinth();
         TurnManager.ResetTurns();
         PlayerData.ResetPlayerPositions();
+        ObstacleData.ResetObstacles(); 
         showModal = false;
         StateHasChanged();
     }
+
 
     private void SelectNewCharacters()
     {
         PlayerData.Players.Clear();
         TurnManager.ResetTurns(); 
         PlayerData.InitializePlayers(PlayerData.NumberOfPlayers); 
+        ObstacleData.ResetObstacles(); 
         Navigation.NavigateTo("/Characters");
         showModal = false;
         StateHasChanged();

@@ -11,14 +11,15 @@ public class Labyrinth
     {
         public CellType Type { get; set; }
         public Trap? Trap { get; set; }
+        public Obstacle? Obstacle { get; set; }
 
-        public Cell(CellType type, Trap? trap = null)
-        {
-            Type = type;
-            Trap = trap;
+        public Cell(CellType type, Trap? trap = null, Obstacle? obstacle = null) 
+        { 
+            Type = type; 
+            Trap = trap; 
+            Obstacle = obstacle; 
         }
 
-        // Método para obtener el tipo de celda
         public string GetCellType()
         {
             return Type switch
@@ -26,6 +27,7 @@ public class Labyrinth
                 CellType.Wall => "Wall",
                 CellType.Road => "Road",
                 CellType.Trap => "Trap",
+                CellType.Obstacle => "Obstacle",
                 CellType.Exit => "Exit",
                 _ => "Unknown"
             };
@@ -34,7 +36,7 @@ public class Labyrinth
 
     public enum CellType
     {
-        Road, Wall, Trap, Exit
+        Road, Wall, Trap, Obstacle, Exit
     }
 
     public Labyrinth()
@@ -48,13 +50,12 @@ public class Labyrinth
             { new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Trap, TrapData.Traps[2]), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall) },
             { new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall) },
             { new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Trap, TrapData.Traps[2]), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Wall) },
-            { new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall) },
+            { new Cell(CellType.Wall), new Cell(CellType.Obstacle, null, ObstacleData.Obstacles[0]), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall) },
             { new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Exit) },
             { new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall) }
         };
     }
 
-    // Método para comprobar y activar las trampas
     public void CheckAndActivateTrap(Player player)
     {
         var cell = Maze[player.Position.RowPosition, player.Position.ColPosition];
