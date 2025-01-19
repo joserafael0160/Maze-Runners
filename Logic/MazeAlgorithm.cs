@@ -140,7 +140,6 @@ public static class MazeAlgorithm
         while (queue.Count > 0)
         {
             var (currentRow, currentCol, distance) = queue.Dequeue();
-            allPositions.Add((currentRow, currentCol, distance));
     
             foreach (var (dx, dy) in directions)
             {
@@ -151,6 +150,10 @@ public static class MazeAlgorithm
                 {
                     visited[newRow, newCol] = true;
                     queue.Enqueue((newRow, newCol, distance + 1));
+                    if (labyrinth.Maze[newRow, newCol].Type == Labyrinth.CellType.Road)
+                    {
+                        allPositions.Add((newRow, newCol, distance));
+                    }
                 }
             }
         }
