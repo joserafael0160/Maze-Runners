@@ -20,7 +20,7 @@ public static class MazeAlgorithm
         int startY = GetRandomOddNumber(height);
         labyrinth.Maze[startY, startX].Type = Labyrinth.CellType.Road;
 
-        int counter = random.Next(4, 15); // Inicializar contador aleatorio
+        int counter = random.Next(4, 15);
 
         walls.Add((startX, startY));
         while (walls.Count > 0)
@@ -57,7 +57,6 @@ public static class MazeAlgorithm
 
                 if (counter == 0)
                 {
-                    // Colocar trampa o obstáculo
                     if (random.Next(2) == 0)
                     {
                         var trap = TrapData.Traps[random.Next(TrapData.Traps.Count)];
@@ -68,7 +67,6 @@ public static class MazeAlgorithm
                         var obstacle = ObstacleData.Obstacles[random.Next(ObstacleData.Obstacles.Count)];
                         labyrinth.Maze[ny, nx].Obstacle = obstacle;
                     }
-                    // Reiniciar contador
                     counter = random.Next(4, 15);
                 }
 
