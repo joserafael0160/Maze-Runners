@@ -7,7 +7,7 @@ public class Obstacle
     public string Image { get; set; } 
     public string Name { get; set; } 
 
-    public Obstacle(int health, string image, string name)
+    public Obstacle(int health, string name, string image)
     {
         Health = health;
         MaxHealth = health; 

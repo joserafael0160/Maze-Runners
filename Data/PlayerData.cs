@@ -8,13 +8,7 @@ public static class PlayerData
     public static int NumberOfPlayers = 1;
     public static List<Player> Players = new List<Player>();
 
-    public static List<(int row, int col)> InitialPositions = new List<(int row, int col)>
-    {
-        (1, 1),
-        (4, 1),
-        (7, 1),
-        (6, 1),
-    };
+    public static List<(int row, int col)> InitialPositions = new List<(int row, int col)>();
 
     public static void ResetPlayerPositions()
     {

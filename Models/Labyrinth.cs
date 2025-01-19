@@ -1,25 +1,25 @@
 using AnimeMaze.Data;
 using System.Linq;
+using AnimeMaze.Logic;
 
 namespace AnimeMaze.Models;
 
 public class Labyrinth
 {
     public Cell[,] Maze { get; }
-
+    
     public class Cell
     {
         public CellType Type { get; set; }
         public Trap? Trap { get; set; }
         public Obstacle? Obstacle { get; set; }
-
-        public Cell(CellType type, Trap? trap = null, Obstacle? obstacle = null) 
-        { 
-            Type = type; 
-            Trap = trap; 
-            Obstacle = obstacle; 
+        public Cell(CellType type, Trap? trap = null, Obstacle? obstacle = null)
+        {
+            Type = type;
+            Trap = trap;
+            Obstacle = obstacle;
         }
-
+        
         public string GetCellType()
         {
             return Type switch
@@ -33,29 +33,18 @@ public class Labyrinth
             };
         }
     }
-
+    
     public enum CellType
     {
         Road, Wall, Trap, Obstacle, Exit
     }
-
-    public Labyrinth()
+    
+    public Labyrinth(int width, int height)
     {
-        Maze = new Cell[,]
-        {
-            { new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall) },
-            { new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall) },
-            { new Cell(CellType.Wall), new Cell(CellType.Trap, TrapData.Traps[1]), new Cell(CellType.Trap, TrapData.Traps[1]), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall) },
-            { new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Trap, TrapData.Traps[0]), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall) },
-            { new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Trap, TrapData.Traps[2]), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall) },
-            { new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall) },
-            { new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Trap, TrapData.Traps[2]), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Wall) },
-            { new Cell(CellType.Wall), new Cell(CellType.Obstacle, null, ObstacleData.Obstacles[0]), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall) },
-            { new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Wall), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Road), new Cell(CellType.Exit) },
-            { new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall), new Cell(CellType.Wall) }
-        };
+        Maze = new Cell[height, width];
+        MazeAlgorithm.GenerateMaze(this);
     }
-
+    
     public void CheckAndActivateTrap(Player player)
     {
         var cell = Maze[player.Position.RowPosition, player.Position.ColPosition];
@@ -65,3 +54,4 @@ public class Labyrinth
         }
     }
 }
+

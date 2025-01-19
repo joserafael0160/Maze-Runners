@@ -2,7 +2,7 @@
 @using AnimeMaze.Services;
 @using AnimeMaze.Data;
 
-<section class="grid grid-cols-10 w-3/4 aspect-square mb-8" aria-live="polite">
+<section class="w-3/4 aspect-square mb-8" aria-live="polite" style="display: grid; grid-template-columns: repeat(@(game?.Maze.GetLength(1) ?? 10), 1fr);">
     @if (game != null && players != null)
     {
         for (int i = 0; i < game.Maze.GetLength(0); i++)
@@ -30,7 +30,7 @@
                     var obstacle = game.Maze[row, col].Obstacle;
                     if (obstacle.Health > 0)
                     {
-                        <div class="relative">
+                        <div class="relative " >
                             <div class="absolute inset-x-0 top-0 h-1 bg-red-500">
                                 <div class="h-full bg-green-500" style="width:@(obstacle.Health * 100 / obstacle.MaxHealth)%"></div>
                             </div>
