@@ -154,7 +154,8 @@
         LabyrinthData.ResetLabyrinth();
         TurnManager.ResetTurns();
         PlayerData.ResetPlayerPositions();
-        ObstacleData.ResetObstacles(); 
+        ObstacleData.ResetObstacles(LabyrinthData.Game); 
+        ValidationService.ResetValidationGame(LabyrinthData.Game);
         showModal = false;
         StateHasChanged();
     }
@@ -165,7 +166,8 @@
         PlayerData.Players.Clear();
         TurnManager.ResetTurns(); 
         PlayerData.InitializePlayers(PlayerData.NumberOfPlayers); 
-        ObstacleData.ResetObstacles(); 
+        ObstacleData.ResetObstacles(LabyrinthData.Game); 
+        ValidationService.ResetValidationGame(LabyrinthData.Game);
         Navigation.NavigateTo("/Characters");
         showModal = false;
         StateHasChanged();

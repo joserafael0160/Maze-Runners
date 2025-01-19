@@ -2,6 +2,7 @@
 @inject NavigationManager Navigation
 @using AnimeMaze.Data
 @using AnimeMaze.Models
+@using AnimeMaze.Logic
 
 <header class="bg-gray-800 text-white flex justify-between items-center p-4" role="banner">
     <a href="/" class="border-2 border-white p-2">Volver al inicio</a>
@@ -27,7 +28,10 @@
 
     private void StartGame()
     {
+
         PlayerData.InitializePlayers(numberOfPlayers);
         Navigation.NavigateTo("/Characters");
+        
     }
+
 }

@@ -3,6 +3,7 @@ namespace AnimeMaze.Logic;
 using System;
 using System.Collections.Generic;
 using AnimeMaze.Models;
+using AnimeMaze.Data;
 
 public static class MazeAlgorithm
 {
@@ -59,13 +60,15 @@ public static class MazeAlgorithm
                 {
                     if (random.Next(2) == 0)
                     {
-                        var trap = TrapData.Traps[random.Next(TrapData.Traps.Count)];
-                        labyrinth.Maze[ny, nx].Trap = trap;
+                        var trap = TrapData.Traps[random.Next(TrapData.Traps.Count)]; 
+                        labyrinth.Maze[ny, nx].Trap = trap; 
+                        labyrinth.Maze[ny, nx].Type = Labyrinth.CellType.Trap;
                     }
                     else
                     {
-                        var obstacle = ObstacleData.Obstacles[random.Next(ObstacleData.Obstacles.Count)];
-                        labyrinth.Maze[ny, nx].Obstacle = obstacle;
+                        var obstacle = ObstacleData.CreateRandomObstacle(); 
+                        labyrinth.Maze[ny, nx].Obstacle = obstacle; 
+                        labyrinth.Maze[ny, nx].Type = Labyrinth.CellType.Obstacle;
                     }
                     counter = random.Next(4, 15);
                 }
@@ -103,19 +106,19 @@ public static class MazeAlgorithm
 
         switch (border)
         {
-            case 0: // Borde superior
+            case 0: // Top Border
                 exitX = GetRandomOddNumber(width);
                 exitY = 0;
                 break;
-            case 1: // Borde inferior
+            case 1: // Bottom Border
                 exitX = GetRandomOddNumber(width);
                 exitY = height - 1;
                 break;
-            case 2: // Borde izquierdo
+            case 2: // Left Border
                 exitX = 0;
                 exitY = GetRandomOddNumber(height);
                 break;
-            default: // Borde derecho
+            default: // Right Border
                 exitX = width - 1;
                 exitY = GetRandomOddNumber(height);
                 break;
@@ -124,43 +127,38 @@ public static class MazeAlgorithm
         labyrinth.Maze[exitY, exitX].Type = Labyrinth.CellType.Exit;
     }
 
-    private static List<(int row, int col)> FindFurthestPositions(Labyrinth labyrinth, int width, int height, int startX, int startY)
+    public static List<(int row, int col)> FindFurthestPositions(Labyrinth labyrinth, int width, int height, int startX, int startY)
     {
         var directions = new (int, int)[] { (0, 1), (1, 0), (0, -1), (-1, 0) };
         var visited = new bool[height, width];
         var queue = new Queue<(int row, int col, int dist)>();
-        var furthestPositions = new List<(int row, int col)>();
-
+        var allPositions = new List<(int row, int col, int dist)>();
+    
         queue.Enqueue((startY, startX, 0));
         visited[startY, startX] = true;
-
+    
         while (queue.Count > 0)
         {
             var (currentRow, currentCol, distance) = queue.Dequeue();
-
+            allPositions.Add((currentRow, currentCol, distance));
+    
             foreach (var (dx, dy) in directions)
             {
                 int newRow = currentRow + dx;
                 int newCol = currentCol + dy;
-
-                if (IsWithinBounds(newCol, newRow, width, height) && !visited[newRow, newCol] && labyrinth.Maze[newRow, newCol].Type == Labyrinth.CellType.Road)
+    
+                if (IsWithinBounds(newCol, newRow, width, height) && !visited[newRow, newCol] && labyrinth.Maze[newRow, newCol].Type != Labyrinth.CellType.Wall)
                 {
                     visited[newRow, newCol] = true;
                     queue.Enqueue((newRow, newCol, distance + 1));
-
-                    if (furthestPositions.Count < 4)
-                    {
-                        furthestPositions.Add((newRow, newCol));
-                    }
-                    else
-                    {
-                        furthestPositions.RemoveAt(0);
-                        furthestPositions.Add((newRow, newCol));
-                    }
                 }
             }
         }
-
+    
+        // Sort positions by distance in descending order and take the top 4 furthest positions
+        var furthestPositions = allPositions.OrderByDescending(p => p.dist).Take(4).Select(p => (p.row, p.col)).ToList();
+    
         return furthestPositions;
     }
+
 }

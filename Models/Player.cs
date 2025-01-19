@@ -102,6 +102,11 @@ public class Player
         if (cell.Obstacle != null && cell.Obstacle.Health != 0)
         {
             cell.Obstacle.TakeDamage(this.Attack);
+            if (cell.Obstacle.IsBroken()) 
+            { 
+                cell.Obstacle = null; // Remove obstacle once broken 
+                cell.Type = Labyrinth.CellType.Road; // Change cell type back to Road 
+            }
         }
         else if (player != null)
         {

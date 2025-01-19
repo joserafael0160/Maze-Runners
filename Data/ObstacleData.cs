@@ -5,16 +5,24 @@ namespace AnimeMaze.Data;
 
 public static class ObstacleData
 {
-    public static List<Obstacle> Obstacles = new List<Obstacle>
+    private static readonly Random random = new Random();
+    
+    private static readonly List<(int Health, string Name, string Image)> ObstacleDefinitions = new List<(int, string, string)>
     {
-        new Obstacle(100, "Rock", "/images/rock.jpg"),
+        (100, "Rock", "/images/rock.jpg"),
     };
 
-    public static void ResetObstacles()
+    public static Obstacle CreateRandomObstacle()
     {
-        foreach (var obstacle in Obstacles)
+        var obstacleDefinition = ObstacleDefinitions[random.Next(ObstacleDefinitions.Count)];
+        return new Obstacle(obstacleDefinition.Health, obstacleDefinition.Name, obstacleDefinition.Image);
+    }
+
+    public static void ResetObstacles(Labyrinth labyrinth)
+    {
+        foreach (var cell in labyrinth.Maze)
         {
-            obstacle.Reset(); 
+            cell.Obstacle?.Reset();
         }
     }
 }

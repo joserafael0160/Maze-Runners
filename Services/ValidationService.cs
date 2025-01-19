@@ -5,7 +5,7 @@ namespace AnimeMaze.Services;
 
 public static class ValidationService
 {
-    private static Labyrinth game = LabyrinthData.Game;
+    private static Labyrinth game = LabyrinthData.Game ;
 
     public static bool IsValidMove(int playerRow, int playerCol)
     {
@@ -41,5 +41,9 @@ public static class ValidationService
     public static Player? GetPlayerAtPosition(int row, int col)
     {
         return PlayerData.Players.FirstOrDefault(p => p.Position == (row, col));
+    }
+    public static void ResetValidationGame(Labyrinth newGame)
+    {
+        game = newGame;
     }
 }

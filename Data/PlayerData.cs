@@ -8,7 +8,7 @@ public static class PlayerData
     public static int NumberOfPlayers = 1;
     public static List<Player> Players = new List<Player>();
 
-    public static List<(int row, int col)> InitialPositions = new List<(int row, int col)>();
+    public static List<(int row, int col)> InitialPositions = new List<(int row, int col)> ();
 
     public static void ResetPlayerPositions()
     {
@@ -23,6 +23,7 @@ public static class PlayerData
     {
         NumberOfPlayers = numberOfPlayers;
         Players.Clear();
+
         for (int i = 0; i < numberOfPlayers; i++)
         {
             var position = InitialPositions[i];
