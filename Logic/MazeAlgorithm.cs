@@ -70,7 +70,7 @@ public static class MazeAlgorithm
                         labyrinth.Maze[ny, nx].Obstacle = obstacle; 
                         labyrinth.Maze[ny, nx].Type = Labyrinth.CellType.Obstacle;
                     }
-                    counter = random.Next(4, 15);
+                    counter = random.Next(4, 8);
                 }
 
                 walls.Add((nx, ny));
