@@ -9,7 +9,7 @@ public static class ObstacleData
     
     private static readonly List<(int Health, string Name, string Image)> ObstacleDefinitions = new List<(int, string, string)>
     {
-        (100, "Rock", "/images/rock.jpg"),
+        (100, "Rock", "/images/Obstacles/Rock.png"),
     };
 
     public static Obstacle CreateRandomObstacle()

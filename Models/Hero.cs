@@ -8,7 +8,7 @@ public class Hero
 
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
-    public string Image { get; set; } = string.Empty;
+    public HeroImage Image { get; set; } = new HeroImage();
     public Power Power { get; set; } = new Power("Default", 0, (_, _) => {});
 
     public int Speed
@@ -46,11 +46,11 @@ public class Hero
         }
     }
 
-    public Hero(string name, string description, string image, int speed, int health, int attack, Power power)
+    public Hero(string name, string description, int speed, int health, int attack, Power power)
     {
         Name = name;
         Description = description;
-        Image = image;
+        Image = new HeroImage(name);
         Speed = speed;
         Health = health;
         Attack = attack;

@@ -12,13 +12,13 @@ public static class TrapData
         new Trap(
             "Trampa de Veneno",
             "Un gas venenoso del anime 'Naruto' que reduce la salud del jugador en 20 puntos.",
-            "/images/green-smoke.png",
+            "/images/Traps/Green Smoke.png",
             player => player.Health -= 20
         ),
         new Trap(
             "Trampa de Parálisis",
             "Electricidad del 'Raikiri' del anime 'Bleach' que inmoviliza al jugador por un turno.",
-            "/images/electricity.jpeg",
+            "/images/Traps/Thunder.png",
             player =>
             {
                 if (player != null && player.HeroSelected != null)
@@ -37,7 +37,7 @@ public static class TrapData
         new Trap(
             "Trampa de Rc Cells",
             "Una explosión de Rc Cells del anime 'Tokyo Ghoul' que reduce la salud del jugador en 15 puntos y su velocidad en 1 punto durante 3 turnos.",
-            "/images/rc-cells.jpeg",
+            "/images/Traps/Red Smoke.png",
             player =>
             {
                 player.Health -= 15;
