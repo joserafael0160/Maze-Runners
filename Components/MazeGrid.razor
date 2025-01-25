@@ -48,7 +48,7 @@
 
                         @if (playerAtCell != null && playerAtCell.HeroSelected != null)
                         {
-                            string borderClass = playerAtCell == TurnManager.CurrentPlayer ? " border-2 border-blue-500" : "";
+                            string borderClass = playerAtCell == TurnManager.CurrentPlayer ? "border-2 border-blue-500" : "";
                             string playerImage = playerAtCell.FacingDirection switch
                             {
                                 Direction.Up => playerAtCell.HeroSelected.Image.Up,

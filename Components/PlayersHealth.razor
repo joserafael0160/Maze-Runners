@@ -2,28 +2,31 @@
 @using AnimeMaze.Models
 @using AnimeMaze.Services
 
-<aside class="fixed bottom-0 left-0 w-28 flex flex-col gap-4 p-4 bg-gray-100 rounded-lg shadow-md">
+<aside class="fixed bottom-0 left-0 w-28 flex flex-col gap-4 p-2 bg-gray-100 rounded-lg shadow-md">
     @if (Players != null)
     {
         @foreach (var player in Players)
         {
-            <div class="mb-2">
-                <h4 class="font-bold text-gray-700">Effects:</h4>
-                <ul class="list-disc list-inside">
-                    @foreach (var effect in player.TemporaryEffects)
-                    {
-                        <li class="text-sm text-gray-600">@effect.Name @effect.TurnsRemaining</li>
-                    }
-                </ul>
-            </div>
+            if (player.TemporaryEffects.Count > -1)
+            {
+                <div class="mb-2">
+                    <h4 class="font-bold text-gray-700">Effects:</h4>
+                    <ul class="list-disc list-inside">
+                        @foreach (var effect in player.TemporaryEffects)
+                        {
+                            <li class="text-sm text-gray-600">@effect.Name @effect.TurnsRemaining</li>
+                        }
+                    </ul>
+                </div>    
+            }
+            
             
             string borderClass = player == TurnManager.CurrentPlayer ? "border-4 border-blue-800" : "border-2 border-gray-400";
 
-            <article class="relative p-4 flex items-center bg-white rounded-lg shadow-lg @borderClass">
-                <img src="@player.HeroSelected?.Image" alt="@player.HeroSelected?.Name's avatar" class="h-12 w-12 rounded-full"/>
-                <div class="flex flex-col ml-4">
+            <article class="relative p-2 flex items-center bg-white rounded-lg shadow-lg @borderClass">
+                <img src="@player.HeroSelected?.Image.Down" alt="@player.HeroSelected?.Name's avatar" class="h-8 w-8 rounded-full"/>
+                <div class="flex flex-col ml-2">
                     <p class="text-red-500 font-semibold">@player.Health</p>
-                    <p class="text-gray-700">@DetermineFacingDirection(player)</p>
                     <p class="text-black text-sm">@player.HeroSelected?.Power.CurrentCooldown</p>
                 </div>
                 <div class="absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-75 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-lg">
@@ -37,16 +40,4 @@
 @code {
     [Parameter]
     public List<Player>? Players { get; set; }
-
-    private string DetermineFacingDirection(Player player)
-    {
-        return player.FacingDirection switch
-        {
-            Direction.Up => "⬆️",
-            Direction.Left => "⬅️",
-            Direction.Right => "➡️",
-            Direction.Down => "⬇️",
-            _ => "❓",
-        };
-    }
 }
