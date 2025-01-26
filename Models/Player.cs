@@ -21,7 +21,7 @@ public class Player
     {
         Position = position;
         InitialPosition = position;
-        FacingDirection = Direction.Right;
+        FacingDirection = Direction.Down;
     }
 
     public void InitializeStats()
