@@ -1,17 +1,31 @@
 @inject IJSRuntime JSRuntime
 
 <nav id="navigation" class="fixed bottom-0 right-0 @(isMenuOpen ? "bg-gray-800" : "") text-white p-4 rounded-md shadow-lg nav-menu" role="navigation">
-    <button class="@(isMenuOpen ? "bg-red-600 hover:bg-red-500" : "bg-yellow-600 hover:bg-yellow-500") text-white font-bold py-2 px-4 rounded-full transition-all duration-300" @onclick="ToggleMenu" aria-label="Toggle Menu">@((isMenuOpen ? "x" : "☰"))</button>
+    <button class="@(isMenuOpen ? " hover:bg-red-500" : " hover:bg-green-500") text-white font-bold w-12 transition-all duration-300" @onclick="ToggleMenu" aria-label="Toggle Menu">
+        <img class="" src="@(isMenuOpen ? "images/Buttons/Menu/X.png" : "images/Buttons/Menu/Menu.png")" alt="Menu Toggle " class="w-full transition duration-300 hover:brightness-75 active:brightness-50"  />
+    </button>
 
     <div class="mt-4 grid grid-cols-3 gap-4 items-center lg:grid" style="display: @(isMenuOpen ? "grid" : "none");">
-        <button class="col-start-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition-all duration-300" @onclick='async () => await MovePlayer.InvokeAsync("up")' aria-label="Move Up">⬆️</button>
-        <button class="col-start-1 col-span-1 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition-all duration-300" @onclick='async () => await MovePlayer.InvokeAsync("left")' aria-label="Move Left">⬅️</button>
-        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition-all duration-300" @onclick='async () => await MovePlayer.InvokeAsync("down")' aria-label="Move Down">⬇️</button>
-        <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full transition-all duration-300" @onclick='async () => await MovePlayer.InvokeAsync("right")' aria-label="Move Right">➡️</button>
+        <button class="col-start-2 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full transition-all duration-300" @onclick='async () => await MovePlayer.InvokeAsync("up")' aria-label="Move Up">
+            <img src="/images/Buttons/Arrows/Up.png" class="w-full transition duration-300 hover:brightness-75 active:brightness-50">
+        </button>
+        <button class="col-start-1 col-span-1 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-full transition-all duration-300" @onclick='async () => await MovePlayer.InvokeAsync("left")' aria-label="Move Left">
+             <img src="/images/Buttons/Arrows/Left.png" class="w-full transition duration-300 hover:brightness-75 active:brightness-50">
+        </button>
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold  rounded-full transition-all duration-300" @onclick='async () => await MovePlayer.InvokeAsync("down")' aria-label="Move Down">
+            <img src="/images/Buttons/Arrows/Down.png" class="w-full transition duration-300 hover:brightness-75 active:brightness-50">
+        </button>
+        <button class=" bg-blue-500 hover:bg-blue-700 text-white font-bold  rounded-full transition-all duration-300" @onclick='async () => await MovePlayer.InvokeAsync("right")' aria-label="Move Right">
+            <img src="/images/Buttons/Arrows/Right.png" class="w-full transition duration-300 hover:brightness-75 active:brightness-50">
+        </button>
     </div>
     <div style="display: @(isMenuOpen ? "block" : "none");">
-        <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded-full mt-4 transition-all duration-300" @onclick='async () => await Power.InvokeAsync()' aria-label="Power">⚔️ Power</button>
-        <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded-full mt-4 transition-all duration-300" @onclick='async () => await Attack.InvokeAsync()' aria-label="Attack">⚔️ Attack</button>
+        <button class="p-0 focus:outline-none" @onclick='async () => await Power.InvokeAsync()' aria-label="Power">
+            <img src="/images/Buttons/Specials/Power.png" class="w-full transition duration-300 hover:brightness-75 active:brightness-50">
+        </button>
+        <button class="p-0 focus:outline-none" @onclick='async () => await Attack.InvokeAsync()' aria-label="Attack">
+            <img src="/images/Buttons/Specials/Attack.png" class="w-full transition duration-300 hover:brightness-75 active:brightness-50">
+        </button>
     </div>
 </nav>
 
