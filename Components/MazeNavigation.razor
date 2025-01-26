@@ -2,7 +2,7 @@
 
 <nav id="navigation" class="fixed bottom-0 right-0 @(isMenuOpen ? "bg-gray-800" : "") text-white p-4 rounded-md shadow-lg nav-menu" role="navigation">
     <button class="@(isMenuOpen ? " hover:bg-red-500" : " hover:bg-green-500") text-white font-bold w-12 transition-all duration-300" @onclick="ToggleMenu" aria-label="Toggle Menu">
-        <img class="" src="@(isMenuOpen ? "images/Buttons/Menu/X.png" : "images/Buttons/Menu/Menu.png")" alt="Menu Toggle " class="w-full transition duration-300 hover:brightness-75 active:brightness-50"  />
+        <img  src="@(isMenuOpen ? "images/Buttons/Menu/X.png" : "images/Buttons/Menu/Menu.png")" alt="Menu Toggle " class="w-full transition duration-300 hover:brightness-75 active:brightness-50"  />
     </button>
 
     <div class="mt-4 grid grid-cols-3 gap-4 items-center lg:grid" style="display: @(isMenuOpen ? "grid" : "none");">

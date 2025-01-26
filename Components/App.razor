@@ -25,14 +25,40 @@
     <meta name="theme-color" content="#000000">
 
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@4.0/dist/tailwind.min.css" rel="stylesheet">
-    
     <link rel="stylesheet" href="app.css" />
     <HeadOutlet @rendermode="InteractiveServer" />
 </head>
 
 <body class="bg-gray-900 text-white">
     <Routes @rendermode="InteractiveServer"/>
+
+    <Music @rendermode="InteractiveServer"/>
+
+    <script>
+        window.setAudioSource = (audioElement, source) => {
+            console.log("Setting audio source:", source);
+            audioElement.src = source;
+        };
+         window.pauseAudio = (audioElement) => {
+            audioElement.pause();
+        };
     
+        window.playAudio = (audioElement) => {
+            audioElement.play()
+                .then(() => console.log("Audio started"))
+                .catch(error => console.error("Error playing audio:", error));
+        };
+    
+        window.initializeAudioPlayer = (dotNetObject) => {
+            const audioPlayer = document.getElementById('audioPlayer');
+            if (audioPlayer) {
+                audioPlayer.onended = () => {
+                    console.log("Audio ended");
+                    dotNetObject.invokeMethodAsync('OnAudioEnded');
+                };
+            }
+        };
+    </script>
     <script src="_framework/blazor.web.js"></script>
 </body>
 

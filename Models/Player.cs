@@ -75,52 +75,52 @@ public class Player
     }
 
     public void AttackTarget()
-{
-    (int row, int col) attackPosition = Position;
-
-    switch (FacingDirection)
     {
-        case Direction.Up:
-            attackPosition.row--;
-            break;
-        case Direction.Down:
-            attackPosition.row++;
-            break;
-        case Direction.Left:
-            attackPosition.col--;
-            break;
-        case Direction.Right:
-            attackPosition.col++;
-            break;
-    }
-
-    if (ValidationService.CanAttack(attackPosition.row, attackPosition.col))
-    {
-        var cell = ValidationService.GetCell(attackPosition.row, attackPosition.col);
-        var player = ValidationService.GetPlayerAtPosition(attackPosition.row, attackPosition.col);
-        
-        if (cell.Obstacle != null && cell.Obstacle.Health != 0)
+        (int row, int col) attackPosition = Position;
+    
+        switch (FacingDirection)
         {
-            cell.Obstacle.TakeDamage(this.Attack);
-            if (cell.Obstacle.IsBroken()) 
-            { 
-                cell.Obstacle = null; // Remove obstacle once broken 
-                cell.Type = Labyrinth.CellType.Road; // Change cell type back to Road 
-            }
+            case Direction.Up:
+                attackPosition.row--;
+                break;
+            case Direction.Down:
+                attackPosition.row++;
+                break;
+            case Direction.Left:
+                attackPosition.col--;
+                break;
+            case Direction.Right:
+                attackPosition.col++;
+                break;
         }
-        else if (player != null)
+    
+        if (ValidationService.CanAttack(attackPosition.row, attackPosition.col))
         {
-            player.Health -= this.Attack;
-            if (player.Health <= 0)
+            var cell = ValidationService.GetCell(attackPosition.row, attackPosition.col);
+            var player = ValidationService.GetPlayerAtPosition(attackPosition.row, attackPosition.col);
+            
+            if (cell.Obstacle != null && cell.Obstacle.Health != 0)
             {
-                player.Position = player.InitialPosition;
-                player.InitializeStats(); 
+                cell.Obstacle.TakeDamage(this.Attack);
+                if (cell.Obstacle.IsBroken()) 
+                { 
+                    cell.Obstacle = null;
+                    cell.Type = Labyrinth.CellType.Road; 
+                }
+            }
+            else if (player != null)
+            {
+                player.Health -= this.Attack;
+                if (player.Health <= 0)
+                {
+                    player.Position = player.InitialPosition;
+                    player.InitializeStats(); 
+                }
             }
         }
-    }
         ApplyEffects();
         TurnManager.NextTurn();
-}
+    }
 
 
     public void ApplyEffects()

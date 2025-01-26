@@ -1,0 +1,59 @@
+@inject IJSRuntime JS
+
+<div class="volume-control fixed top-0 right-4 z-50">
+    <button @onclick="ToggleMusic" class="p-2 hover:opacity-80 transition-opacity">
+        <img src="/images/Buttons/Sound/@(isPlaying ? "On.png" : "Off.png")" 
+             alt="Sound Control" 
+             class="w-8 h-8" />
+    </button>
+</div>
+
+<audio id="audioPlayer" @ref="audioPlayer"></audio>
+
+@code {
+    private ElementReference audioPlayer;
+    private bool isPlaying = false;
+    private List<string> playlist = new List<string>
+    {
+        "/sound/Music/TokyoGhoul.mp3",
+        "/sound/Music/AttackOnTitans.mp3"
+    };
+    
+    private int currentSongIndex = 0;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            await JS.InvokeVoidAsync("initializeAudioPlayer", DotNetObjectReference.Create(this));
+        }
+    }
+
+    private async Task ToggleMusic()
+    {
+        isPlaying = !isPlaying;
+        if (isPlaying)
+        {
+            await PlayMusic();
+        }
+        else
+        {
+            await JS.InvokeVoidAsync("pauseAudio", audioPlayer);
+        }
+        StateHasChanged();
+    }
+
+    private async Task PlayMusic()
+    {
+        var source = playlist[currentSongIndex];
+        await JS.InvokeVoidAsync("setAudioSource", audioPlayer, source);
+        await JS.InvokeVoidAsync("playAudio", audioPlayer);
+    }
+
+    [JSInvokable]
+    public async Task OnAudioEnded()
+    {
+        currentSongIndex = (currentSongIndex + 1) % playlist.Count;
+        await PlayMusic();
+    }
+}
