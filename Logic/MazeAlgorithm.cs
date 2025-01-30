@@ -155,7 +155,7 @@ public static class MazeAlgorithm
                     queue.Enqueue((newRow, newCol, distance + 1));
                     if (labyrinth.Maze[newRow, newCol].Type == Labyrinth.CellType.Road)
                     {
-                        allPositions.Add((newRow, newCol, distance + 1)); // Corregido distance
+                        allPositions.Add((newRow, newCol, distance + 1)); 
                     }
                 }
             }
