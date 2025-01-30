@@ -7,14 +7,17 @@
     {
         @foreach (var player in Players)
         {
-            if (player.TemporaryEffects.Count > -1)
+            if (player.TemporaryEffects.Count > 0)
             {
                 <div class="mb-2">
                     <h4 class="font-bold text-gray-700">Effects:</h4>
                     <ul class="list-disc list-inside">
                         @foreach (var effect in player.TemporaryEffects)
                         {
-                            <li class="text-sm text-gray-600">@effect.Name @effect.TurnsRemaining</li>
+                            if (effect.TurnsRemaining > 0)
+                            {
+                                <li class="text-sm text-gray-600">@effect.Name <span class="text-xl text-green-500">@effect.TurnsRemaining</span></li>
+                            }
                         }
                     </ul>
                 </div>    

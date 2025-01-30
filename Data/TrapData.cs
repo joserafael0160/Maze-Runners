@@ -46,7 +46,7 @@ public static class TrapData
                     player.AddTemporaryEffect(new TemporaryEffect(
                         "Rc Cells",
                         p => p.Speed = Math.Max(p.Speed - 1, 0),
-                        p => p.Speed = p.HeroSelected.Speed,
+                        p => p.Speed = Math.Min(p.Speed + 1, p.HeroSelected.Speed),
                         3
                     ));
                     TurnManager.MovesLeft--;

@@ -66,9 +66,7 @@ public class Player
             {
                 HasWon = true;
                 return true;
-            }
-        ApplyEffects();
-            
+            }      
             TurnManager.NextTurn();
         }
         return false;
@@ -118,7 +116,6 @@ public class Player
                 }
             }
         }
-        ApplyEffects();
         TurnManager.NextTurn();
     }
 
@@ -138,8 +135,14 @@ public class Player
 
     public void AddTemporaryEffect(TemporaryEffect effect)
     {
+
         TemporaryEffects.Add(effect);
         effect.Apply(this);
+        if (Health <= 0)
+        {
+            Position = InitialPosition;
+            InitializeStats();
+        }
     }
 
     public void ResetHasWon()

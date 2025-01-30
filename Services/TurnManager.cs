@@ -25,28 +25,21 @@ public static class TurnManager
     }
 
     public static void NextTurn()
-{
-    if (CurrentPlayer != null)
     {
-        CurrentPlayer.ApplyEffects();
-        
-        if (MovesLeft <= 1)
-        {
-            CurrentPlayer.HeroSelected?.Power.ReduceCooldown();
-            CurrentPlayerIndex = (CurrentPlayerIndex + 1) % PlayerData.NumberOfPlayers;
-            MovesLeft = CurrentPlayer.HeroSelected?.Speed ?? 0;
-        }
-        else
+        if (CurrentPlayer != null)
         {
             MovesLeft--;
+            
+            if (MovesLeft <= 0) // Solo aplicar efectos cuando se acaban los movimientos
+            {
+                CurrentPlayer.ApplyEffects();
+                CurrentPlayer.HeroSelected?.Power.ReduceCooldown();
+                
+                CurrentPlayerIndex = (CurrentPlayerIndex + 1) % PlayerData.NumberOfPlayers;
+                MovesLeft = CurrentPlayer.Speed;
+            }
         }
     }
-    else
-    {
-        CurrentPlayerIndex = (CurrentPlayerIndex + 1) % PlayerData.NumberOfPlayers;
-        MovesLeft = CurrentPlayer?.HeroSelected?.Speed ?? 0;
-    }
-}
 
 
 

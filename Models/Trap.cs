@@ -17,12 +17,12 @@ public class Trap
             if (!player.TemporaryEffects.Any(e => e.Name == name))
             {
                 activate(player);
-                player.AddTemporaryEffect(new TemporaryEffect(name, p => { }, p => { }, 1));
-            }
-            if (player.Health <= 0)
-            {
-                player.Position = player.InitialPosition;
-                player.InitializeStats();
+                player.AddTemporaryEffect(new TemporaryEffect(
+                    name, 
+                    p => { /* Aplicar efecto al inicio */ }, 
+                    p => { /* Remover efecto al final */ }, 
+                    0 // Duración en TURNOS COMPLETOS
+                ));
             }
         };
     }
