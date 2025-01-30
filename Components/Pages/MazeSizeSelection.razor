@@ -1,0 +1,81 @@
+@page "/MazeSizeSelection"
+@inject NavigationManager Navigation
+@using AnimeMaze.Data
+
+<PageTitle>Tamaño del Laberinto</PageTitle>
+
+<MazeSizeHeader />
+
+<main class="flex flex-col items-center justify-center min-h-screen gap-5 bg-gray-900 text-white">
+    <h2 class="text-4xl font-bold mb-8">Selecciona el tamaño del laberinto</h2>
+     <img src="@HeroData.HeroCharacters[0].Image.Down" 
+                     class="w-64 h-64"
+                     alt="@HeroData.HeroCharacters[0].Name"/>
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 w-full max-w-6xl p-6">
+        <button @onclick="() => SelectSize(9)" 
+                class="p-6 rounded-lg transition-all transform hover:scale-105 @GetButtonClass(9)">
+            <h3 class="text-2xl font-bold mb-2">Pequeño</h3>
+            <p class="text-gray-300">9x9 casillas</p>
+        </button>
+        
+        <button @onclick="() => SelectSize(15)" 
+                class="p-6 rounded-lg transition-all transform hover:scale-105 @GetButtonClass(15)">
+            <h3 class="text-2xl font-bold mb-2">Mediano</h3>
+            <p class="text-gray-300">15x15 casillas</p>
+        </button>
+        
+        <button @onclick="() => SelectSize(25)" 
+                class="p-6 rounded-lg transition-all transform hover:scale-105 @GetButtonClass(25)">
+            <h3 class="text-2xl font-bold mb-2">Grande</h3>
+            <p class="text-gray-300">25x25 casillas</p>
+        </button>
+        
+        <button @onclick="() => SelectSize(35)" 
+                class="p-6 rounded-lg transition-all transform hover:scale-105 @GetButtonClass(35)">
+            <h3 class="text-2xl font-bold mb-2">Muy Grande</h3>
+            <p class="text-gray-300">35x35 casillas</p>
+        </button>
+    </div>
+
+    <div class="mt-8 flex gap-4">
+        <button @onclick="ConfirmSize" 
+                class="px-8 py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition-colors"
+                disabled="@(selectedSize == 0)">
+            Confirmar Tamaño
+        </button>
+        <button @onclick="NavigateBack" 
+                class="px-8 py-3 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-colors">
+            Volver Atrás
+        </button>
+    </div>
+</main>
+
+@code {
+    private int selectedSize = 0;
+
+    private string GetButtonClass(int size)
+    {
+        return selectedSize == size 
+            ? " border-4 border-green-500 scale-105" 
+            : "bg-gray-800 border-4 border-gray-700 hover:bg-indigo-600";
+    }
+
+    private void SelectSize(int size)
+    {
+        selectedSize = size;
+    }
+
+    private void ConfirmSize()
+    {
+        if (selectedSize > 0)
+        {
+            LabyrinthData.SelectedSize = selectedSize;
+            Navigation.NavigateTo("/PlayerSelection");
+        }
+    }
+
+    private void NavigateBack()
+    {
+        Navigation.NavigateTo("/");
+    }
+}

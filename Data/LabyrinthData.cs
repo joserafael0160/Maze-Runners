@@ -3,18 +3,12 @@ namespace AnimeMaze.Data;
 
 public static class LabyrinthData
 {
-    public static Labyrinth Game = new Labyrinth(9, 9);
-    
+    public static int SelectedSize { get; set; } = 15; // Tamaño por defecto
+    public static Labyrinth Game { get; private set; } = new Labyrinth(SelectedSize, SelectedSize);
 
     public static void ResetLabyrinth()
     {
-        Game = new Labyrinth(9, 9);
-        foreach (var cell in Game.Maze) 
-        { 
-            if (cell.Obstacle != null) 
-            { 
-                cell.Obstacle.Reset();
-            }
-        } 
+        Game = new Labyrinth(SelectedSize, SelectedSize);
+        // Resto del código...
     }
 }
