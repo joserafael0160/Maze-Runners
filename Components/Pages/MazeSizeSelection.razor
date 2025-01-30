@@ -6,49 +6,66 @@
 
 <MazeSizeHeader />
 
-<main class="flex flex-col items-center justify-center min-h-screen gap-5 bg-gray-900 text-white">
-    <h2 class="text-4xl font-bold mb-8">Selecciona el tamaño del laberinto</h2>
-     <img src="@HeroData.HeroCharacters[0].Image.Down" 
-                     class="w-64 h-64"
-                     alt="@HeroData.HeroCharacters[0].Name"/>
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-4 w-full max-w-6xl p-6">
-        <button @onclick="() => SelectSize(9)" 
-                class="p-6 rounded-lg transition-all transform hover:scale-105 @GetButtonClass(9)">
-            <h3 class="text-2xl font-bold mb-2">Pequeño</h3>
-            <p class="text-gray-300">9x9 casillas</p>
-        </button>
+<main class="relative min-h-screen bg-gradient-to-br from-gray-900 via-purple-900/20 to-gray-900 text-white pb-24">
+    <div class="max-w-6xl mx-auto px-4 py-8 md:py-12">
+        <h2 class="text-3xl md:text-4xl lg:text-5xl font-bold text-center mb-6 md:mb-8 bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent">
+            Elige tu Destino
+        </h2>
         
-        <button @onclick="() => SelectSize(15)" 
-                class="p-6 rounded-lg transition-all transform hover:scale-105 @GetButtonClass(15)">
-            <h3 class="text-2xl font-bold mb-2">Mediano</h3>
-            <p class="text-gray-300">15x15 casillas</p>
-        </button>
-        
-        <button @onclick="() => SelectSize(25)" 
-                class="p-6 rounded-lg transition-all transform hover:scale-105 @GetButtonClass(25)">
-            <h3 class="text-2xl font-bold mb-2">Grande</h3>
-            <p class="text-gray-300">25x25 casillas</p>
-        </button>
-        
-        <button @onclick="() => SelectSize(35)" 
-                class="p-6 rounded-lg transition-all transform hover:scale-105 @GetButtonClass(35)">
-            <h3 class="text-2xl font-bold mb-2">Muy Grande</h3>
-            <p class="text-gray-300">35x35 casillas</p>
-        </button>
+        <div class="flex flex-col items-center gap-6 md:gap-8">
+            <div class="relative group mx-auto w-full max-w-[256px] md:max-w-[320px] lg:max-w-[384px]">
+                <div class="relative overflow-hidden rounded-xl border-2 border-purple-500/20 hover:border-pink-500/40 transition-all">
+                    <img src="@HeroData.HeroCharacters[0].Image.Down" 
+                         class="w-full h-auto pixel-art transform hover:scale-105 transition-transform"
+                         alt="@HeroData.HeroCharacters[0].Name"/>
+                    <div class="absolute inset-0 bg-gradient-to-t from-purple-900/40 to-transparent"></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 w-full">
+                @foreach (var sizeOption in new[] { 9, 15, 25, 35 })
+                {
+                    <button @onclick="() => SelectSize(sizeOption)" 
+                            class="relative p-4 md:p-6 rounded-xl border-2 transition-all duration-300 transform hover:scale-105 @GetButtonClass(sizeOption)">
+                        <div class="absolute inset-0 bg-gradient-to-br from-purple-900/30 to-pink-900/30 rounded-xl"></div>
+                        <div class="relative z-10 space-y-2">
+                            <h3 class="text-xl md:text-2xl font-bold">@GetSizeLabel(sizeOption)</h3>
+                            <p class="text-gray-300 text-sm md:text-base">@($"{sizeOption}x{sizeOption} casillas")</p>
+                            <div class="mt-2 md:mt-4 opacity-0 transition-opacity @(selectedSize == sizeOption ? "opacity-100" : "")">
+                                <svg class="w-6 h-6 md:w-8 md:h-8 mx-auto text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </button>
+                }
+            </div>
+        </div>
     </div>
 
-    <div class="mt-8 flex gap-4">
+    <div class="fixed bottom-4 md:bottom-6 right-4 md:right-6 left-4 md:left-auto z-50 flex gap-2 justify-end">
         <button @onclick="ConfirmSize" 
-                class="px-8 py-3 bg-green-600 text-white font-bold rounded-lg hover:bg-green-700 transition-colors"
+                class="px-4 py-2 md:px-8 md:py-4 bg-gradient-to-r from-pink-600 to-purple-700 text-sm md:text-base 
+                       text-white font-bold rounded-lg md:rounded-xl shadow-lg transform transition-all 
+                       hover:scale-105 flex items-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled="@(selectedSize == 0)">
-            Confirmar Tamaño
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+            </svg>
+            Confirmar
         </button>
+        
         <button @onclick="NavigateBack" 
-                class="px-8 py-3 bg-gray-600 text-white font-bold rounded-lg hover:bg-gray-700 transition-colors">
-            Volver Atrás
+                class="px-3 py-2 md:px-6 md:py-3 bg-gray-700/80 text-sm md:text-base text-white 
+                       font-bold rounded-lg backdrop-blur-sm hover:bg-gray-600 transition-colors flex items-center gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 md:h-5 md:w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+            </svg>
+            <span class="hidden md:inline">Volver</span>
         </button>
     </div>
 </main>
+
 
 @code {
     private int selectedSize = 0;
@@ -56,8 +73,20 @@
     private string GetButtonClass(int size)
     {
         return selectedSize == size 
-            ? " border-4 border-green-500 scale-105" 
-            : "bg-gray-800 border-4 border-gray-700 hover:bg-indigo-600";
+            ? "border-pink-500 bg-purple-900/30 scale-[1.02] shadow-lg" 
+            : "border-gray-700 hover:border-purple-500 bg-gray-800/50";
+    }
+
+    private string GetSizeLabel(int size)
+    {
+        return size switch
+        {
+            9 => "Pequeño",
+            15 => "Mediano",
+            25 => "Grande",
+            35 => "Épico",
+            _ => "Personalizado"
+        };
     }
 
     private void SelectSize(int size)
