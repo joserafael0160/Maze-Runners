@@ -1,0 +1,125 @@
+@page "/History"
+@using Microsoft.AspNetCore.Components.Routing
+@using AnimeMaze.Data
+@using AnimeMaze.Models
+
+<PageTitle>Historia</PageTitle>
+<HistoryHeader />
+
+<main class="min-h-screen bg-gradient-to-b from-gray-900 to-gray-800 text-white p-6">
+    <div class="max-w-6xl mx-auto space-y-12">
+        <!-- Sección Principal con Héroe Destacado -->
+        <section class="flex flex-col md:flex-row items-center gap-8 animate-fade-in">
+            <div class="flex-1">
+                <h2 class="text-3xl font-bold mb-4 text-pink-400">La Flor Eterna de Sakura: La Batalla por la Inmortalidad</h2>
+                <p class="text-lg leading-relaxed">
+                    En un mundo donde la inmortalidad es el mayor tesoro, la leyenda de la <span class="text-pink-300">Flor Eterna de Sakura</span> atrae a los guerreros más poderosos y ambiciosos de todos los rincones del multiverso anime. Esta flor mítica, escondida en el corazón de un laberinto traicionero, tiene el poder de otorgar vida eterna a quien logre alcanzarla. Sin embargo, la isla que alberga este tesoro no es solo un jardín de flores; es un campo de batalla lleno de trampas mortales, obstáculos insuperables y enemigos implacables.
+                </p>
+            </div>
+            <div class="relative group">
+                <img src="@HeroData.HeroCharacters[0].Image.Down" 
+                     class="w-64 h-64 object-contain pixel-art transition-transform"
+                     alt="@HeroData.HeroCharacters[0].Name"/>
+                <div class="absolute inset-0 bg-pink-500/20 group-hover:opacity-0 transition-opacity"></div>
+            </div>
+        </section>
+
+        <!-- Sección Isla de Shinsenkyo -->
+        <section class="flex flex-col md:flex-row-reverse items-center gap-8 bg-gray-700 p-6 rounded-lg shadow-xl">
+            <div class="flex-1">
+                <h3 class="text-2xl font-bold mb-4 text-emerald-400">Isla de Shinsenkyo</h3>
+                <p class="leading-relaxed">
+                    Cuenta la leyenda que la isla fue creada por un antiguo dios con el propósito de probar la valía de los mortales. La isla está cubierta de flores de cerezo que florecen eternamente, pero estas flores también esconden peligros inesperados. El centro de la isla alberga la Flor Eterna, protegida por un laberinto encantado que desafía incluso a los héroes más valientes.
+                </p>
+            </div>
+            <img src="@HeroData.HeroCharacters[1].Image.Down" 
+                 class="w-32 h-32 object-contain pixel-art animate-pulse-slow"
+                 alt="Personaje en isla misteriosa"/>
+        </section>
+
+        <!-- Sección Convocatoria -->
+        <section class="grid md:grid-cols-3 gap-6 text-center">
+            <div class="col-span-2">
+                <h3 class="text-2xl font-bold mb-4 text-red-400">La Convocatoria</h3>
+                <p class="mb-6">
+                    Personajes de distintos animes reciben una misteriosa invitación: "Ven a la Isla de Shinsenkyo y demuestra tu valía. La Flor Eterna te espera". Entre ellos se encuentran ninjas con habilidades sobrenaturales, samuráis con espadas legendarias, magos con poderes arcanos y guerreros con fuerza sobrehumana. Cada uno tiene sus propias razones para buscar la inmortalidad, pero todos comparten un objetivo común: ser el primero en llegar a la Flor Eterna.
+                </p>
+                <div class="flex justify-around">
+                    <img src="@HeroData.HeroCharacters[2].Image.Down" class="w-24 h-24 pixel-art hover:animate-bounce" alt="Guerrero 1"/>
+                    <img src="@HeroData.HeroCharacters[3].Image.Down" class="w-24 h-24 pixel-art hover:animate-bounce" alt="Guerrero 2"/>
+                </div>
+            </div>
+
+        <!-- Sección Carrera Hacia la Flor Eterna -->
+        <section class="bg-gray-700/30 p-6 rounded-xl">
+            <h3 class="text-2xl font-bold mb-4 text-blue-400">La Carrera Hacia la Flor Eterna</h3>
+            <p class="leading-relaxed">
+                El laberinto está lleno de trampas ingeniosas diseñadas para poner a prueba la astucia y la valentía de los competidores. Desde fosas llenas de pinchos y plataformas móviles, hasta pasillos que cambian de forma, el camino hacia la flor no es nada fácil. Además, los competidores deben enfrentarse a obstáculos naturales, como ríos de lava y campos de energía, que solo pueden ser atravesados utilizando sus habilidades únicas.
+            </p>
+        </section>
+
+        <!-- Sección Batalla Final Interactiva -->
+        <section class="text-center py-12 bg-gray-700/30 rounded-xl">
+            <h3 class="text-4xl font-bold mb-8 text-purple-400 animate-pulse">¡Batalla Final!</h3>
+            <div class="flex flex-wrap justify-center gap-8">
+                @foreach (var hero in HeroData.HeroCharacters.Take(3))
+                {
+                    <div class="relative group">
+                        <img src="@hero.Image.Down" 
+                             class="w-32 h-32 pixel-art mx-auto transform group-hover:scale-125 transition-transform"
+                             alt="@hero.Name"/>
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <div class="animate-spin-slow">
+                                <div class="w-24 h-24 border-4 border-red-500 rounded-full"></div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+            <p class="mt-8 max-w-xl mx-auto text-lg">
+                En el corazón del laberinto, los últimos competidores se encuentran en un enfrentamiento final. Cada uno ha demostrado su valía al superar los desafíos y obstáculos de la isla. Ahora, deben enfrentarse entre sí en una batalla épica para determinar quién será el digno poseedor de la inmortalidad.
+            </p>
+        </section>
+
+        <!-- Sección Poder de la Flor Eterna -->
+        <section class="bg-gray-700/30 p-6 rounded-xl">
+            <h3 class="text-2xl font-bold mb-4 text-green-400">El Poder de la Flor Eterna</h3>
+            <p class="leading-relaxed">
+                Solo uno puede reclamar la Flor Eterna de Sakura, pero la inmortalidad no es el único premio. El verdadero significado de la inmortalidad reside en los actos heroicos y el legado que cada personaje deja atrás. La Flor Eterna no solo concede la vida eterna, sino también la sabiduría para usar ese don con responsabilidad y honor.
+            </p>
+        </section>
+
+        <!-- Botón CTA -->
+        <div class="text-center py-8">
+            <NavLink href="/PlayerSelection" 
+                    class="bg-pink-600 hover:bg-pink-700 text-white font-bold py-3 px-8 rounded-full 
+                           transition-all transform hover:scale-105 shadow-lg">
+                ¡COMENZAR LA AVENTURA!
+            </NavLink>
+        </div>
+    </div>
+</main>
+
+<style>
+    .pixel-art {
+        image-rendering: pixelated;
+    }
+
+    @@keyframes pulse-slow {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.5; }
+    }
+
+    .animate-pulse-slow {
+        animation: pulse-slow 3s infinite;
+    }
+
+    .animate-fade-in {
+        animation: fadeIn 1s ease-in;
+    }
+
+    @@keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+</style>
