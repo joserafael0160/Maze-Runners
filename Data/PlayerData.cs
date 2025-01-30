@@ -21,10 +21,18 @@ public static class PlayerData
 
     public static void InitializePlayers(int numberOfPlayers)
     {
+        if (InitialPositions.Count == 0)
+        {
+            throw new InvalidOperationException("Debe generarse el laberinto primero");
+        }
+    
         NumberOfPlayers = numberOfPlayers;
         Players.Clear();
-
-        for (int i = 0; i < numberOfPlayers; i++)
+    
+        // Asegurar que no se excedan las posiciones disponibles
+        int maxPlayers = Math.Min(numberOfPlayers, InitialPositions.Count);
+        
+        for (int i = 0; i < maxPlayers; i++)
         {
             var position = InitialPositions[i];
             Players.Add(new Player(position));
