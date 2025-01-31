@@ -2,7 +2,8 @@
 @using AnimeMaze.Services;
 @using AnimeMaze.Data;
 
-<section class="w-3/4 aspect-square mb-8" aria-live="polite" style="display: grid; grid-template-columns: repeat(@(game?.Maze.GetLength(1) ?? 10), 1fr);">
+<section class="relative w-full max-w-2xl mx-auto aspect-square bg-gray-800/50 backdrop-blur-lg rounded-xl overflow-hidden
+                border border-white/10 shadow-2xl" aria-live="polite" style="display: grid; grid-template-columns: repeat(@(game?.Maze.GetLength(1) ?? 10), 1fr);">
     @if (game != null && players != null)
     {
         for (int i = 0; i < game.Maze.GetLength(0); i++)
