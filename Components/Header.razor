@@ -1,4 +1,4 @@
-<header class="bg-gradient-to-r from-gray-800 to-purple-900/80 text-white shadow-xl @CustomClass">
+<header class="bg-gray-800/50 backdrop-blur-lg border-b border-white/10 shadow-xl @CustomClass">
     <nav class="max-w-6xl mx-auto flex items-center justify-between">
         <!-- Botón Volver -->
         @if (ShowBackButton)
@@ -22,7 +22,6 @@
         </div>
     </nav>
 </header>
-
 @code {
     [Parameter]
     public string Title { get; set; } = default!;

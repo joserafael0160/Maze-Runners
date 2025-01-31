@@ -19,24 +19,10 @@
                         animation: float @(Random.Shared.Next(5, 15))s infinite linear;"></div>
         }
     </div>
-
-    <header class="z-10 bg-gray-800/50 backdrop-blur-lg border-b border-white/10 p-4 flex items-center justify-between">
-        <a href="/" class="px-4 py-2 border-2 border-pink-500 rounded-lg hover:bg-pink-500/20 transition-colors text-sm md:text-base">
-                ← Volver
-        </a>
-        <h1 class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-            Laberinto de Shinsenkyo
-        </h1>
-        <button @onclick="ResetMaze"
-                class="px-4 py-2 bg-pink-600/30 hover:bg-pink-600/50 border border-pink-400/30 rounded-lg transition-all
-                       flex items-center gap-2 group">
-            <svg class="w-5 h-5 text-pink-400 group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-            </svg>
-            Reiniciar
-        </button>
-    </header>
-
+    <Header Title="Laberinto de Shikego" 
+        RightComponent="@RightComponentContent"
+        ShowBackButton="true">
+    </Header>
     <main class="flex-1 relative z-10">
         @if (showModal)
         {
@@ -95,9 +81,19 @@
     private bool showModal = false;
     private string winningMessage = string.Empty;
     private RenderFragment RightComponentContent => @<button 
-        class="px-4 py-2 border-2 border-pink-500 rounded-lg hover:bg-pink-500/20 transition-colors text-sm md:text-base"
-        @onclick="ResetMaze">
-        Reiniciar Juego
+        @onclick="ResetMaze"
+        class="px-4 py-2 bg-pink-600/30 hover:bg-pink-600/50 border border-pink-400/30 rounded-lg transition-all
+               flex items-center gap-2 group">
+        <svg class="w-5 h-5 text-pink-400 group-hover:rotate-180 transition-transform" 
+             fill="none" 
+             stroke="currentColor" 
+             viewBox="0 0 24 24">
+            <path stroke-linecap="round" 
+                  stroke-linejoin="round" 
+                  stroke-width="2" 
+                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+        </svg>
+        Reiniciar
     </button>;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
