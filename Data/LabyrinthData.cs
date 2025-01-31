@@ -1,4 +1,5 @@
 using AnimeMaze.Models;
+using AnimeMaze.Services;
 namespace AnimeMaze.Data;
 
 public static class LabyrinthData
@@ -9,5 +10,6 @@ public static class LabyrinthData
     public static void ResetLabyrinth()
     {
         Game = new Labyrinth(SelectedSize, SelectedSize);
+        ValidationService.ResetValidationGame(Game);
     }
 }

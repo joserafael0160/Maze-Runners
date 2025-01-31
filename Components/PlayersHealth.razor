@@ -2,41 +2,44 @@
 @using AnimeMaze.Models
 @using AnimeMaze.Services
 
-<aside class="fixed bottom-0 left-0 w-28 flex flex-col gap-4 p-2 bg-gray-100 rounded-lg shadow-md">
-    @if (Players != null)
+<aside class="fixed left-4 bottom-4 z-40 flex flex-col gap-3">
+    @foreach (var player in Players)
     {
-        @foreach (var player in Players)
-        {
-            if (player.TemporaryEffects.Count > 0)
-            {
-                <div class="mb-2">
-                    <h4 class="font-bold text-gray-700">Effects:</h4>
-                    <ul class="list-disc list-inside">
-                        @foreach (var effect in player.TemporaryEffects)
-                        {
-                            if (effect.TurnsRemaining > 0)
-                            {
-                                <li class="text-sm text-gray-600">@effect.Name <span class="text-xl text-green-500">@effect.TurnsRemaining</span></li>
-                            }
-                        }
-                    </ul>
-                </div>    
-            }
-            
-            
-            string borderClass = player == TurnManager.CurrentPlayer ? "border-4 border-blue-800" : "border-2 border-gray-400";
+        <article class="group relative bg-gray-800/50 backdrop-blur-lg rounded-xl p-3 shadow-lg border border-white/10
+                      @(player == TurnManager.CurrentPlayer ? "ring-2 ring-purple-500" : "") transition-all">
+            <div class="flex items-center gap-3">
+                <img src="@player.HeroSelected?.Image.Down" 
+                     alt="@player.HeroSelected?.Name" 
+                     class="w-12 h-12 rounded-lg object-cover border-2 border-purple-500/30"/>
+                
+                <div class="space-y-1">
+                    <div class="flex items-center gap-2">
+                        <span class="text-red-400 font-bold text-xl">@player.Health</span>
+                        <span class="text-sm text-purple-400">HP</span>
+                    </div>
+                    <div class="h-1 bg-gray-700 rounded-full">
+                        <div class="h-full bg-red-500 rounded-full transition-all" 
+                             style="width: @((player.Health * 100)/player.HeroSelected?.Health ?? 1)%"></div>
+                    </div>
+                </div>
+            </div>
 
-            <article class="relative p-2 flex items-center bg-white rounded-lg shadow-lg @borderClass">
-                <img src="@player.HeroSelected?.Image.Down" alt="@player.HeroSelected?.Name's avatar" class="h-8 w-8 rounded-full"/>
-                <div class="flex flex-col ml-2">
-                    <p class="text-red-500 font-semibold">@player.Health</p>
-                    <p class="text-black text-sm">@player.HeroSelected?.Power.CurrentCooldown</p>
+            <!-- Efectos temporales -->
+            @if (player.TemporaryEffects.Any(e => e.TurnsRemaining > 0))
+            {
+                <div class="mt-2 pt-2 border-t border-white/10">
+                    <h3 class="text-xs font-semibold text-gray-400 mb-1">Efectos activos:</h3>
+                    <div class="flex flex-wrap gap-1">
+                        @foreach (var effect in player.TemporaryEffects.Where(e => e.TurnsRemaining > 0))
+                        {
+                            <span class="px-2 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">
+                                @effect.Name (@effect.TurnsRemaining)
+                            </span>
+                        }
+                    </div>
                 </div>
-                <div class="absolute inset-0 flex flex-col items-center justify-center bg-white bg-opacity-75 opacity-0 hover:opacity-100 transition-opacity duration-300 rounded-lg">
-                    <h3 class="text-sm font-semibold text-black">@player.HeroSelected?.Name</h3>
-                </div>
-            </article>
-        }
+            }
+        </article>
     }
 </aside>
 

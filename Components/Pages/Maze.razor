@@ -6,43 +6,82 @@
 @inject IJSRuntime JSRuntime
 @inject NavigationManager Navigation
 
-<PageTitle>Maze</PageTitle>
+<PageTitle>Laberinto - Anime Maze</PageTitle>
 
-<div role="container" class="flex flex-col h-screen">
-    <!-- Header actualizado -->
-    <Header Title="Laberinto" 
-            ShowBackButton="true"
-            RightComponent="@RightComponentContent"
-            CustomClass="justify-between gap-4 px-4 py-3"/>
+<div class="flex flex-col bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
+    <!-- Efecto de partículas -->
+    <div class="absolute inset-0 opacity-20 animate-particles">
+        @for (int i = 0; i < 30; i++)
+        {
+            <div class="absolute w-1 h-1 bg-white rounded-full" 
+                 style="top: @(Random.Shared.Next(0, 100))%; 
+                        left: @(Random.Shared.Next(0, 100))%;
+                        animation: float @(Random.Shared.Next(5, 15))s infinite linear;"></div>
+        }
+    </div>
 
-    @if (showModal)
-    {
-        <GameWonModal Message="@winningMessage"
-                      OnResetGame="ResetMaze" 
-                      OnSelectNewCharacters="SelectNewCharacters" />
-    }
-    else
-    {
-        <PlayersHealth Players="players"/>
-        <div class="text-white bg-gray-800 p-4 rounded-lg shadow-lg flex items-center space-x-4">
-            <div class="text-lg font-bold flex items-center">
-                <span class="text-yellow-500">Turno:</span>
-                <span class="ml-2">Jugador @(TurnManager.CurrentPlayerIndex + 1)</span>
+    <header class="z-10 bg-gray-800/50 backdrop-blur-lg border-b border-white/10 p-4 flex items-center justify-between">
+        <a href="/" class="px-4 py-2 border-2 border-pink-500 rounded-lg hover:bg-pink-500/20 transition-colors text-sm md:text-base">
+                ← Volver
+        </a>
+        <h1 class="text-2xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+            Laberinto de Shinsenkyo
+        </h1>
+        <button @onclick="ResetMaze"
+                class="px-4 py-2 bg-pink-600/30 hover:bg-pink-600/50 border border-pink-400/30 rounded-lg transition-all
+                       flex items-center gap-2 group">
+            <svg class="w-5 h-5 text-pink-400 group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+            </svg>
+            Reiniciar
+        </button>
+    </header>
+
+    <main class="flex-1 relative z-10">
+        @if (showModal)
+        {
+            <GameWonModal Message="@winningMessage"
+                        OnResetGame="ResetMaze" 
+                        OnSelectNewCharacters="SelectNewCharacters" />
+        }
+        else
+        {
+            <!-- Panel de estado -->
+            <section aria-labelledby="gameStatus" class="bg-gray-800/50 backdrop-blur-lg mx-4 mt-4 p-4 rounded-xl shadow-lg">
+                <div class="flex flex-wrap gap-4 items-center justify-between text-white">
+                    <div class="flex items-center gap-3">
+                        <span class="text-lg font-semibold text-yellow-400">Turno actual:</span>
+                        <span class="text-xl font-bold text-purple-400">Jugador @(TurnManager.CurrentPlayerIndex + 1)</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                        <span class="text-lg font-semibold text-green-400">Movimientos:</span>
+                        <div class="flex gap-2 items-center">
+                            <span class="text-xl font-bold">@TurnManager.MovesLeft</span>
+                            <span class="text-sm opacity-75">(Velocidad @TurnManager.CurrentPlayer?.Speed)</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Contenido principal -->
+            <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-4 p-4">
+                <MazeGrid game="LabyrinthData.Game" 
+                        players="players" 
+                        OnClickMaze="EventCallback.Factory.Create<(int, int)>(this, OnClickMaze)"/> 
+                
+                <aside class="lg:order-last">
+                    <MazeNavigation MovePlayer="MovePlayerAsync" 
+                                  Attack="AttackPlayer" 
+                                  Power="UsePowerPlayer"/>
+                </aside>
             </div>
-            <div class="text-lg font-bold flex items-center">
-                <span class=" text-green-500">Movimientos:</span>
-                <span class="ml-2">@TurnManager.MovesLeft</span>
-                <span class="ml-2">Speed @TurnManager.CurrentPlayer?.Speed</span>
-                <span class="ml-2">Attack @TurnManager.CurrentPlayer?.Attack</span>
-             </div>
-        </div>
-        <main class="flex flex-col gap-2 bg-black items-center p-2 flex-grow">
-            <MazeGrid game="LabyrinthData.Game" players="players" OnClickMaze="EventCallback.Factory.Create<(int, int)>(this, OnClickMaze)"/> 
-            <MazeNavigation MovePlayer="MovePlayerAsync" Attack="AttackPlayer" Power="UsePowerPlayer"/>
-        </main>
-    }
+
+            <PlayersHealth Players="players"/>
+        }
+    </main>
 </div>
 
+<!-- Resto del código se mantiene igual -->
 <script>
     window.addKeyListener = function (dotNetHelper) {
         document.addEventListener('keydown', function (event) {
