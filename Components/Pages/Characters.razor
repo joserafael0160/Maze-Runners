@@ -4,28 +4,44 @@
 @using AnimeMaze.Models
 @using AnimeMaze.Data
 
-<PageTitle>Personajes</PageTitle>
+<PageTitle>Selección de Personajes - Anime Maze</PageTitle>
+<Header Title="Selección de Guerreros"/>
 
-<Header Title="Personajes"/>
-
-<main class="p-4 bg-gray-900 text-white">
-    <h2 class="text-2xl font-bold">Jugador @currentPlayer</h2>
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        @for (int i = 0; i < characters?.Count; i++)
+<main class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-4 relative overflow-hidden">
+    <!-- Efecto de partículas -->
+    <div class="absolute inset-0 opacity-20 animate-particles">
+        @for (int i = 0; i < 30; i++)
         {
-            var index = i;
-            <HeroCard Character="characters[index]"
-                      Index="index"
-                      OnSelect="SelectCharacter"
-                      OnToggleDescription="ToggleDescription"
-                      IsExpanded="@(ShowFullDescription == index)"
-                      IsSelected="@(SelectedHeroIndex == index)" />
+            <div class="absolute w-1 h-1 bg-white rounded-full" 
+                 style="top: @(Random.Shared.Next(0, 100))%; 
+                        left: @(Random.Shared.Next(0, 100))%;
+                        animation: float @(Random.Shared.Next(5, 15))s infinite linear;"></div>
         }
-    </div> 
+    </div>
+
+    <!-- Contenido principal -->
+    <section aria-labelledby="charactersHeading" class="relative z-10 max-w-7xl mx-auto">
+        <header class="mb-8 text-center">
+            <p class="text-xl text-gray-300 mt-2">Jugador @currentPlayer - Elige tu personaje</p>
+        </header>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            @for (int i = 0; i < characters?.Count; i++)
+                {
+                    var index = i;
+                    <HeroCard Character="characters[index]"
+                              Index="index"
+                              OnSelect="SelectCharacter"
+                              OnToggleDescription="ToggleDescription"
+                              IsExpanded="@(ShowFullDescription == index)"
+                              IsSelected="@(SelectedHeroIndex == index)" 
+                              /> 
+                }
+        </div>
+    </section>
 </main>
 
 <SelectedHeroNotification SelectedHero="SelectedHero" OnPlayGame="PlayGame" Player="currentPlayer"/>
-
 @code {
     private List<Hero>? characters = HeroData.HeroCharacters;
     private int? ShowFullDescription { get; set; } = null;
@@ -53,6 +69,7 @@
     {
         SelectedHeroIndex = index;
         SelectedHero = HeroData.HeroCharacters[index];
+        StateHasChanged();
     }
 
     private void PlayGame()
