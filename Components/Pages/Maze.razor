@@ -9,8 +9,12 @@
 <PageTitle>Maze</PageTitle>
 
 <div role="container" class="flex flex-col h-screen">
-    <MazeHeader ResetMaze="ResetMaze" />
-    
+    <!-- Header actualizado -->
+    <Header Title="Laberinto" 
+            ShowBackButton="true"
+            RightComponent="@RightComponentContent"
+            CustomClass="justify-between gap-4 px-4 py-3"/>
+
     @if (showModal)
     {
         <GameWonModal Message="@winningMessage"
@@ -51,7 +55,11 @@
     private List<Player> players = PlayerData.Players;
     private bool showModal = false;
     private string winningMessage = string.Empty;
-
+    private RenderFragment RightComponentContent => @<button 
+        class="px-4 py-2 border-2 border-pink-500 rounded-lg hover:bg-pink-500/20 transition-colors text-sm md:text-base"
+        @onclick="ResetMaze">
+        Reiniciar Juego
+    </button>;
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
         if (firstRender)

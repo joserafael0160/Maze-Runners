@@ -1,0 +1,38 @@
+<header class="bg-gradient-to-r from-gray-800 to-purple-900/80 text-white shadow-xl @CustomClass">
+    <nav class="max-w-6xl mx-auto flex items-center justify-between">
+        <!-- Botón Volver -->
+        @if (ShowBackButton)
+        {
+            <a href="/" class="px-4 py-2 border-2 border-pink-500 rounded-lg hover:bg-pink-500/20 transition-colors text-sm md:text-base">
+                ← Volver
+            </a>
+        }
+        
+        <!-- Título -->
+        <h1 class="text-xl md:text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent mx-4">
+            @Title
+        </h1>
+
+        <!-- Componente Derecho -->
+        <div class="flex items-center">
+            @if (RightComponent != null)
+            {
+                @RightComponent
+            }
+        </div>
+    </nav>
+</header>
+
+@code {
+    [Parameter]
+    public string Title { get; set; } = default!;
+
+    [Parameter]
+    public bool ShowBackButton { get; set; } = true;
+
+    [Parameter]
+    public RenderFragment? RightComponent { get; set; }
+
+    [Parameter]
+    public string CustomClass { get; set; } = "p-4 md:p-6";
+}

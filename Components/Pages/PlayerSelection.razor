@@ -4,26 +4,71 @@
 @using AnimeMaze.Models
 @using AnimeMaze.Logic
 
-<PageTitle>Player Selection</PageTitle>
+<PageTitle>Selección de Jugadores - Anime Maze</PageTitle>
 
-<header class="bg-gray-800 text-white flex justify-between items-center p-4" role="banner">
-    <a href="/" class="border-2 border-white p-2">Volver al inicio</a>
-    <h1 class="text-2xl font-bold">Selección de jugadores</h1>
-</header>
-
-<main class="flex flex-col items-center justify-center min-h-screen gap-5">
-    <h2 class="text-4xl font-bold">Selección de jugadores</h2>
-    <p class="text-lg">Selecciona el número de jugadores</p>
-    <select @bind="numberOfPlayers" class="block w-1/4 px-3 py-2 bg-white border text-black border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-        @for (int i = 1; i <= 4; i++)
+<main class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex flex-col items-center justify-center relative overflow-hidden">
+    <!-- Efecto de partículas -->
+    <div class="absolute inset-0 opacity-20 animate-particles">
+        @for (int i = 0; i < 30; i++)
         {
-            <option value="@i" class="text-black">@i</option>
+            <div class="absolute w-1 h-1 bg-white rounded-full" 
+                 style="top: @(Random.Shared.Next(0, 100))%; 
+                        left: @(Random.Shared.Next(0, 100))%;
+                        animation: float @(Random.Shared.Next(5, 15))s infinite linear;"></div>
         }
-    </select>
-    <button @onclick="StartGame" class="px-4 py-2 bg-indigo-600 text-white font-semibold rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2">
-        Empezar juego
-    </button>
+    </div>
+
+    <!-- Contenido principal -->
+    <section aria-labelledby="playerSelectionHeading" class="z-10 text-center space-y-8 p-8 bg-gray-800/50 backdrop-blur-lg rounded-2xl shadow-xl border border-white/10 max-w-md w-full mx-4">
+        <header class="space-y-4">
+            <h1 id="playerSelectionHeading" class="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+                Selección de Jugadores
+            </h1>
+            <p class="text-gray-300 text-lg">Elije cuántos guerreros enfrentarán el laberinto</p>
+        </header>
+
+        <!-- Selector de jugadores -->
+        <div class="relative group">
+            <select 
+                @bind="numberOfPlayers"
+                class="w-full px-6 py-3 text-lg bg-gray-700/50 border border-purple-500/30 rounded-xl appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 text-white transition-all"
+                aria-label="Número de jugadores">
+                @for (int i = 1; i <= 4; i++)
+                {
+                    <option value="@i" class="bg-gray-800 text-white">@i Jugador@(i > 1 ? "es" : "")</option>
+                }
+            </select>
+            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Botón de inicio -->
+        <button 
+            @onclick="StartGame"
+            class="w-full py-3 px-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl transform transition-all hover:scale-105 hover:shadow-purple-500/30 active:scale-95 focus:outline-none focus:ring-2 focus:ring-purple-500">
+            Comenzar Aventura
+        </button>
+    </section>
 </main>
+
+<style>
+    .animate-particles {
+        animation: particles-move 20s linear infinite;
+    }
+
+    @@keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+
+    @@keyframes particles-move {
+        from { transform: translateY(-100%); }
+        to { transform: translateY(100%); }
+    }
+</style>
 
 @code {
     private int numberOfPlayers = 1;
@@ -33,7 +78,5 @@
         LabyrinthData.ResetLabyrinth();
         PlayerData.InitializePlayers(numberOfPlayers);
         Navigation.NavigateTo("/Characters");
-        
     }
-
 }
