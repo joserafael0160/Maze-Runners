@@ -9,43 +9,49 @@
 </div>
 
 <p align="center">
-<a href="#">
-<img src="https://img.shields.io/badge/made%20with-love-E760A4.svg" alt="Hecho con amor">
-</a>
-<a href="https://opensource.org/licenses/MIT" target="_blank">
-<img src="https://img.shields.io/badge/license-MIT-green.svg" alt="Licencia">
-</a>
+  <a href="#">
+    <img src="https://img.shields.io/badge/made%20with-love-E760A4.svg" alt="Hecho con amor">
+  </a>
+  <a href="https://opensource.org/licenses/MIT" target="_blank">
+    <img src="https://img.shields.io/badge/license-MIT-green.svg" alt="Licencia">
+  </a>
 </p>
 
 <div align="center">
-<a href="#-acerca-del-proyecto" target="_blank">
-Acerca Del Proyecto
-</a>
-<span>&nbsp;✦&nbsp;</span>
-<a href="#-arquitectura" target="_blank">
-Arquitectura
-</a>
-<span>&nbsp;✦&nbsp;</span>
-<a href="#-tecnologías" target="_blank">
-Tecnologías
-</a>
-<span>&nbsp;✦&nbsp;</span>
-<a href="#-cómo-empezar" target="_blank">
-Cómo Empezar
-</a>
-<span>&nbsp;✦&nbsp;</span>
-<a href="#-instrucciones-de-juego" target="_blank">
-Instrucciones de Juego
-</a>
-<span>&nbsp;✦&nbsp;</span>
-<a href="#-licencia" target="_blank">
-Licencia
-</a>
+  <a href="#-acerca-del-proyecto" target="_blank">
+    Acerca Del Proyecto
+  </a>
+  <span>&nbsp;✦&nbsp;</span>
+      <a href="#-características" target="_blank">
+          Características
+      </a>
+  <span>&nbsp;✦&nbsp;</span>
+    <a href="#-arquitectura" target="_blank">
+      Arquitectura
+    </a>
+  <span>&nbsp;✦&nbsp;</span>
+    <a href="#-tecnologías" target="_blank">
+      Tecnologías
+    </a>
+  <span>&nbsp;✦&nbsp;</span>
+    <a href="#-cómo-empezar" target="_blank">
+      Cómo Empezar
+    </a>
+  <span>&nbsp;✦&nbsp;</span>
+    <a href="#-instrucciones-de-juego" target="_blank">
+      Instrucciones de Juego
+    </a>
+  <span>&nbsp;✦&nbsp;</span>
+    <a href="#-licencia" target="_blank">
+      Licencia
+    </a>
 </div>
 <br>
 
 ## 📜 Acerca Del Proyecto
-Anime Maze es un juego laberíntico multijugador donde los jugadores controlan héroes de anime para alcanzar la salida del laberinto. Características principales:
+Anime Maze es un juego laberíntico multijugador donde los jugadores controlan héroes de anime para alcanzar la salida del laberinto. 
+
+## 💬 Características:
 - Sistema multijugador por turnos
 - Personajes con habilidades especiales
 - Laberintos generados proceduralmente
