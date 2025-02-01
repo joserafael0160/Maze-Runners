@@ -6,7 +6,6 @@
      role="navigation" 
      aria-label="Controles del juego">
     
-    <!-- Botón de toggle -->
     <button @onclick="ToggleMenu" 
             class="absolute -top-4 -left-4 w-12 h-12 bg-purple-600/80 hover:bg-purple-500/90 rounded-full shadow-lg
                    flex items-center justify-center transition-all hover:scale-110"
@@ -16,7 +15,6 @@
              alt="Menu" aria-hidden="true"/>
     </button>
 
-    <!-- Contenedor principal -->
     <div class="p-3 space-y-4" style="display: @(isMenuOpen ? "block" : "none");">
         <!-- Flechas de dirección -->
         <div class="grid grid-cols-3 gap-2 items-center">
@@ -91,7 +89,6 @@
     touch-action: manipulation;
 }
 
-/* Animación suave para la aparición */
 @@keyframes slideIn {
     from { transform: translateX(100%); }
     to { transform: translateX(0); }

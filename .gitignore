@@ -1,0 +1,81 @@
+# Configuración del IDE y editor
+.vs/
+.idea/
+.vscode/
+*.user
+*.suo
+*.userprefs
+*.njsproj
+*.sln.iml
+# Estilos
+Prototypes/
+# Archivos de compilación de C#
+[Bb]in/
+bin/
+[Oo]bj/
+obj
+out/
+**/wwwroot/dist/  # Si usas algún sistema de bundling
+
+# Dependencias de NuGet
+packages/
+*.nupkg
+.nuget/
+
+# Archivos temporales
+_ReSharper.*
+*.log
+*.cache
+*.orig
+
+# Archivos de entorno
+.env
+.env.local
+.env.*.local
+
+# Node.js y npm
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Tailwind (si usas JIT o builds personalizados)
+**/wwwroot/css/output.css
+**/wwwroot/css/tailwind.css.map
+
+# Archivos de configuración local
+appsettings.Development.json
+appsettings.local.json
+
+# Azure Functions
+AzureFunctions/
+
+# Archivos de depuración/profiling
+*.diagsession
+*.aps
+
+# Archivos de MSBuild
+*.msi
+*.rdl.data
+
+# Rider
+*.sln.dotnet
+
+# macOS
+.DS_Store
+
+# Linux
+*~
+
+# Archivos generados en tiempo de ejecución
+**/wwwroot/dist/
+**/wwwroot/_framework/
+**/wwwroot/_content/
+**/wwwroot/service-worker.*
+**/wwwroot/blazor.boot.json
+**/wwwroot/blazor.*.js
+**/wwwroot/blazor.server.json
+**/wwwroot/icon-*
+
+# Blazor Temporary Files
+.blazor/

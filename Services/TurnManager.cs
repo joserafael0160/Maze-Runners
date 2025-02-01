@@ -30,7 +30,7 @@ public static class TurnManager
         {
             MovesLeft--;
             
-            if (MovesLeft <= 0) // Solo aplicar efectos cuando se acaban los movimientos
+            if (MovesLeft <= 0) 
             {
                 CurrentPlayer.ApplyEffects();
                 CurrentPlayer.HeroSelected?.Power.ReduceCooldown();

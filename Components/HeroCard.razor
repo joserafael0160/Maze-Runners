@@ -17,7 +17,6 @@
                 <h2 class="text-2xl font-bold text-purple-400">@Character.Name</h2>
             </header>
 
-            <!-- Stats -->
             <div class="grid grid-cols-3 gap-2 p-3 bg-gray-900/50 rounded-lg">
                 <div class="flex flex-col items-center">
                     <img src="/images/Others/Boots.png" class="w-8 h-8 mb-1" alt="Velocidad">
@@ -36,14 +35,12 @@
                 </div>
             </div>
 
-            <!-- Poder -->
             <div class="bg-gray-900/50 p-3 rounded-lg">
                 <h3 class="text-lg font-semibold text-yellow-400 mb-2">Poder Especial</h3>
                 <p class="text-purple-300 font-medium">@Character.Power.Name</p>
                 <p class="text-sm text-gray-300 mt-1">@Character.Power.Description</p>
             </div>
 
-            <!-- Descripción -->
             <div class="relative">
                 <p class="text-gray-300 text-sm transition-all duration-500 @(IsExpanded ? "max-h-[500px]" : "max-h-24") overflow-hidden">
                     @Character.Description

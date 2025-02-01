@@ -1,6 +1,5 @@
 <header class="bg-gray-800/50 backdrop-blur-lg border-b border-white/10 shadow-xl @CustomClass">
     <nav class="max-w-6xl mx-auto flex items-center justify-between">
-        <!-- Botón Volver -->
         @if (ShowBackButton)
         {
             <a href="/" class="px-4 py-2 border-2 border-pink-500 rounded-lg hover:bg-pink-500/20 transition-colors text-sm md:text-base">
@@ -8,12 +7,10 @@
             </a>
         }
         
-        <!-- Título -->
         <h1 class="text-xl md:text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent mx-4">
             @Title
         </h1>
 
-        <!-- Componente Derecho -->
         <div class="flex items-center">
             @if (RightComponent != null)
             {

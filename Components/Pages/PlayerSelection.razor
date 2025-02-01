@@ -19,7 +19,6 @@
         }
     </div>
 
-    <!-- Contenido principal -->
     <section aria-labelledby="playerSelectionHeading" class="z-10 text-center space-y-8 p-8 bg-gray-800/50 backdrop-blur-lg rounded-2xl shadow-xl border border-white/10 max-w-md w-full mx-4">
         <header class="space-y-4">
             <h1 id="playerSelectionHeading" class="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
@@ -28,7 +27,6 @@
             <p class="text-gray-300 text-lg">Elije cuántos guerreros enfrentarán el laberinto</p>
         </header>
 
-        <!-- Selector de jugadores -->
         <div class="relative group">
             <select 
                 @bind="numberOfPlayers"
@@ -46,7 +44,6 @@
             </div>
         </div>
 
-        <!-- Botón de inicio -->
         <button 
             @onclick="StartGame"
             class="w-full py-3 px-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl transform transition-all hover:scale-105 hover:shadow-purple-500/30 active:scale-95 focus:outline-none focus:ring-2 focus:ring-purple-500">
