@@ -134,7 +134,6 @@ http://0.0.0.0:5066
 - **Movimiento**: WASD o Flechas direccionales
 - **Ataque**: Tecla E
 - **Habilidad Especial**: Tecla F
-- **Menú**: Tecla M
 
 <p align="right">(<a href="#top">Volver al inicio 🔝</a>)</p>
 
@@ -149,7 +148,7 @@ Las contribuciones son bienvenidas. Sigue estos pasos:
 <p align="right">(<a href="#top">Volver al inicio 🔝</a>)</p>
 
 ## 🔑 Licencia
-Distribuido bajo licencia MIT. Ver `LICENSE` para más detalles.
+Distribuido bajo licencia MIT. Ver [LICENSE](https://github.com/joserafael0160/Maze-Runners/blob/main/LICENSE) para más detalles.
 
 <p align="right">(<a href="#top">Volver al inicio 🔝</a>)</p>
 
