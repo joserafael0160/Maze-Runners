@@ -9,16 +9,8 @@
 <PageTitle>Laberinto - Anime Maze</PageTitle>
 
 <div class="flex flex-col bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
-    <!-- Efecto de partículas -->
-    <div class="absolute inset-0 opacity-20 animate-particles">
-        @for (int i = 0; i < 30; i++)
-        {
-            <div class="absolute w-1 h-1 bg-white rounded-full" 
-                 style="top: @(Random.Shared.Next(0, 100))%; 
-                        left: @(Random.Shared.Next(0, 100))%;
-                        animation: float @(Random.Shared.Next(5, 15))s infinite linear;"></div>
-        }
-    </div>
+    
+    <Particles/>
     <Header Title="Laberinto de Shikego" 
         RightComponent="@RightComponentContent"
         ShowBackButton="true">

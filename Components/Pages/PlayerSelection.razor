@@ -8,17 +8,8 @@
 
 <Header Title="Selección de Jugadores"/>
 <main class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex flex-col items-center justify-center relative overflow-hidden">
-    <!-- Efecto de partículas -->
-    <div class="absolute inset-0 opacity-20 animate-particles">
-        @for (int i = 0; i < 30; i++)
-        {
-            <div class="absolute w-1 h-1 bg-white rounded-full" 
-                 style="top: @(Random.Shared.Next(0, 100))%; 
-                        left: @(Random.Shared.Next(0, 100))%;
-                        animation: float @(Random.Shared.Next(5, 15))s infinite linear;"></div>
-        }
-    </div>
-
+    
+    <Particles/>
     <section aria-labelledby="playerSelectionHeading" class="z-10 text-center space-y-8 p-8 bg-gray-800/50 backdrop-blur-lg rounded-2xl shadow-xl border border-white/10 max-w-md w-full mx-4">
         <header class="space-y-4">
             <h1 id="playerSelectionHeading" class="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
@@ -52,21 +43,7 @@
     </section>
 </main>
 
-<style>
-    .animate-particles {
-        animation: particles-move 20s linear infinite;
-    }
 
-    @@keyframes float {
-        0%, 100% { transform: translateY(0); }
-        50% { transform: translateY(-20px); }
-    }
-
-    @@keyframes particles-move {
-        from { transform: translateY(-100%); }
-        to { transform: translateY(100%); }
-    }
-</style>
 
 @code {
     private int numberOfPlayers = 1;

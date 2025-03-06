@@ -8,17 +8,7 @@
 <Header Title="Selección de Guerreros"/>
 
 <main class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-4 relative overflow-hidden">
-    <!-- Efecto de partículas -->
-    <div class="absolute inset-0 opacity-20 animate-particles">
-        @for (int i = 0; i < 30; i++)
-        {
-            <div class="absolute w-1 h-1 bg-white rounded-full" 
-                 style="top: @(Random.Shared.Next(0, 100))%; 
-                        left: @(Random.Shared.Next(0, 100))%;
-                        animation: float @(Random.Shared.Next(5, 15))s infinite linear;"></div>
-        }
-    </div>
-
+    <Particles/>
     <section aria-labelledby="charactersHeading" class="relative z-10 max-w-7xl mx-auto">
         <header class="mb-8 text-center">
             <p class="text-xl text-gray-300 mt-2">Jugador @currentPlayer - Elige tu personaje</p>

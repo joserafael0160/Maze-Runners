@@ -1,0 +1,25 @@
+<div class="absolute inset-0 opacity-20 animate-particles">
+  @for (int i = 0; i < 30; i++)
+  {
+    <div class="absolute w-1 h-1 bg-white rounded-full" 
+         style="top: @(Random.Shared.Next(0, 100))%; 
+                        left: @(Random.Shared.Next(0, 100))%;
+                        animation: float @(Random.Shared.Next(5, 15))s infinite linear;"></div>
+  }
+</div>
+
+<style>
+    .animate-particles {
+        animation: particles-move 20s linear infinite;
+    }
+
+    @@keyframes float {
+        0%, 100% { transform: translateY(0); }
+        50% { transform: translateY(-20px); }
+    }
+
+    @@keyframes particles-move {
+        from { transform: translateY(-100%); }
+        to { transform: translateY(100%); }
+    }
+</style>

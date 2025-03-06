@@ -5,17 +5,8 @@
 <PageTitle>Anime Maze</PageTitle>
 
 <main class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex flex-col items-center justify-center p-4 space-y-4 md:space-y-8 relative overflow-hidden">
-    <div class="absolute inset-0 opacity-30 animate-particles" aria-hidden="true">
-        @foreach (var particle in particles)
-        {
-            <div class="absolute w-1 h-1 bg-white rounded-full" 
-                 style="top: @(particle.Top)%; 
-                        left: @(particle.Left)%;
-                        animation: float @(particle.Duration)s infinite linear; 
-                        transform: scale(@(particle.Scale))"></div>
-        }
-    </div>
-
+    
+    <Particles/>
     <header class="text-center z-10">
         <h1 class="text-5xl md:text-7xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-500 to-red-500 mb-4 md:mb-8 relative">
             <span class="animate-text-glow">ANIME MAZE</span>
@@ -136,19 +127,7 @@
     private DateTime lastUpdate = DateTime.MinValue;
     private DotNetObjectReference<Home>? dotNetHelper;
 
-    protected override void OnInitialized()
-    {
-        var rnd = new Random();
-        for (int i = 0; i < 50; i++)
-        {
-            particles.Add(new Particle(
-                Top: rnd.Next(0, 100),
-                Left: rnd.Next(0, 100),
-                Duration: rnd.Next(5, 15),
-                Scale: rnd.NextDouble() + 0.5
-            )); 
-        }
-    }
+
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
