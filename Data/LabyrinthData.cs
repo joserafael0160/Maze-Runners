@@ -4,7 +4,7 @@ namespace AnimeMaze.Data;
 
 public static class LabyrinthData
 {
-    public static int SelectedSize { get; set; } = 15; 
+    public static int SelectedSize { get; set; } = 15;
     public static Labyrinth Game { get; private set; } = new Labyrinth(SelectedSize, SelectedSize);
 
     public static void ResetLabyrinth()
@@ -13,3 +13,4 @@ public static class LabyrinthData
         ValidationService.ResetValidationGame(Game);
     }
 }
+

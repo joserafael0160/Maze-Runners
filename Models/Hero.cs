@@ -9,7 +9,7 @@ public class Hero
     public string Name { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public HeroImage Image { get; set; } = new HeroImage();
-    public Power Power { get; set; } = new Power("Default", "Description", 0, (player, players) => {});
+    public Power Power { get; set; } = new Power("Default", "Description", 0, (player, players) => { });
 
 
     public int Speed
@@ -58,5 +58,5 @@ public class Hero
         Power = power;
     }
 
-    public Hero() {}
+    public Hero() { }
 }

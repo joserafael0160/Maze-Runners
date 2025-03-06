@@ -15,7 +15,7 @@ public class Player
     public int Speed { get; set; }
     public int Attack { get; set; }
     public Direction FacingDirection { get; set; }
-    public List<TemporaryEffect> TemporaryEffects { get; } = new List<TemporaryEffect>();
+    public List<TemporaryEffect> TemporaryEffects { get; } = [];
 
     public Player((int row, int col) position)
     {
@@ -66,7 +66,7 @@ public class Player
             {
                 HasWon = true;
                 return true;
-            }      
+            }
             TurnManager.NextTurn();
         }
         return false;
@@ -75,7 +75,7 @@ public class Player
     public void AttackTarget()
     {
         (int row, int col) attackPosition = Position;
-    
+
         switch (FacingDirection)
         {
             case Direction.Up:
@@ -91,19 +91,19 @@ public class Player
                 attackPosition.col++;
                 break;
         }
-    
+
         if (ValidationService.CanAttack(attackPosition.row, attackPosition.col))
         {
             var cell = ValidationService.GetCell(attackPosition.row, attackPosition.col);
             var player = ValidationService.GetPlayerAtPosition(attackPosition.row, attackPosition.col);
-            
+
             if (cell.Obstacle != null && cell.Obstacle.Health != 0)
             {
                 cell.Obstacle.TakeDamage(this.Attack);
-                if (cell.Obstacle.IsBroken()) 
-                { 
+                if (cell.Obstacle.IsBroken())
+                {
                     cell.Obstacle = null;
-                    cell.Type = Labyrinth.CellType.Road; 
+                    cell.Type = Labyrinth.CellType.Road;
                 }
             }
             else if (player != null)
@@ -112,7 +112,7 @@ public class Player
                 if (player.Health <= 0)
                 {
                     player.Position = player.InitialPosition;
-                    player.InitializeStats(); 
+                    player.InitializeStats();
                 }
             }
         }

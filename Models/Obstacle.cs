@@ -4,13 +4,13 @@ public class Obstacle
 {
     public int Health { get; private set; }
     public int MaxHealth { get; private set; }
-    public string Image { get; set; } 
-    public string Name { get; set; } 
+    public string Image { get; set; }
+    public string Name { get; set; }
 
     public Obstacle(int health, string name, string image)
     {
         Health = health;
-        MaxHealth = health; 
+        MaxHealth = health;
         Image = image;
         Name = name;
     }
@@ -31,6 +31,6 @@ public class Obstacle
 
     public void Reset()
     {
-        Health = MaxHealth; 
+        Health = MaxHealth;
     }
 }

@@ -1,5 +1,4 @@
 namespace AnimeMaze.Models;
-
 public class Trap
 {
     public string Name { get; set; }
@@ -18,9 +17,9 @@ public class Trap
             {
                 activate(player);
                 player.AddTemporaryEffect(new TemporaryEffect(
-                    name, 
-                    p => { /* Aplicar efecto al inicio */ }, 
-                    p => { /* Remover efecto al final */ }, 
+                    name,
+                    p => { /* Aplicar efecto al inicio */ },
+                    p => { /* Remover efecto al final */ },
                     0 // Duración en TURNOS COMPLETOS
                 ));
             }

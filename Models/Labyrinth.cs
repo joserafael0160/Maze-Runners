@@ -7,7 +7,7 @@ namespace AnimeMaze.Models;
 public class Labyrinth
 {
     public Cell[,] Maze { get; }
-    
+
     public class Cell
     {
         public CellType Type { get; set; }
@@ -19,7 +19,7 @@ public class Labyrinth
             Trap = trap;
             Obstacle = obstacle;
         }
-        
+
         public string GetCellType()
         {
             return Type switch
@@ -33,18 +33,18 @@ public class Labyrinth
             };
         }
     }
-    
+
     public enum CellType
     {
         Road, Wall, Trap, Obstacle, Exit
     }
-    
+
     public Labyrinth(int width, int height)
     {
         Maze = new Cell[height, width];
         MazeAlgorithm.GenerateMaze(this);
     }
-    
+
     public void CheckAndActivateTrap(Player player)
     {
         var cell = Maze[player.Position.RowPosition, player.Position.ColPosition];

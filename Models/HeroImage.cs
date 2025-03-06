@@ -15,5 +15,5 @@ public class HeroImage
         Right = $"images/Characters/{name}/Right.png";
     }
 
-    public HeroImage() {}
+    public HeroImage() { }
 }

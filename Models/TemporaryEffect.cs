@@ -1,5 +1,4 @@
 namespace AnimeMaze.Models;
-
 public class TemporaryEffect
 {
     public string Name { get; set; }
@@ -27,7 +26,7 @@ public class TemporaryEffect
 
     public void DecrementTurn()
     {
-    	if (TurnsRemaining > 0)
+        if (TurnsRemaining > 0)
         {
             TurnsRemaining--;
         }

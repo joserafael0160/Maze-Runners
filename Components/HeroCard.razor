@@ -1,6 +1,6 @@
 @inject NavigationManager Navigation
 @using AnimeMaze.Models
-
+@namespace AnimeMaze.CustomComponents
 <article @onclick:stopPropagation @onclick="HandleSelect"
  class="group relative bg-gray-800/50 backdrop-blur-lg z-40 rounded-xl shadow-xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 
                @(IsSelected ? "!border-purple-500 scale-[1.02] ring-4 ring-purple-500/30" : "")">
@@ -37,7 +37,7 @@
 
             <div class="bg-gray-900/50 p-3 rounded-lg">
                 <h3 class="text-lg font-semibold text-yellow-400 mb-2">Poder Especial</h3>
-                <p class="text-purple-300 font-medium">@Character.Power.Name</p>
+                <p class="text-purple-300 font-medium inline">@Character.Power.Name</p> <p class="text-blue-300 font-medium inline px-3">Coldown @Character.Power.Cooldown</p>
                 <p class="text-sm text-gray-300 mt-1">@Character.Power.Description</p>
             </div>
 

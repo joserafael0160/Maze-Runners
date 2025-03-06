@@ -6,11 +6,11 @@ namespace AnimeMaze.Data;
 public static class ObstacleData
 {
     private static readonly Random random = new Random();
-    
-    private static readonly List<(int Health, string Name, string Image)> ObstacleDefinitions = new List<(int, string, string)>
-    {
+
+    private static readonly List<(int Health, string Name, string Image)> ObstacleDefinitions =
+    [
         (100, "Rock", "/images/Obstacles/Rock.png"),
-    };
+        ];
 
     public static Obstacle CreateRandomObstacle()
     {
