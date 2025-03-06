@@ -6,80 +6,76 @@
 @using AnimeMaze.CustomComponents
 
 <PageTitle>Selección de Personajes - Anime Maze</PageTitle>
-<Header Title="Selección de Guerreros"/>
+<Header Title="Selección de Guerreros" />
 
 <main class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 p-4 relative overflow-hidden">
-    <Particles/>
-    <section aria-labelledby="charactersHeading" class="relative z-10 max-w-7xl mx-auto">
-        <header class="mb-8 text-center">
-            <p class="text-xl text-gray-300 mt-2">Jugador @currentPlayer - Elige tu personaje</p>
-        </header>
+  <Particles />
+  <section aria-labelledby="charactersHeading" class="relative z-10 max-w-7xl mx-auto">
+    <header class="mb-8 text-center">
+      <p class="text-xl text-gray-300 mt-2">Jugador @currentPlayer - Elige tu personaje</p>
+    </header>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            @for (int i = 0; i < characters?.Count; i++)
-                {
-                    var index = i;
-                    <HeroCard Character="characters[index]"
-                              Index="index"
-                              OnSelect="SelectCharacter"
-                              OnToggleDescription="ToggleDescription"
-                              IsExpanded="@(ShowFullDescription == index)"
-                              IsSelected="@(SelectedHeroIndex == index)" 
-                              /> 
-                }
-        </div>
-    </section>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+      @for (int i = 0; i < characters?.Count; i++)
+      {
+        var index = i;
+        <HeroCard Character="characters[index]" Index="index" OnSelect="SelectCharacter"
+          OnToggleDescription="ToggleDescription" IsExpanded="@(ShowFullDescription == index)"
+          IsSelected="@(SelectedHeroIndex == index)" />
+      }
+    </div>
+  </section>
 </main>
 
-<SelectedHeroNotification SelectedHero="SelectedHero" OnPlayGame="PlayGame" Player="currentPlayer"/>
+<SelectedHeroNotification SelectedHero="SelectedHero" OnPlayGame="PlayGame" Player="currentPlayer" />
 @code {
-    private List<Hero>? characters = HeroData.HeroCharacters;
-    private int? ShowFullDescription { get; set; } = null;
-    private int? SelectedHeroIndex { get; set; } = null;
-    private Hero? SelectedHero { get; set; }
-    private int numberOfPlayers = PlayerData.NumberOfPlayers; 
-    private int currentPlayer = 1;
+  private List<Hero>? characters = HeroData.HeroCharacters;
+  private int? ShowFullDescription { get; set; } = null;
+  private int? SelectedHeroIndex { get; set; } = null;
+  private Hero? SelectedHero { get; set; }
+  private int numberOfPlayers = PlayerData.NumberOfPlayers;
+  private int currentPlayer = 1;
 
-    protected override void OnInitialized()
+  protected override void OnInitialized()
+  {
+    foreach (var player in PlayerData.Players)
     {
-        foreach (var player in PlayerData.Players)
-        {
-            player.HeroSelected = null;
-        }
-        SelectedHeroIndex = null;
+      player.HeroSelected = null;
+    }
+    SelectedHeroIndex = null;
+    SelectedHero = null;
+  }
+
+  private void ToggleDescription(int index)
+  {
+    ShowFullDescription = ShowFullDescription == index ? null : index;
+  }
+
+  private void SelectCharacter(int index)
+  {
+    SelectedHeroIndex = index;
+    SelectedHero = HeroData.HeroCharacters[index];
+    StateHasChanged();
+  }
+
+  private void PlayGame()
+  {
+    if (SelectedHero != null)
+    {
+      PlayerData.Players[currentPlayer - 1].HeroSelected = SelectedHero;
+      PlayerData.Players[currentPlayer - 1].Health = SelectedHero.Health;
+      PlayerData.Players[currentPlayer - 1].Speed = SelectedHero.Speed;
+      PlayerData.Players[currentPlayer - 1].Attack = SelectedHero.Attack;
+      currentPlayer++;
+      if (currentPlayer > numberOfPlayers)
+      {
+        Navigation.NavigateTo($"/Maze");
+      }
+      else
+      {
         SelectedHero = null;
+        SelectedHeroIndex = null;
+      }
     }
-
-    private void ToggleDescription(int index)
-    {
-        ShowFullDescription = ShowFullDescription == index ? null : index;
-    }
-
-    private void SelectCharacter(int index)
-    {
-        SelectedHeroIndex = index;
-        SelectedHero = HeroData.HeroCharacters[index];
-        StateHasChanged();
-    }
-
-    private void PlayGame()
-    {
-        if (SelectedHero != null) 
-        { 
-            PlayerData.Players[currentPlayer - 1].HeroSelected = SelectedHero;
-            PlayerData.Players[currentPlayer - 1].Health = SelectedHero.Health;
-            PlayerData.Players[currentPlayer - 1].Speed = SelectedHero.Speed;
-            PlayerData.Players[currentPlayer - 1].Attack = SelectedHero.Attack;
-            currentPlayer++; 
-            if (currentPlayer > numberOfPlayers) 
-            { 
-                Navigation.NavigateTo($"/Maze"); 
-            } 
-            else 
-            { 
-                SelectedHero = null; 
-                SelectedHeroIndex = null; 
-            } 
-        }
-    }
+  }
 }

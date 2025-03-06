@@ -1,5 +1,5 @@
 @page "/Maze"
-@using Microsoft.JSInterop 
+@using Microsoft.JSInterop
 @using AnimeMaze.Data
 @using AnimeMaze.Models
 @using AnimeMaze.Services
@@ -10,200 +10,187 @@
 <PageTitle>Laberinto - Anime Maze</PageTitle>
 
 <div class="flex flex-col bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 relative overflow-hidden">
-    
-    <Particles/>
-    <Header Title="Laberinto de Shikego" 
-        RightComponent="@RightComponentContent"
-        ShowBackButton="true">
-    </Header>
-    <main class="flex-1 relative z-10">
-        @if (showModal)
-        {
-            <GameWonModal Message="@winningMessage"
-                        OnResetGame="ResetMaze" 
-                        OnSelectNewCharacters="SelectNewCharacters" />
-        }
-        else
-        {
-            <section aria-labelledby="gameStatus" class="bg-gray-800/50 backdrop-blur-lg mx-4 mt-4 p-4 rounded-xl shadow-lg">
-                <div class="flex flex-wrap gap-4 items-center justify-between text-white">
-                    <div class="flex items-center gap-3">
-                        <span class="text-lg font-semibold text-yellow-400">Turno actual:</span>
-                        <span class="text-xl font-bold text-purple-400">Jugador @(TurnManager.CurrentPlayerIndex + 1)</span>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <span class="text-lg font-semibold text-green-400">Movimientos:</span>
-                        <div class="flex gap-2 items-center">
-                            <span class="text-xl font-bold">@TurnManager.MovesLeft</span>
-                            <span class="text-sm opacity-75">(Velocidad @TurnManager.CurrentPlayer?.Speed)</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
 
-            <!-- Contenido principal -->
-            <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-4 p-4">
-                <MazeGrid game="LabyrinthData.Game" 
-                        players="players" 
-                        OnClickMaze="EventCallback.Factory.Create<(int, int)>(this, OnClickMaze)"/> 
-                
-                <aside class="lg:order-last">
-                    <MazeNavigation MovePlayer="MovePlayerAsync" 
-                                  Attack="AttackPlayer" 
-                                  Power="UsePowerPlayer"/>
-                </aside>
+  <Particles />
+  <Header Title="Laberinto de Shikego" RightComponent="@RightComponentContent" ShowBackButton="true">
+  </Header>
+  <main class="flex-1 relative z-10">
+    @if (showModal)
+    {
+      <GameWonModal Message="@winningMessage" OnResetGame="ResetMaze" OnSelectNewCharacters="SelectNewCharacters" />
+    }
+    else
+    {
+      <section aria-labelledby="gameStatus" class="bg-gray-800/50 backdrop-blur-lg mx-4 mt-4 p-4 rounded-xl shadow-lg">
+        <div class="flex flex-wrap gap-4 items-center justify-between text-white">
+          <div class="flex items-center gap-3">
+            <span class="text-lg font-semibold text-yellow-400">Turno actual:</span>
+            <span class="text-xl font-bold text-purple-400">Jugador @(TurnManager.CurrentPlayerIndex + 1)</span>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="text-lg font-semibold text-green-400">Movimientos:</span>
+            <div class="flex gap-2 items-center">
+              <span class="text-xl font-bold">@TurnManager.MovesLeft</span>
+              <span class="text-sm opacity-75">(Velocidad @TurnManager.CurrentPlayer?.Speed)</span>
             </div>
+          </div>
+        </div>
+      </section>
 
-            <PlayersHealth Players="players"/>
-        }
-    </main>
+      <!-- Contenido principal -->
+      <div class="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-4 p-4">
+        <MazeGrid game="LabyrinthData.Game" players="players"
+          OnClickMaze="EventCallback.Factory.Create<(int, int)>(this, OnClickMaze)" />
+
+        <aside class="lg:order-last">
+          <MazeNavigation MovePlayer="MovePlayerAsync" Attack="AttackPlayer" Power="UsePowerPlayer" />
+        </aside>
+      </div>
+
+      <PlayersHealth Players="players" />
+    }
+  </main>
 </div>
 
 <script>
-    window.addKeyListener = function (dotNetHelper) {
-        document.addEventListener('keydown', function (event) {
-            dotNetHelper.invokeMethodAsync('OnKeyPress', event.key);
-        });
-    };
+  window.addKeyListener = function (dotNetHelper) {
+    document.addEventListener('keydown', function (event) {
+      dotNetHelper.invokeMethodAsync('OnKeyPress', event.key);
+    });
+  };
 </script>
 
 @code {
-    private List<Player> players = PlayerData.Players;
-    private bool showModal = false;
-    private string winningMessage = string.Empty;
-    private RenderFragment RightComponentContent => @<button 
-        @onclick="ResetMaze"
-        class="px-4 py-2 bg-pink-600/30 hover:bg-pink-600/50 border border-pink-400/30 rounded-lg transition-all
-               flex items-center gap-2 group">
-        <svg class="w-5 h-5 text-pink-400 group-hover:rotate-180 transition-transform" 
-             fill="none" 
-             stroke="currentColor" 
-             viewBox="0 0 24 24">
-            <path stroke-linecap="round" 
-                  stroke-linejoin="round" 
-                  stroke-width="2" 
-                  d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
-        </svg>
-        Reiniciar
-    </button>;
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+  private List<Player> players = PlayerData.Players;
+  private bool showModal = false;
+  private string winningMessage = string.Empty;
+  private RenderFragment RightComponentContent => @<button @onclick="ResetMaze" class="px-4 py-2 bg-pink-600/30 hover:bg-pink-600/50 border border-pink-400/30 rounded-lg transition-all
+                 flex items-center gap-2 group">
+    <svg class="w-5 h-5 text-pink-400 group-hover:rotate-180 transition-transform" fill="none" stroke="currentColor"
+      viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+        d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+    </svg>
+    Reiniciar
+  </button>;
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    if (firstRender)
     {
-        if (firstRender)
-        {
-            await JSRuntime.InvokeVoidAsync("addKeyListener", DotNetObjectReference.Create(this));
-        }
+      await JSRuntime.InvokeVoidAsync("addKeyListener", DotNetObjectReference.Create(this));
     }
+  }
 
-    private async Task MovePlayerAsync(string direction)
+  private async Task MovePlayerAsync(string direction)
+  {
+    var currentPlayer = TurnManager.CurrentPlayer;
+    if (currentPlayer != null && !showModal)
     {
-        var currentPlayer = TurnManager.CurrentPlayer;
-        if (currentPlayer != null && !showModal)
-        {
-            bool hasWon = currentPlayer.MovePlayer(direction);
-            LabyrinthData.Game.CheckAndActivateTrap(currentPlayer);
-    
-            if (hasWon)
-            {
-                winningMessage = $"¡Jugador {TurnManager.CurrentPlayerIndex + 1} ha ganado!";
-                showModal = true;
-            }
-            await InvokeAsync(StateHasChanged);
-        }
-    }
+      bool hasWon = currentPlayer.MovePlayer(direction);
+      LabyrinthData.Game.CheckAndActivateTrap(currentPlayer);
 
-    private void AttackPlayer()
-    {
-        if (TurnManager.CurrentPlayer != null)
-        {
-            TurnManager.CurrentPlayer.AttackTarget();
-            StateHasChanged();
-        }
+      if (hasWon)
+      {
+        winningMessage = $"¡Jugador {TurnManager.CurrentPlayerIndex + 1} ha ganado!";
+        showModal = true;
+      }
+      await InvokeAsync(StateHasChanged);
     }
+  }
 
-    private void UsePowerPlayer()
+  private void AttackPlayer()
+  {
+    if (TurnManager.CurrentPlayer != null)
     {
-        if (TurnManager.CurrentPlayer != null && TurnManager.CurrentPlayer.HeroSelected?.Power?.CurrentCooldown == 0)
-        {
-            TurnManager.CurrentPlayer.HeroSelected.Power.Use(TurnManager.CurrentPlayer, players);
-            TurnManager.NextTurn();
-            StateHasChanged();
-        }
+      TurnManager.CurrentPlayer.AttackTarget();
+      StateHasChanged();
     }
+  }
 
-    private void OnClickMaze((int row, int col) position)
+  private void UsePowerPlayer()
+  {
+    if (TurnManager.CurrentPlayer != null && TurnManager.CurrentPlayer.HeroSelected?.Power?.CurrentCooldown == 0)
     {
-        var player = TurnManager.CurrentPlayer;
-        if (player != null)
-        {
-            var currentPosition = player.Position;
-            if (position.row < currentPosition.RowPosition)
-            {
-                player.FacingDirection = Direction.Up;
-            }
-            else if (position.row > currentPosition.RowPosition)
-            {
-                player.FacingDirection = Direction.Down;
-            }
-            else if (position.col < currentPosition.ColPosition)
-            {
-                player.FacingDirection = Direction.Left;
-            }
-            else if (position.col > currentPosition.ColPosition)
-            {
-                player.FacingDirection = Direction.Right;
-            }
-            StateHasChanged();
-        }
+      TurnManager.CurrentPlayer.HeroSelected.Power.Use(TurnManager.CurrentPlayer, players);
+      TurnManager.NextTurn();
+      StateHasChanged();
     }
+  }
 
-    [JSInvokable]
-    public async Task OnKeyPress(string key)
+  private void OnClickMaze((int row, int col) position)
+  {
+    var player = TurnManager.CurrentPlayer;
+    if (player != null)
     {
-        switch (key)
-        {
-            case "ArrowUp" or "w":
-                await MovePlayerAsync("up");
-                break;
-            case "ArrowDown" or "s":
-                await MovePlayerAsync("down");
-                break;
-            case "ArrowLeft" or "a":
-                await MovePlayerAsync("left");
-                break;
-            case "ArrowRight" or "d":
-                await MovePlayerAsync("right");
-                break;
-            case "e":
-                AttackPlayer();
-                break;
-            case "f":
-                UsePowerPlayer();
-                break;
-        }
-        await InvokeAsync(StateHasChanged);
+      var currentPosition = player.Position;
+      if (position.row < currentPosition.RowPosition)
+      {
+        player.FacingDirection = Direction.Up;
+      }
+      else if (position.row > currentPosition.RowPosition)
+      {
+        player.FacingDirection = Direction.Down;
+      }
+      else if (position.col < currentPosition.ColPosition)
+      {
+        player.FacingDirection = Direction.Left;
+      }
+      else if (position.col > currentPosition.ColPosition)
+      {
+        player.FacingDirection = Direction.Right;
+      }
+      StateHasChanged();
     }
+  }
 
-    private void ResetMaze()
+  [JSInvokable]
+  public async Task OnKeyPress(string key)
+  {
+    switch (key)
     {
-        LabyrinthData.ResetLabyrinth();
-        TurnManager.ResetTurns();
-        PlayerData.ResetPlayerPositions();
-        ObstacleData.ResetObstacles(LabyrinthData.Game); 
-        ValidationService.ResetValidationGame(LabyrinthData.Game);
-        showModal = false;
-        StateHasChanged();
+      case "ArrowUp" or "w":
+        await MovePlayerAsync("up");
+        break;
+      case "ArrowDown" or "s":
+        await MovePlayerAsync("down");
+        break;
+      case "ArrowLeft" or "a":
+        await MovePlayerAsync("left");
+        break;
+      case "ArrowRight" or "d":
+        await MovePlayerAsync("right");
+        break;
+      case "e":
+        AttackPlayer();
+        break;
+      case "f":
+        UsePowerPlayer();
+        break;
     }
+    await InvokeAsync(StateHasChanged);
+  }
+
+  private void ResetMaze()
+  {
+    LabyrinthData.ResetLabyrinth();
+    TurnManager.ResetTurns();
+    PlayerData.ResetPlayerPositions();
+    ObstacleData.ResetObstacles(LabyrinthData.Game);
+    ValidationService.ResetValidationGame(LabyrinthData.Game);
+    showModal = false;
+    StateHasChanged();
+  }
 
 
-    private void SelectNewCharacters()
-    {
-        PlayerData.Players.Clear();
-        TurnManager.ResetTurns(); 
-        PlayerData.InitializePlayers(PlayerData.NumberOfPlayers); 
-        ObstacleData.ResetObstacles(LabyrinthData.Game); 
-        ValidationService.ResetValidationGame(LabyrinthData.Game);
-        Navigation.NavigateTo("/Characters");
-        showModal = false;
-        StateHasChanged();
-    }
+  private void SelectNewCharacters()
+  {
+    PlayerData.Players.Clear();
+    TurnManager.ResetTurns();
+    PlayerData.InitializePlayers(PlayerData.NumberOfPlayers);
+    ObstacleData.ResetObstacles(LabyrinthData.Game);
+    ValidationService.ResetValidationGame(LabyrinthData.Game);
+    Navigation.NavigateTo("/Characters");
+    showModal = false;
+    StateHasChanged();
+  }
 }

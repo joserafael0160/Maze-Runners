@@ -6,52 +6,53 @@
 @using AnimeMaze.CustomComponents
 <PageTitle>Selección de Jugadores - Anime Maze</PageTitle>
 
-<Header Title="Selección de Jugadores"/>
-<main class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex flex-col items-center justify-center relative overflow-hidden">
-    
-    <Particles/>
-    <section aria-labelledby="playerSelectionHeading" class="z-10 text-center space-y-8 p-8 bg-gray-800/50 backdrop-blur-lg rounded-2xl shadow-xl border border-white/10 max-w-md w-full mx-4">
-        <header class="space-y-4">
-            <h1 id="playerSelectionHeading" class="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-                Selección de Jugadores
-            </h1>
-            <p class="text-gray-300 text-lg">Elije cuántos guerreros enfrentarán el laberinto</p>
-        </header>
+<Header Title="Selección de Jugadores" />
+<main
+  class="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900 to-purple-900 flex flex-col items-center justify-center relative overflow-hidden">
 
-        <div class="relative group">
-            <select 
-                @bind="numberOfPlayers"
-                class="w-full px-6 py-3 text-lg bg-gray-700/50 border border-purple-500/30 rounded-xl appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 text-white transition-all"
-                aria-label="Número de jugadores">
-                @for (int i = 1; i <= 4; i++)
-                {
-                    <option value="@i" class="bg-gray-800 text-white">@i Jugador@(i > 1 ? "es" : "")</option>
-                }
-            </select>
-            <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
-                <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                </svg>
-            </div>
-        </div>
+  <Particles />
+  <section aria-labelledby="playerSelectionHeading"
+    class="z-10 text-center space-y-8 p-8 bg-gray-800/50 backdrop-blur-lg rounded-2xl shadow-xl border border-white/10 max-w-md w-full mx-4">
+    <header class="space-y-4">
+      <h1 id="playerSelectionHeading"
+        class="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+        Selección de Jugadores
+      </h1>
+      <p class="text-gray-300 text-lg">Elije cuántos guerreros enfrentarán el laberinto</p>
+    </header>
 
-        <button 
-            @onclick="StartGame"
-            class="w-full py-3 px-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl transform transition-all hover:scale-105 hover:shadow-purple-500/30 active:scale-95 focus:outline-none focus:ring-2 focus:ring-purple-500">
-            Comenzar Aventura
-        </button>
-    </section>
+    <div class="relative group">
+      <select @bind="numberOfPlayers"
+        class="w-full px-6 py-3 text-lg bg-gray-700/50 border border-purple-500/30 rounded-xl appearance-none focus:outline-none focus:ring-2 focus:ring-purple-500 text-white transition-all"
+        aria-label="Número de jugadores">
+        @for (int i = 1; i <= 4; i++)
+        {
+          <option value="@i" class="bg-gray-800 text-white">@i Jugador@(i > 1 ? "es" : "")</option>
+        }
+      </select>
+      <div class="absolute inset-y-0 right-4 flex items-center pointer-events-none">
+        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+        </svg>
+      </div>
+    </div>
+
+    <button @onclick="StartGame"
+      class="w-full py-3 px-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl transform transition-all hover:scale-105 hover:shadow-purple-500/30 active:scale-95 focus:outline-none focus:ring-2 focus:ring-purple-500">
+      Comenzar Aventura
+    </button>
+  </section>
 </main>
 
 
 
 @code {
-    private int numberOfPlayers = 1;
+  private int numberOfPlayers = 1;
 
-    private void StartGame()
-    {
-        LabyrinthData.ResetLabyrinth();
-        PlayerData.InitializePlayers(numberOfPlayers);
-        Navigation.NavigateTo("/Characters");
-    }
+  private void StartGame()
+  {
+    LabyrinthData.ResetLabyrinth();
+    PlayerData.InitializePlayers(numberOfPlayers);
+    Navigation.NavigateTo("/Characters");
+  }
 }

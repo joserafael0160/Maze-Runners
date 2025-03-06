@@ -1,77 +1,78 @@
 @inject NavigationManager Navigation
 @using AnimeMaze.Models
 @namespace AnimeMaze.CustomComponents
-<article @onclick:stopPropagation @onclick="HandleSelect"
- class="group relative bg-gray-800/50 backdrop-blur-lg z-40 rounded-xl shadow-xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 
+<article @onclick:stopPropagation @onclick="HandleSelect" class="group relative bg-gray-800/50 backdrop-blur-lg z-40 rounded-xl shadow-xl border border-white/10 hover:border-purple-500/50 transition-all duration-300 
                @(IsSelected ? "!border-purple-500 scale-[1.02] ring-4 ring-purple-500/30" : "")">
-    @if (Character != null)
-    {
-        <figure class="overflow-hidden rounded-t-xl aspect-square">
-            <img src="@Character.Image.Down" 
-                 alt="@Character.Name" 
-                 class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110"/>
-        </figure>
-        
-        <div class="p-4 space-y-4">
-            <header>
-                <h2 class="text-2xl font-bold text-purple-400">@Character.Name</h2>
-            </header>
+  @if (Character != null)
+  {
+    <figure class="overflow-hidden rounded-t-xl aspect-square">
+      <img src="@Character.Image.Down" alt="@Character.Name"
+        class="w-full h-full object-cover transform transition-transform duration-500 group-hover:scale-110" />
+    </figure>
 
-            <div class="grid grid-cols-3 gap-2 p-3 bg-gray-900/50 rounded-lg">
-                <div class="flex flex-col items-center">
-                    <img src="/images/Others/Boots.png" class="w-8 h-8 mb-1" alt="Velocidad">
-                    <span class="text-green-400 font-bold text-xl">@Character.Speed</span>
-                    <span class="text-xs text-gray-400">Velocidad</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img src="/images/Others/Hearth.png" class="w-8 h-8 mb-1" alt="Vida">
-                    <span class="text-red-400 font-bold text-xl">@Character.Health</span>
-                    <span class="text-xs text-gray-400">Vida</span>
-                </div>
-                <div class="flex flex-col items-center">
-                    <img src="/images/Others/Sword.png" class="w-8 h-8 mb-1" alt="Ataque">
-                    <span class="text-blue-400 font-bold text-xl">@Character.Attack</span>
-                    <span class="text-xs text-gray-400">Ataque</span>
-                </div>
-            </div>
+    <div class="p-4 space-y-4">
+      <header>
+        <h2 class="text-2xl font-bold text-purple-400">@Character.Name</h2>
+      </header>
 
-            <div class="bg-gray-900/50 p-3 rounded-lg">
-                <h3 class="text-lg font-semibold text-yellow-400 mb-2">Poder Especial</h3>
-                <p class="text-purple-300 font-medium inline">@Character.Power.Name</p> <p class="text-blue-300 font-medium inline px-3">Coldown @Character.Power.Cooldown</p>
-                <p class="text-sm text-gray-300 mt-1">@Character.Power.Description</p>
-            </div>
-
-            <div class="relative">
-                <p class="text-gray-300 text-sm transition-all duration-500 @(IsExpanded ? "max-h-[500px]" : "max-h-24") overflow-hidden">
-                    @Character.Description
-                </p>
-                <button @onclick:stopPropagation @onclick="HandleToggleDescription"
-                        class="text-purple-400 hover:text-purple-300 text-sm font-medium mt-2 flex items-center gap-1">
-                    @(IsExpanded ? "Mostrar menos" : "Mostrar más")
-                    <svg class="w-4 h-4 transform transition-transform @(IsExpanded ? "rotate-180" : "")" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
-                    </svg>
-                </button>
-            </div>
+      <div class="grid grid-cols-3 gap-2 p-3 bg-gray-900/50 rounded-lg">
+        <div class="flex flex-col items-center">
+          <img src="/images/Others/Boots.png" class="w-8 h-8 mb-1" alt="Velocidad">
+          <span class="text-green-400 font-bold text-xl">@Character.Speed</span>
+          <span class="text-xs text-gray-400">Velocidad</span>
         </div>
-    }
+        <div class="flex flex-col items-center">
+          <img src="/images/Others/Hearth.png" class="w-8 h-8 mb-1" alt="Vida">
+          <span class="text-red-400 font-bold text-xl">@Character.Health</span>
+          <span class="text-xs text-gray-400">Vida</span>
+        </div>
+        <div class="flex flex-col items-center">
+          <img src="/images/Others/Sword.png" class="w-8 h-8 mb-1" alt="Ataque">
+          <span class="text-blue-400 font-bold text-xl">@Character.Attack</span>
+          <span class="text-xs text-gray-400">Ataque</span>
+        </div>
+      </div>
+
+      <div class="bg-gray-900/50 p-3 rounded-lg">
+        <h3 class="text-lg font-semibold text-yellow-400 mb-2">Poder Especial</h3>
+        <p class="text-purple-300 font-medium inline">@Character.Power.Name</p>
+        <p class="text-blue-300 font-medium inline px-3">Coldown @Character.Power.Cooldown</p>
+        <p class="text-sm text-gray-300 mt-1">@Character.Power.Description</p>
+      </div>
+
+      <div class="relative">
+        <p
+          class="text-gray-300 text-sm transition-all duration-500 @(IsExpanded ? "max-h-[500px]" : "max-h-24") overflow-hidden">
+          @Character.Description
+        </p>
+        <button @onclick:stopPropagation @onclick="HandleToggleDescription"
+          class="text-purple-400 hover:text-purple-300 text-sm font-medium mt-2 flex items-center gap-1">
+          @(IsExpanded ? "Mostrar menos" : "Mostrar más")
+          <svg class="w-4 h-4 transform transition-transform @(IsExpanded ? "rotate-180" : "")" fill="none"
+            stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  }
 </article>
 
 @code {
-    [Parameter] public Hero? Character { get; set; } = new Hero();
-    [Parameter] public int Index { get; set; }
-    [Parameter] public EventCallback<int> OnSelect { get; set; }
-    [Parameter] public EventCallback<int> OnToggleDescription { get; set; }
-    [Parameter] public bool IsExpanded { get; set; }
-    [Parameter] public bool IsSelected { get; set; }
+  [Parameter] public Hero? Character { get; set; } = new Hero();
+  [Parameter] public int Index { get; set; }
+  [Parameter] public EventCallback<int> OnSelect { get; set; }
+  [Parameter] public EventCallback<int> OnToggleDescription { get; set; }
+  [Parameter] public bool IsExpanded { get; set; }
+  [Parameter] public bool IsSelected { get; set; }
 
-    private async Task HandleSelect()
-    {
-        await OnSelect.InvokeAsync(Index);
-    }
+  private async Task HandleSelect()
+  {
+    await OnSelect.InvokeAsync(Index);
+  }
 
-    private async Task HandleToggleDescription()
-    {
-        await OnToggleDescription.InvokeAsync(Index);
-    }
+  private async Task HandleToggleDescription()
+  {
+    await OnToggleDescription.InvokeAsync(Index);
+  }
 }

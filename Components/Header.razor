@@ -1,36 +1,37 @@
-
 @namespace AnimeMaze.CustomComponents
 <header class="bg-gray-800/50 backdrop-blur-lg border-b border-white/10 shadow-xl @CustomClass">
-    <nav class="max-w-6xl mx-auto flex items-center justify-between">
-        @if (ShowBackButton)
-        {
-            <a href="/" class="px-4 py-2 border-2 border-pink-500 rounded-lg hover:bg-pink-500/20 transition-colors text-sm md:text-base">
-                ← Volver
-            </a>
-        }
-        
-        <h1 class="text-xl md:text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent mx-4">
-            @Title
-        </h1>
+  <nav class="max-w-6xl mx-auto flex items-center justify-between">
+    @if (ShowBackButton)
+    {
+      <a href="/"
+        class="px-4 py-2 border-2 border-pink-500 rounded-lg hover:bg-pink-500/20 transition-colors text-sm md:text-base">
+        ← Volver
+      </a>
+    }
 
-        <div class="flex items-center">
-            @if (RightComponent != null)
-            {
-                @RightComponent
-            }
-        </div>
-    </nav>
+    <h1
+      class="text-xl md:text-2xl font-bold bg-gradient-to-r from-pink-400 to-purple-400 bg-clip-text text-transparent mx-4">
+      @Title
+    </h1>
+
+    <div class="flex items-center">
+      @if (RightComponent != null)
+      {
+        @RightComponent
+      }
+    </div>
+  </nav>
 </header>
 @code {
-    [Parameter]
-    public string Title { get; set; } = default!;
+  [Parameter]
+  public string Title { get; set; } = default!;
 
-    [Parameter]
-    public bool ShowBackButton { get; set; } = true;
+  [Parameter]
+  public bool ShowBackButton { get; set; } = true;
 
-    [Parameter]
-    public RenderFragment? RightComponent { get; set; }
+  [Parameter]
+  public RenderFragment? RightComponent { get; set; }
 
-    [Parameter]
-    public string CustomClass { get; set; } = "p-4 md:p-6";
+  [Parameter]
+  public string CustomClass { get; set; } = "p-4 md:p-6";
 }

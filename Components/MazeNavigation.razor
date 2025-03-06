@@ -1,138 +1,127 @@
 @inject IJSRuntime JSRuntime
 @namespace AnimeMaze.CustomComponents
-<nav id="navigation" 
-     class="fixed bottom-4 right-4 bg-gray-800/50 backdrop-blur-lg rounded-xl shadow-2xl border border-white/10
-            transition-all duration-300 z-50"
-     role="navigation" 
-     aria-label="Controles del juego">
-    
-    <button @onclick="ToggleMenu" 
-            class="absolute -top-4 -left-4 w-12 h-12 bg-purple-600/80 hover:bg-purple-500/90 rounded-full shadow-lg
+<nav id="navigation" class="fixed bottom-4 right-4 bg-gray-800/50 backdrop-blur-lg rounded-xl shadow-2xl border border-white/10
+            transition-all duration-300 z-50" role="navigation" aria-label="Controles del juego">
+
+  <button @onclick="ToggleMenu" class="absolute -top-4 -left-4 w-12 h-12 bg-purple-600/80 hover:bg-purple-500/90 rounded-full shadow-lg
                    flex items-center justify-center transition-all hover:scale-110"
-            aria-label="@(isMenuOpen ? "Ocultar controles" : "Mostrar controles")">
-        <img src="@(isMenuOpen ? "images/Buttons/Menu/X.png" : "images/Buttons/Menu/Menu.png")" 
-             class="w-8 h-8 transition-opacity hover:opacity-80"
-             alt="Menu" aria-hidden="true"/>
-    </button>
+    aria-label="@(isMenuOpen ? "Ocultar controles" : "Mostrar controles")">
+    <img src="@(isMenuOpen ? "images/Buttons/Menu/X.png" : "images/Buttons/Menu/Menu.png")"
+      class="w-8 h-8 transition-opacity hover:opacity-80" alt="Menu" aria-hidden="true" />
+  </button>
 
-    <div class="p-3 space-y-4" style="display: @(isMenuOpen ? "block" : "none");">
-        <!-- Flechas de dirección -->
-        <div class="grid grid-cols-3 gap-2 items-center">
-            <button @onclick='async () => await MovePlayer.InvokeAsync("up")' 
-                    class="col-start-2 rounded-lg
-                           hover:scale-110 transition-transform duration-200"
-                    aria-label="Mover hacia arriba">
-                <img src="/images/Buttons/Arrows/Up.png" 
-                     class="w-8 h-8 mx-auto drop-shadow-lg"
-                     alt="Arrow Up" aria-hidden="true"/>
-            </button>
-            
-            <button @onclick='async () => await MovePlayer.InvokeAsync("left")' 
-                    class="col-start-1 rounded-lg 
-                           hover:scale-110 transition-transform duration-200"
-                    aria-label="Mover hacia la izquierda">
-                <img src="/images/Buttons/Arrows/Left.png" 
-                     class="w-8 h-8 mx-auto drop-shadow-lg"
-                     alt="Arrow Left" aria-hidden="true"/>
-            </button>
-            
-            <button @onclick='async () => await MovePlayer.InvokeAsync("down")' 
-                    class="rounded-lg
-                           hover:scale-110 transition-transform duration-200"
-                    aria-label="Mover hacia abajo">
-                <img src="/images/Buttons/Arrows/Down.png" 
-                     class="w-8 h-8 mx-auto drop-shadow-lg"
-                     alt="Arrow Down" aria-hidden="true"/>
-            </button>
-            
-            <button @onclick='async () => await MovePlayer.InvokeAsync("right")' 
-                    class="rounded-lg
-                           hover:scale-110 transition-transform duration-200"
-                    aria-label="Mover hacia la derecha">
-                <img src="/images/Buttons/Arrows/Right.png" 
-                     class="w-8 h-8 mx-auto drop-shadow-lg"
-                     alt="Arrow Right" aria-hidden="true"/>
-            </button>
-        </div>
+  <div class="p-3 space-y-4" style="display: @(isMenuOpen ? "block" : "none");">
+    <!-- Flechas de dirección -->
+    <div class="grid grid-cols-3 gap-2 items-center">
+      <button @onclick='async () => await MovePlayer.InvokeAsync("up")' class="col-start-2 rounded-lg
+                           hover:scale-110 transition-transform duration-200" aria-label="Mover hacia arriba">
+        <img src="/images/Buttons/Arrows/Up.png" class="w-8 h-8 mx-auto drop-shadow-lg" alt="Arrow Up"
+          aria-hidden="true" />
+      </button>
 
-        <!-- Botones de acción -->
-        <div class="flex justify-center gap-3 border-t border-white/10 pt-4">
-            <button @onclick='async () => await Power.InvokeAsync()' 
-                    class="bg-gradient-to-br from-green-600 to-emerald-600 p-2 rounded-lg shadow-md
-                           hover:scale-110 transition-transform duration-200"
-                    aria-label="Usar poder especial">
-                <img src="/images/Buttons/Specials/Power.png" 
-                     class="w-10 h-10 mx-auto drop-shadow-lg"
-                     alt="Power" aria-hidden="true"/>
-            </button>
-            
-            <button @onclick='async () => await Attack.InvokeAsync()' 
-                    class="bg-gradient-to-br from-red-600 to-orange-600 p-2 rounded-lg shadow-md
-                           hover:scale-110 transition-transform duration-200"
-                    aria-label="Realizar ataque">
-                <img src="/images/Buttons/Specials/Attack.png" 
-                     class="w-10 h-10 mx-auto drop-shadow-lg"
-                     alt="Attack" aria-hidden="true"/>
-            </button>
-        </div>
+      <button @onclick='async () => await MovePlayer.InvokeAsync("left")' class="col-start-1 rounded-lg 
+                           hover:scale-110 transition-transform duration-200" aria-label="Mover hacia la izquierda">
+        <img src="/images/Buttons/Arrows/Left.png" class="w-8 h-8 mx-auto drop-shadow-lg" alt="Arrow Left"
+          aria-hidden="true" />
+      </button>
+
+      <button @onclick='async () => await MovePlayer.InvokeAsync("down")' class="rounded-lg
+                           hover:scale-110 transition-transform duration-200" aria-label="Mover hacia abajo">
+        <img src="/images/Buttons/Arrows/Down.png" class="w-8 h-8 mx-auto drop-shadow-lg" alt="Arrow Down"
+          aria-hidden="true" />
+      </button>
+
+      <button @onclick='async () => await MovePlayer.InvokeAsync("right")' class="rounded-lg
+                           hover:scale-110 transition-transform duration-200" aria-label="Mover hacia la derecha">
+        <img src="/images/Buttons/Arrows/Right.png" class="w-8 h-8 mx-auto drop-shadow-lg" alt="Arrow Right"
+          aria-hidden="true" />
+      </button>
     </div>
+
+    <!-- Botones de acción -->
+    <div class="flex justify-center gap-3 border-t border-white/10 pt-4">
+      <button @onclick='async () => await Power.InvokeAsync()' class="bg-gradient-to-br from-green-600 to-emerald-600 p-2 rounded-lg shadow-md
+                           hover:scale-110 transition-transform duration-200" aria-label="Usar poder especial">
+        <img src="/images/Buttons/Specials/Power.png" class="w-10 h-10 mx-auto drop-shadow-lg" alt="Power"
+          aria-hidden="true" />
+      </button>
+
+      <button @onclick='async () => await Attack.InvokeAsync()' class="bg-gradient-to-br from-red-600 to-orange-600 p-2 rounded-lg shadow-md
+                           hover:scale-110 transition-transform duration-200" aria-label="Realizar ataque">
+        <img src="/images/Buttons/Specials/Attack.png" class="w-10 h-10 mx-auto drop-shadow-lg" alt="Attack"
+          aria-hidden="true" />
+      </button>
+    </div>
+  </div>
 </nav>
 
 <script>
-    window.getWindowWidth = function () {
-        return window.innerWidth;
-    };
+  window.getWindowWidth = function () {
+    return window.innerWidth;
+  };
 </script>
 
 <style>
-#navigation {
+  #navigation {
     touch-action: manipulation;
-}
+  }
 
-@@keyframes slideIn {
-    from { transform: translateX(100%); }
-    to { transform: translateX(0); }
-}
+  @@keyframes slideIn
+  {
+      from {
+        transform: translateX(100%);
+      }
 
-@@keyframes slideOut {
-    from { transform: translateX(0); }
-    to { transform: translateX(100%); }
-}
-
-.nav-menu[style*="display: none"] {
-    animation: slideOut 0.3s ease forwards;
-}
-
-.nav-menu[style*="display: grid"] {
-    animation: slideIn 0.3s ease forwards;
-}
-</style>
-
-@code { 
-    private bool isMenuOpen = true;
-
-    [Parameter]
-    public EventCallback<string> MovePlayer { get; set; }
-    
-    [Parameter]
-    public EventCallback Attack { get; set; }
-
-    [Parameter]
-    public EventCallback Power { get; set; }
-
-    private async Task ToggleMenu()
-    {
-        isMenuOpen = !isMenuOpen;
-        await InvokeAsync(StateHasChanged);
+      to {
+        transform: translateX(0);
+      }
     }
 
-    protected override async Task OnAfterRenderAsync(bool firstRender)
+    @@keyframes slideOut
     {
-        if (firstRender)
-        {
-            var width = await JSRuntime.InvokeAsync<int>("getWindowWidth");
-            isMenuOpen = width <= 768;
-            await InvokeAsync(StateHasChanged);
+    from {
+      transform: translateX(0);
+    }
+
+        to {
+          transform: translateX(100%);
         }
+      }
+
+      .nav-menu[style*="display: none"] {
+        animation: slideOut 0.3s ease forwards;
+      }
+
+      .nav-menu[style*="display: grid"] {
+        animation: slideIn 0.3s ease forwards;
+      }
+    </style>
+
+@code {
+  private bool isMenuOpen = true;
+
+  [Parameter]
+  public EventCallback<string> MovePlayer { get; set; }
+
+  [Parameter]
+  public EventCallback Attack { get; set; }
+
+  [Parameter]
+  public EventCallback Power { get; set; }
+
+  private async Task ToggleMenu()
+  {
+    isMenuOpen = !isMenuOpen;
+    await InvokeAsync(StateHasChanged);
+  }
+
+  protected override async Task OnAfterRenderAsync(bool firstRender)
+  {
+    if (firstRender)
+    {
+      var width = await JSRuntime.InvokeAsync<int>("getWindowWidth");
+      isMenuOpen = width <= 768;
+      await InvokeAsync(StateHasChanged);
     }
+  }
 }

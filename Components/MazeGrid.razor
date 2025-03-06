@@ -3,89 +3,97 @@
 @using AnimeMaze.Data;
 @namespace AnimeMaze.CustomComponents
 <section class="relative w-full max-w-2xl mx-auto aspect-square bg-gray-800/50 backdrop-blur-lg rounded-xl overflow-hidden
-                border border-white/10 shadow-2xl" aria-live="polite" style="display: grid; grid-template-columns: repeat(@(game?.Maze.GetLength(1) ?? 10), 1fr);">
-    @if (game != null && players != null)
+                border border-white/10 shadow-2xl" aria-live="polite"
+  style="display: grid; grid-template-columns: repeat(@(game?.Maze.GetLength(1) ?? 10), 1fr);">
+  @if (game != null && players != null)
+  {
+    for (int i = 0; i < game.Maze.GetLength(0); i++)
     {
-        for (int i = 0; i < game.Maze.GetLength(0); i++)
-        {
-            for (int j = 0; j < game.Maze.GetLength(1); j++)
+      for (int j = 0; j < game.Maze.GetLength(1); j++)
+      {
+        int row = i;
+        int col = j;
+        var playerAtCell = players.FirstOrDefault(p => p.Position.RowPosition == row && p.Position.ColPosition == col);
+        var cell = game.Maze[row, col];
+
+        <div class="relative">
+          @if (cell.Type == Labyrinth.CellType.Wall)
+          {
+            <img src="images/Map Elements/Wall.png" alt="Wall" class="h-full w-full object-cover aspect-square"
+              @onclick="() => HandleClick(row, col)">
+          }
+          else
+          {
+            <img src="images/Map Elements/Floor.png" alt="Floor" class="h-full w-full object-cover aspect-square"
+              @onclick="() => HandleClick(row, col)">
+
+            @if (cell.Type == Labyrinth.CellType.Exit)
             {
-                int row = i;
-                int col = j;
-                var playerAtCell = players.FirstOrDefault(p => p.Position.RowPosition == row && p.Position.ColPosition == col);
-                var cell = game.Maze[row, col];
-
-                <div class="relative">
-                    @if (cell.Type == Labyrinth.CellType.Wall)
-                    {
-                        <img src="images/Map Elements/Wall.png" alt="Wall" class="h-full w-full object-cover aspect-square" @onclick="() => HandleClick(row, col)">
-                    }
-                    else
-                    {
-                        <img src="images/Map Elements/Floor.png" alt="Floor" class="h-full w-full object-cover aspect-square" @onclick="() => HandleClick(row, col)">
-
-                        @if (cell.Type == Labyrinth.CellType.Exit)
-                        {
-                            <img src="images/Map Elements/Exit.png" alt="Exit" class="absolute inset-0 h-full w-full object-cover aspect-square" @onclick="() => HandleClick(row, col)">
-                        }
-
-                        @if (cell.Trap != null)
-                        {
-                            var trap = cell.Trap;
-                            <img src="@trap.Image" alt="@trap.Name" class="absolute inset-0 h-full w-full object-cover aspect-square" @onclick="() => HandleClick(row, col)">
-                        }
-
-                        @if (cell.Obstacle != null)
-                        {
-                            var obstacle = cell.Obstacle;
-                            if (obstacle.Health > 0)
-                            {
-                                    <div class="absolute inset-x-0 top-0 h-1 bg-red-500">
-                                        <div class="h-full bg-green-500" style="width:@(obstacle.Health * 100 / obstacle.MaxHealth)%"></div>
-                                    </div>
-                                    <img src="@obstacle.Image" alt="@obstacle.Name" class="absolute inset-0 h-full w-full object-cover aspect-square" @onclick="() => HandleClick(row, col)">
-                            }
-                        }
-
-                        @if (playerAtCell != null && playerAtCell.HeroSelected != null)
-                        {
-                            string borderClass = playerAtCell == TurnManager.CurrentPlayer ? "border-2 border-blue-500" : "";
-                            string playerImage = playerAtCell.FacingDirection switch
-                            {
-                                Direction.Up => playerAtCell.HeroSelected.Image.Up,
-                                Direction.Left => playerAtCell.HeroSelected.Image.Left,
-                                Direction.Right => playerAtCell.HeroSelected.Image.Right,
-                                _ => playerAtCell.HeroSelected.Image.Down
-                            };   
-                            <img src="@playerImage" alt="@playerAtCell.HeroSelected.Name" class="absolute inset-0 h-full w-full object-cover aspect-square @borderClass" @onclick="() => HandleClick(row, col)">
-                       }
-                    }
-                </div>
+              <img src="images/Map Elements/Exit.png" alt="Exit" class="absolute inset-0 h-full w-full object-cover aspect-square"
+                @onclick="() => HandleClick(row, col)">
             }
-        }
+
+            @if (cell.Trap != null)
+            {
+              var trap = cell.Trap;
+              <img src="@trap.Image" alt="@trap.Name" class="absolute inset-0 h-full w-full object-cover aspect-square"
+                @onclick="() => HandleClick(row, col)">
+            }
+
+            @if (cell.Obstacle != null)
+            {
+              var obstacle = cell.Obstacle;
+              if (obstacle.Health > 0)
+              {
+                <div class="absolute inset-x-0 top-0 h-1 bg-red-500">
+                  <div class="h-full bg-green-500" style="width:@(obstacle.Health * 100 / obstacle.MaxHealth)%"></div>
+                </div>
+                <img src="@obstacle.Image" alt="@obstacle.Name" class="absolute inset-0 h-full w-full object-cover aspect-square"
+                  @onclick="() => HandleClick(row, col)">
+              }
+            }
+
+            @if (playerAtCell != null && playerAtCell.HeroSelected != null)
+            {
+              string borderClass = playerAtCell == TurnManager.CurrentPlayer ? "border-2 border-blue-500" : "";
+              string playerImage = playerAtCell.FacingDirection switch
+              {
+                Direction.Up => playerAtCell.HeroSelected.Image.Up,
+                Direction.Left => playerAtCell.HeroSelected.Image.Left,
+                Direction.Right => playerAtCell.HeroSelected.Image.Right,
+                _ => playerAtCell.HeroSelected.Image.Down
+              };
+              <img src="@playerImage" alt="@playerAtCell.HeroSelected.Name"
+                class="absolute inset-0 h-full w-full object-cover aspect-square @borderClass"
+                @onclick="() => HandleClick(row, col)">
+            }
+          }
+        </div>
+      }
     }
+  }
 </section>
 
 @code {
-    [Parameter]
-    public Labyrinth? game { get; set; }
-    [Parameter]
-    public List<Player>? players { get; set; }
-    [Parameter]
-    public EventCallback<(int, int)> OnClickMaze { get; set; }
+  [Parameter]
+  public Labyrinth? game { get; set; }
+  [Parameter]
+  public List<Player>? players { get; set; }
+  [Parameter]
+  public EventCallback<(int, int)> OnClickMaze { get; set; }
 
-    private string GetCellClass(Labyrinth.CellType cellType)
+  private string GetCellClass(Labyrinth.CellType cellType)
+  {
+    return cellType switch
     {
-        return cellType switch
-        {
-            Labyrinth.CellType.Road => "bg-white",
-            Labyrinth.CellType.Wall => "bg-gray-900",
-            _ => ""
-        };
-    }
+      Labyrinth.CellType.Road => "bg-white",
+      Labyrinth.CellType.Wall => "bg-gray-900",
+      _ => ""
+    };
+  }
 
-    private void HandleClick(int row, int col)
-    {
-        OnClickMaze.InvokeAsync((row, col));
-    }
+  private void HandleClick(int row, int col)
+  {
+    OnClickMaze.InvokeAsync((row, col));
+  }
 }

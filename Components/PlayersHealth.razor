@@ -3,48 +3,47 @@
 @using AnimeMaze.Services
 @namespace AnimeMaze.CustomComponents
 <aside class="fixed left-4 bottom-4 z-40 flex flex-col gap-3">
-    @if(Players != null)
+  @if (Players != null)
     @foreach (var player in Players)
     {
-        <article class="group relative bg-gray-800/50 backdrop-blur-lg rounded-xl p-3 shadow-lg border border-white/10
-                      @(player == TurnManager.CurrentPlayer ? "ring-2 ring-purple-500" : "") transition-all">
-            <div class="flex items-center gap-3">
-                <img src="@player.HeroSelected?.Image.Down" 
-                     alt="@player.HeroSelected?.Name" 
-                     class="w-12 h-12 rounded-lg object-cover border-2 border-purple-500/30"/>
-                
-                <div class="space-y-1">
-                    <div class="flex items-center gap-2">
-                        <span class="text-red-400 font-bold text-xl">@player.Health</span>
-                        <span class="text-sm text-purple-400">HP</span>
-                    </div>
-                    <div class="h-1 bg-gray-700 rounded-full">
-                        <div class="h-full bg-red-500 rounded-full transition-all" 
-                             style="width: @((player.Health * 100)/player.HeroSelected?.Health ?? 1)%"></div>
-                    </div>
-                </div>
-            </div>
+      <article class="group relative bg-gray-800/50 backdrop-blur-lg rounded-xl p-3 shadow-lg border border-white/10
+                          @(player == TurnManager.CurrentPlayer ? "ring-2 ring-purple-500" : "") transition-all">
+        <div class="flex items-center gap-3">
+          <img src="@player.HeroSelected?.Image.Down" alt="@player.HeroSelected?.Name"
+            class="w-12 h-12 rounded-lg object-cover border-2 border-purple-500/30" />
 
-            <!-- Efectos temporales -->
-            @if (player.TemporaryEffects.Any(e => e.TurnsRemaining > 0))
-            {
-                <div class="mt-2 pt-2 border-t border-white/10">
-                    <h3 class="text-xs font-semibold text-gray-400 mb-1">Efectos activos:</h3>
-                    <div class="flex flex-wrap gap-1">
-                        @foreach (var effect in player.TemporaryEffects.Where(e => e.TurnsRemaining > 0))
-                        {
-                            <span class="px-2 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">
-                                @effect.Name (@effect.TurnsRemaining)
-                            </span>
-                        }
-                    </div>
-                </div>
-            }
-        </article>
+          <div class="space-y-1">
+            <div class="flex items-center gap-2">
+              <span class="text-red-400 font-bold text-xl">@player.Health</span>
+              <span class="text-sm text-purple-400">HP</span>
+            </div>
+            <div class="h-1 bg-gray-700 rounded-full">
+              <div class="h-full bg-red-500 rounded-full transition-all"
+                style="width: @((player.Health * 100) / player.HeroSelected?.Health ?? 1)%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Efectos temporales -->
+        @if (player.TemporaryEffects.Any(e => e.TurnsRemaining > 0))
+        {
+          <div class="mt-2 pt-2 border-t border-white/10">
+            <h3 class="text-xs font-semibold text-gray-400 mb-1">Efectos activos:</h3>
+            <div class="flex flex-wrap gap-1">
+              @foreach (var effect in player.TemporaryEffects.Where(e => e.TurnsRemaining > 0))
+              {
+                <span class="px-2 py-1 bg-purple-500/20 text-purple-300 rounded-full text-xs">
+                  @effect.Name (@effect.TurnsRemaining)
+                </span>
+              }
+            </div>
+          </div>
+        }
+      </article>
     }
 </aside>
 
 @code {
-    [Parameter]
-    public List<Player>? Players { get; set; }
+  [Parameter]
+  public List<Player>? Players { get; set; }
 }

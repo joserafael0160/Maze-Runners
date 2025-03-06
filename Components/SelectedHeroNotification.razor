@@ -3,51 +3,53 @@
 
 @if (SelectedHero != null)
 {
-    <div class="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-purple-600/90 to-pink-600/90 backdrop-blur-lg text-white p-5 rounded-xl shadow-2xl border border-white/10 
-                animate-fade-in-up">
-        <div class="flex items-center gap-3">
-            <img src="@SelectedHero.Image.Down" class="w-12 h-12 rounded-lg object-cover" alt="@SelectedHero.Name">
-            <div>
-                <p class="font-semibold">Jugador @Player ha seleccionado:</p>
-                <h3 class="text-xl font-bold text-yellow-400">@SelectedHero.Name</h3>
-            </div>
-        </div>
-        <button @onclick="HandlePlayGame"
-                class="mt-4 w-full py-2 px-6 bg-white/10 hover:bg-white/20 rounded-lg font-semibold transition-all
-                       flex items-center justify-center gap-2 ring-2 ring-purple-400/30 hover:ring-purple-400/50">
-            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            Comenzar Aventura
-        </button>
+  <div class="fixed bottom-6 right-6 z-50 bg-gradient-to-br from-purple-600/90 to-pink-600/90 backdrop-blur-lg text-white p-5 rounded-xl shadow-2xl border border-white/10 
+                  animate-fade-in-up">
+    <div class="flex items-center gap-3">
+      <img src="@SelectedHero.Image.Down" class="w-12 h-12 rounded-lg object-cover" alt="@SelectedHero.Name">
+      <div>
+        <p class="font-semibold">Jugador @Player ha seleccionado:</p>
+        <h3 class="text-xl font-bold text-yellow-400">@SelectedHero.Name</h3>
+      </div>
     </div>
+    <button @onclick="HandlePlayGame" class="mt-4 w-full py-2 px-6 bg-white/10 hover:bg-white/20 rounded-lg font-semibold transition-all
+                         flex items-center justify-center gap-2 ring-2 ring-purple-400/30 hover:ring-purple-400/50">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      Comenzar Aventura
+    </button>
+  </div>
 }
 
 <style>
-    .animate-fade-in-up {
-        animation: fadeInUp 0.3s ease-out forwards;
+  .animate-fade-in-up {
+    animation: fadeInUp 0.3s ease-out forwards;
+  }
+
+  @@keyframes fadeInUp
+  {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
     }
 
-    @@keyframes fadeInUp {
-        from {
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
-</style>
+  </style>
 
 @code {
-    [Parameter] public Hero? SelectedHero { get; set; }
-    [Parameter] public EventCallback OnPlayGame { get; set; }
-    [Parameter] public int Player { get; set; } 
+  [Parameter] public Hero? SelectedHero { get; set; }
+  [Parameter] public EventCallback OnPlayGame { get; set; }
+  [Parameter] public int Player { get; set; }
 
-    private async Task HandlePlayGame()
-    {
-        await OnPlayGame.InvokeAsync();
-    }
+  private async Task HandlePlayGame()
+  {
+    await OnPlayGame.InvokeAsync();
+  }
 }
