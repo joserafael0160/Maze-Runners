@@ -8,7 +8,7 @@ public enum Direction { Up, Down, Left, Right }
 public class Player
 {
   public (int RowPosition, int ColPosition) Position { get; set; }
-  public (int RowPosition, int ColPosition) InitialPosition { get; }
+  public (int RowPosition, int ColPosition) InitialPosition { get; set;}
   public Hero? HeroSelected { get; set; }
   public bool HasWon { get; private set; } = false;
   public int Health { get; set; }

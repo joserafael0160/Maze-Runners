@@ -14,6 +14,7 @@ public static class PlayerData
   {
     for (int i = 0; i < Players.Count; i++)
     {
+      Players[i].InitialPosition = InitialPositions[i];
       Players[i].Position = InitialPositions[i];
       Players[i].ResetHasWon();
     }

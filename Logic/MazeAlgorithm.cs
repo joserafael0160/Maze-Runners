@@ -34,6 +34,7 @@ public static class MazeAlgorithm
     }
     PlaceExit(labyrinth, width, height, out int exitX, out int exitY);
     var furthestPositions = FindFurthestPositions(labyrinth, width, height, exitX, exitY);
+  
     PlayerData.InitialPositions = furthestPositions;
   }
 
