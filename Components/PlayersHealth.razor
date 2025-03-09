@@ -39,6 +39,27 @@
             </div>
           </div>
         }
+        @if (player.HeroSelected?.Power != null)
+        {
+          <div class="mt-2 pt-2 border-t border-white/10">
+            <h3 class="text-xs font-semibold text-gray-400 mb-1">Habilidad:</h3>
+            <div class="flex flex-col gap-1">
+                <div class="flex justify-between items-center">
+                  <span class="text-xs text-gray-300">
+                    @player.HeroSelected?.Power.Name
+                  </span>
+                  <span class="px-2 text-xs text-purple-400">
+                    Cooldown
+                    <div class="h-1 bg-gray-700 rounded-full">
+                      <div class="h-full bg-blue-500 rounded-full transition-all"
+                         style="width: @(100 - (player.HeroSelected?.Power.CurrentCooldown * 100) / player.HeroSelected?.Power.Cooldown)%">
+                      </div>
+                    </div>
+                  </span>
+                </div>
+            </div>
+          </div>
+        }
       </article>
     }
 </aside>
