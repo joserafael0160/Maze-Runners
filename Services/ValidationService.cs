@@ -40,7 +40,15 @@ namespace AnimeMaze.Services
 
     public static Player? GetPlayerAtPosition(int row, int col)
     {
-      return PlayerData.Players.FirstOrDefault(p => p.Position == (row, col));
+      // Primero verificar límites del laberinto
+      if (row < 0 || col < 0 ||
+          row >= game.Maze.GetLength(0) ||
+          col >= game.Maze.GetLength(1)) return null;
+
+      return PlayerData.Players.FirstOrDefault(p =>
+          p.Position.RowPosition == row &&
+          p.Position.ColPosition == col
+      );
     }
     public static void ResetValidationGame(Labyrinth newGame)
     {
