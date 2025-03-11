@@ -37,7 +37,7 @@
       </div>
     </div>
 
-    <button @onclick="StartGame"
+    <button @onclick="ConfirmNumberOfPlayers"
       class="w-full py-3 px-6 bg-gradient-to-r from-purple-600 to-pink-600 text-white font-semibold rounded-xl transform transition-all hover:scale-105 hover:shadow-purple-500/30 active:scale-95 focus:outline-none focus:ring-2 focus:ring-purple-500">
       Comenzar Aventura
     </button>
@@ -49,9 +49,8 @@
 @code {
   private int numberOfPlayers = 1;
 
-  private void StartGame()
+  private void ConfirmNumberOfPlayers()
   {
-    LabyrinthData.ResetLabyrinth();
     PlayerData.InitializePlayers(numberOfPlayers);
     Navigation.NavigateTo("/Characters");
   }

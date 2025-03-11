@@ -19,63 +19,11 @@
     </h1>
   </header>
 
-  <nav class="flex flex-col md:flex-row gap-4 md:gap-8 z-10 transform hover:scale-95 transition-all duration-500">
-    <article
-      class="group relative w-48 h-48 md:w-72 md:h-72 bg-gray-800/50 backdrop-blur-lg rounded-xl md:rounded-2xl shadow-lg md:shadow-2xl border border-white/10 transform transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-500/30">
-      <a href="/MazeSizeSelection" class="flex flex-col items-center justify-center h-full space-y-2 md:space-y-4 p-4">
-        <div class="relative">
-          <svg class="w-16 h-16 md:w-20 md:h-20 text-purple-400 group-hover:text-purple-300 transition-colors"
-            fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-          </svg>
-          <div class="absolute inset-0 bg-purple-500/20 blur-md" aria-hidden="true"></div>
-        </div>
-        <h2 class="text-xl md:text-2xl font-bold text-white group-hover:text-purple-300 transition-colors">JUGAR</h2>
-        <p class="text-gray-300/80 text-center text-xs md:text-sm">Desafía el laberinto</p>
-      </a>
-    </article>
+  <Navigation/>
 
-    <article
-      class="group relative w-48 h-48 md:w-72 md:h-72 bg-gray-800/50 backdrop-blur-lg rounded-xl md:rounded-2xl shadow-lg md:shadow-2xl border border-white/10 transform transition-all duration-300 hover:scale-[1.02] hover:shadow-blue-500/30">
-      <a href="/History" class="flex flex-col items-center justify-center h-full space-y-2 md:space-y-4 p-4">
-        <div class="relative">
-          <svg class="w-16 h-16 md:w-20 md:h-20 text-blue-400 group-hover:text-blue-300 transition-colors" fill="none"
-            stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-          </svg>
-          <div class="absolute inset-0 bg-blue-500/20 blur-md" aria-hidden="true"></div>
-        </div>
-        <h2 class="text-xl md:text-2xl font-bold text-white group-hover:text-blue-300 transition-colors">HISTORIA</h2>
-        <p class="text-gray-300/80 text-center text-xs md:text-sm">Descubre los secretos</p>
-      </a>
-    </article>
-  </nav>
+  <HomeFooter />
 
-  <footer
-    class="fixed bottom-4 left-4 bg-black/30 backdrop-blur-sm rounded-xl p-3 md:p-4 transition-all hover:bg-black/40 group">
-    <div class="flex items-center space-x-2 md:space-x-3">
-      <a href="https://github.com/joserafael0160/Maze-Runners" target="_blank" rel="noopener noreferrer"
-        class="text-gray-300 hover:text-white transition-colors flex items-center space-x-2">
-        <svg class="w-5 h-5 md:w-6 md:h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path fill-rule="evenodd"
-            d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z" />
-        </svg>
-      </a>
-      <div class="text-gray-300 text-sm font-mono">
-        <p class="block group-hover:text-purple-300 transition-colors text-xs md:text-sm">José Rafael Pérez Rivero</p>
-        <p class="text-[0.6rem] md:text-xs opacity-70">C112</p>
-      </div>
-    </div>
-  </footer>
-
-  <figure class="fixed kaneki-figure @(isDragging ? "no-transition" : "")"
-    style="transform: translate(@(kanekiX)px, @(kanekiY)px) scale(@(currentScale))">
-    <img src="/images/Characters/Kaneki/Down.png"
-      class="w-full h-full object-contain cursor-grab active:cursor-grabbing" alt="Personaje Kaneki"
-      @onmousedown="StartDrag" @onmouseup="EndDrag" @onmouseout="EndDrag" @ontouchstart="StartDrag"
-      @ontouchend="EndDrag" @ontouchcancel="EndDrag">
-  </figure>
+  <KanekiFigure/>
 </main>
 
 <script>
@@ -104,108 +52,5 @@
     transform-origin: center;
   }
 
-  .no-transition {
-    transition: none;
-  }
-
-    @@keyframes float {
-
-    0%,
-    100% {
-      transform: translateY(0) scale(1);
-    }
-
-    50% {
-      transform: translateY(-20px) scale(1.05);
-    }
-  }
-
-    @@media (max-width: 768px) {
-    .animate-particles>div {
-      animation-duration: 20s !important;
-      transform: scale(0.8) !important;
-    }
-
-    .kaneki-figure {
-      width: 24vw;
-      height: 24vw;
-    }
-  }
 </style>
 
-@code {
-  private readonly List<Particle> particles = new();
-  private double kanekiX;
-  private double kanekiY;
-  private double targetX;
-  private double targetY;
-  private bool isDragging;
-  private double currentScale = 1.0;
-  private DateTime lastUpdate = DateTime.MinValue;
-  private DotNetObjectReference<Home>? dotNetHelper;
-
-
-
-  protected override async Task OnAfterRenderAsync(bool firstRender)
-  {
-    if (firstRender)
-    {
-      dotNetHelper = DotNetObjectReference.Create(this);
-      await JS.InvokeVoidAsync("addGlobalMouseListener", dotNetHelper);
-    }
-  }
-
-  [JSInvokable]
-  public async Task UpdateMousePosition(double clientX, double clientY)
-  {
-    if ((DateTime.Now - lastUpdate).TotalMilliseconds < 30) return;
-    lastUpdate = DateTime.Now;
-
-    targetX = clientX - 64;
-    targetY = clientY - 64;
-
-    if (!isDragging)
-    {
-      var dx = targetX - kanekiX;
-      var dy = targetY - kanekiY;
-      var distance = Math.Sqrt(dx * dx + dy * dy);
-
-      var lerpFactor = distance switch
-      {
-        > 500 => 0.4,
-        > 200 => 0.3,
-        > 100 => 0.2,
-        > 50 => 0.1,
-        _ => 0.05
-      };
-
-      kanekiX += dx * lerpFactor;
-      kanekiY += dy * lerpFactor;
-    }
-
-    await InvokeAsync(StateHasChanged);
-  }
-
-  private async Task StartDrag(MouseEventArgs e) => await StartDrag(e.ClientX, e.ClientY);
-  private async Task StartDrag(TouchEventArgs e) => await StartDrag(e.Touches[0].ClientX, e.Touches[0].ClientY);
-
-  private async Task StartDrag(double x, double y)
-  {
-    isDragging = true;
-    currentScale = 1.1;
-    kanekiX = x - 64;
-    kanekiY = y - 64;
-    await InvokeAsync(StateHasChanged);
-  }
-
-  private void EndDrag()
-  {
-    isDragging = false;
-    currentScale = 1.0;
-    StateHasChanged();
-  }
-
-  public void Dispose() => dotNetHelper?.Dispose();
-
-  private record Particle(double Top, double Left, int Duration, double Scale);
-}

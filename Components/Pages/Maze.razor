@@ -43,7 +43,7 @@
           OnClickMaze="EventCallback.Factory.Create<(int, int)>(this, OnClickMaze)" />
 
         <aside class="lg:order-last">
-          <MazeNavigation MovePlayer="MovePlayerAsync" Attack="AttackPlayer" Power="UsePowerPlayer" />
+          <MazeNavigation MovePlayer="MovePlayer" Attack="AttackPlayer" Power="UsePowerPlayer" />
         </aside>
       </div>
 
@@ -81,7 +81,7 @@
     }
   }
 
-  private async Task MovePlayerAsync(string direction)
+  private async Task MovePlayer(string direction)
   {
     var currentPlayer = TurnManager.CurrentPlayer;
     if (currentPlayer != null && !showModal)
@@ -149,16 +149,16 @@
     switch (key)
     {
       case "ArrowUp" or "w":
-        await MovePlayerAsync("up");
+        await MovePlayer("up");
         break;
       case "ArrowDown" or "s":
-        await MovePlayerAsync("down");
+        await MovePlayer("down");
         break;
       case "ArrowLeft" or "a":
-        await MovePlayerAsync("left");
+        await MovePlayer("left");
         break;
       case "ArrowRight" or "d":
-        await MovePlayerAsync("right");
+        await MovePlayer("right");
         break;
       case "e":
         AttackPlayer();

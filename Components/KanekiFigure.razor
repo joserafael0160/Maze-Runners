@@ -1,0 +1,81 @@
+@inject IJSRuntime JS
+
+<figure class="fixed kaneki-figure @(isDragging ? "no-transition" : "")"
+    style="transform: translate(@(kanekiX)px, @(kanekiY)px) scale(@(currentScale))">
+    <img src="/images/Characters/Kaneki/Down.png"
+        class="w-full h-full object-contain cursor-grab active:cursor-grabbing" alt="Personaje Kaneki"
+        @onmousedown="StartDrag" @onmouseup="EndDrag" @onmouseout="EndDrag" @ontouchstart="StartDrag"
+        @ontouchend="EndDrag" @ontouchcancel="EndDrag">
+</figure>
+
+@code {
+    private double kanekiX;
+    private double kanekiY;
+    private double targetX;
+    private double targetY;
+    private bool isDragging;
+    private double currentScale = 1.0;
+    private DateTime lastUpdate = DateTime.MinValue;
+    private DotNetObjectReference<KanekiFigure>? dotNetHelper;
+
+    protected override async Task OnAfterRenderAsync(bool firstRender)
+    {
+        if (firstRender)
+        {
+            dotNetHelper = DotNetObjectReference.Create(this);
+            await JS.InvokeVoidAsync("addGlobalMouseListener", dotNetHelper);
+        }
+    }
+
+    [JSInvokable]
+    public async Task UpdateMousePosition(double clientX, double clientY)
+    {
+        if ((DateTime.Now - lastUpdate).TotalMilliseconds < 30) return;
+        lastUpdate = DateTime.Now;
+
+        targetX = clientX - 64;
+        targetY = clientY - 64;
+
+        if (!isDragging)
+        {
+            var dx = targetX - kanekiX;
+            var dy = targetY - kanekiY;
+            var distance = Math.Sqrt(dx * dx + dy * dy);
+
+            var lerpFactor = distance switch
+            {
+                > 500 => 0.4,
+                > 200 => 0.3,
+                > 100 => 0.2,
+                > 50 => 0.1,
+                _ => 0.05
+            };
+
+            kanekiX += dx * lerpFactor;
+            kanekiY += dy * lerpFactor;
+        }
+
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private async Task StartDrag(MouseEventArgs e) => await StartDrag(e.ClientX, e.ClientY);
+    private async Task StartDrag(TouchEventArgs e) => await StartDrag(e.Touches[0].ClientX, e.Touches[0].ClientY);
+
+    private async Task StartDrag(double x, double y)
+    {
+        isDragging = true;
+        currentScale = 1.1;
+        kanekiX = x - 64;
+        kanekiY = y - 64;
+        await InvokeAsync(StateHasChanged);
+    }
+
+    private void EndDrag()
+    {
+        isDragging = false;
+        currentScale = 1.0;
+        StateHasChanged();
+    }
+
+    public void Dispose() => dotNetHelper?.Dispose();
+}

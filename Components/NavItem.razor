@@ -1,0 +1,28 @@
+@code {
+  [Parameter]
+  public string? href { get; set; }
+  
+  [Parameter]
+  public string? svgClass { get; set; }
+  
+  [Parameter]
+  public string? pathData { get; set; }
+  
+  [Parameter]
+  public string? title { get; set; }
+  
+  [Parameter]
+  public string? description { get; set; }
+}
+<article class="group relative w-48 h-48 md:w-72 md:h-72 bg-gray-800/50 backdrop-blur-lg rounded-xl md:rounded-2xl shadow-lg md:shadow-2xl border border-white/10 transform transition-all duration-300 hover:scale-[1.02] hover:shadow-purple-500/30">
+  <a href="@href" class="flex flex-col items-center justify-center h-full space-y-2 md:space-y-4 p-4">
+    <div class="relative">
+      <svg class="w-16 h-16 md:w-20 md:h-20 @svgClass" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="@pathData" />
+      </svg>
+      <div class="absolute inset-0 bg-purple-500/20 blur-md" aria-hidden="true"></div>
+    </div>
+    <h2 class="text-xl md:text-2xl font-bold text-white group-hover:text-purple-300 transition-colors">@title</h2>
+    <p class="text-gray-300/80 text-center text-xs md:text-sm">@description</p>
+  </a>
+</article>
