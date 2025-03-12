@@ -7,7 +7,7 @@ public static class ObstacleData
 {
   private static readonly Random random = new();
 
-  private static readonly List<(int Health, string Name, string Image)> ObstacleDefinitions =
+  private static readonly List<Obstacle> ObstacleDefinitions =
   [
     (100, "Rock", "/images/Obstacles/Rock.png"),
   ];
